@@ -551,7 +551,7 @@ html.locked,html.locked body{overflow:hidden}
     <p class="bigdate" data-k="dataNum">23 / 04 / 2027</p>
     <p class="place-line" data-k="cidade">Garopaba · SC</p>
     <p class="intro boas-vindas">Fizemos este cantinho pra dividir com vocês cada pedacinho do nosso grande dia. Aqui tem tudo: onde, quando, como chegar, onde ficar e um mural pra você deixar seu carinho. Confirma sua presença por aqui e volta sempre que bater saudade. A gente mal pode esperar pra te dar aquele abraço.</p>
-    <p class="hand boas-vindas-assin">com amor, Diego &amp; Mayara</p>
+    <p class="hand boas-vindas-assin">com carinho, Diego e Mayara</p>
     <div class="count" aria-label="Contagem regressiva" style="margin-top:14px">
       <div><b id="cd-d">–</b><small>dias</small></div><span class="sep"></span>
       <div><b id="cd-h">–</b><small>horas</small></div><span class="sep"></span>
@@ -635,7 +635,7 @@ html.locked,html.locked body{overflow:hidden}
       <div class="notebox"><div class="note-p" data-tear="5">
         <span class="eyebrow">Crianças</span>
         <h3>São muito bem-vindas</h3>
-        <p>As crianças convidadas já aparecem com o nome delas, junto com a família, na confirmação de presença.</p>
+        <p>As crianças da família estão no convite. Informe quantas vêm na confirmação.</p>
       </div></div>
       <div class="notebox"><div class="note-p" data-tear="5">
         <span class="eyebrow">Prazo</span>
@@ -661,7 +661,7 @@ html.locked,html.locked body{overflow:hidden}
       <p class="addr" data-k="endereco">Endereço completo · Cidade, UF</p>
       <dl class="facts">
         <dt>Cerimônia</dt><dd data-k="cerimoniaNota">Cerimônia e festa no mesmo lugar.</dd>
-        <dt>Chegada</dt><dd>Chegue 30 minutos antes. A cerimônia começa às 15h em ponto.</dd>
+        <dt>Chegada</dt><dd>Chegue 30 minutos antes. A cerimônia começa no horário.</dd>
         <dt>Festa</dt><dd data-k="festaNota">Depois da igreja, a festa segue no salão a partir das 17h20.</dd>
         <dt>Estacionamento</dt><dd data-k="estacionamento">Estacionamento no local.</dd>
         <dt>Hospedagem</dt><dd data-k="hospedagem">Vem de fora? Fale com a gente que indicamos onde ficar.</dd>
@@ -697,7 +697,7 @@ html.locked,html.locked body{overflow:hidden}
     <div class="rsvp-side">
       <span class="eyebrow">Confirmar presença</span>
       <h2 class="rsvp-title"><span class="caps">Você</span><em>vem?</em></h2>
-      <p class="lede">Procura seu nome aqui embaixo e responde por você e por quem está no seu convite. Uma pessoa pode responder pela família toda.</p>
+      <p class="lede">Uma pessoa pode responder pela família toda.</p>
       <span class="deadline hand">até <span data-k="prazoExtenso">23 de abril</span>, combinado?</span>
     </div>
     <div class="lift-photo">
@@ -818,7 +818,7 @@ html.locked,html.locked body{overflow:hidden}
           <h3 id="pix-title">Escolha uma cota</h3>
           <p class="small">No app do banco, escolha <b>Pix › Ler QR code</b> ou <b>Pix copia e cola</b>. Recebedor: <b data-k="pixNome">Nome do recebedor</b>.</p>
           <div class="code" id="pix-code"></div>
-          <div class="row"><button class="btn solid" type="button" id="pix-copy">Copiar código Pix</button></div>
+          <div class="row"><button class="btn solid" type="button" id="pix-copy">Copiar código Pix</button><button class="btn" type="button" id="key-copy">Copiar só a chave</button></div>
         </div>
       </div>
     </div>
@@ -939,9 +939,9 @@ const CONFIG = {
   endereco: "Centro Histórico de Garopaba, em frente à Praça 21 de Abril",
   mapsLink: "",
   mapsBusca: "Igreja Matriz São Joaquim, Garopaba, SC",
-  estacionamento: "As ruas do centrinho histórico enchem rápido. Chega com folga pra estacionar sem correria.",
-  hospedagem: "Separamos umas dicas logo aqui embaixo. Reserva cedo!",
-  cerimoniaNota: "Às 15h, na Igreja Matriz São Joaquim.",
+  estacionamento: "Estacionamento no local.",
+  hospedagem: "Vem de fora? Fale com a gente que indicamos onde ficar.",
+  cerimoniaNota: "Na igreja de Garopaba.",
   festaNota: "Depois do sim, a festa segue no salão a partir das 17h20. O endereço chega aqui em breve.",
   traje: "Esporte fino",
   trajeNota: "Uma sugestão, não regra. Venha confortável pra dançar.",
@@ -956,7 +956,7 @@ const CONFIG = {
     { hora: "15h", titulo: "Início", texto: "Entrada dos padrinhos e madrinhas." },
     { hora: "15h05", titulo: "Entrada do noivo", texto: "Diego entra com a mãe e a avó." },
     { hora: "15h10", titulo: "Entrada da florista", texto: "" },
-    { hora: "15h25", titulo: "Entrada da noiva", texto: "Mayara entra com os dois pais e começa a cerimônia." },
+    { hora: "15h25", titulo: "Entrada da noiva", texto: "Mayara entra com os dois pais. O sim, as lágrimas e os abraços." },
     { hora: "15h40", titulo: "Entrada das alianças", texto: "" },
     { hora: "16h", titulo: "Fim da cerimônia", texto: "Depois, sessão de fotos até o pôr do sol." },
     { hora: "17h20", titulo: "Chegada ao salão", texto: "Brindes, corte do bolo e trend." },
@@ -964,8 +964,8 @@ const CONFIG = {
     { hora: "20h", titulo: "Fim do jantar", texto: "" },
     { hora: "20h05", titulo: "Gravata", texto: "Hora de passar a gravata." },
     { hora: "20h30", titulo: "Buquê e whisky", texto: "" },
-    { hora: "21h", titulo: "Valsa", texto: "Valsa e abertura da pista." },
-    { hora: "0h", titulo: "Encerramento", texto: "Até alguém pedir pra parar." }
+    { hora: "21h", titulo: "Valsa e festa", texto: "Pista aberta até alguém pedir pra parar." },
+    { hora: "0h", titulo: "Encerramento", texto: "" }
   ],
   hospedagens: [
     { nome: "Pousada Village Garopaba", nota: "Pousada familiar, com piscina e café da manhã." },
@@ -986,12 +986,13 @@ const CONFIG = {
   ],
   faq: [
     ["Posso levar acompanhante?", "A gente montou a lista com muito carinho e dentro do limite de pessoas que o espaço comporta. Por isso, o convite vale para os nomes que aparecem na sua confirmação de presença. Se ficou alguma dúvida sobre o seu convite, fala com a gente no WhatsApp."],
-    ["Crianças podem ir?", "As crianças que estão no convite são muito bem-vindas! Elas já aparecem com o nome delas na confirmação, junto com a família."],
+    ["Crianças podem ir?", "Sim! As crianças da família são muito bem-vindas. Informe quantas vêm na confirmação."],
     ["Como confirmo minha presença?", "Na seção Confirmar: digite seu nome, encontre o seu convite e marque quem vai e quem não vai. Uma pessoa pode responder pela família toda. O prazo é {prazo}."],
     ["E se eu perder o prazo?", "Depois de {prazo} a confirmação pelo site fecha. Aí é só chamar um de nós no WhatsApp."],
-    ["Que horas devo chegar?", "A cerimônia começa às 15h em ponto na Igreja Matriz São Joaquim. Chegue uns 30 minutos antes."],
+    ["Que horas devo chegar?", "Chegue uns 30 minutos antes. A cerimônia começa pontualmente."],
     ["Onde é a festa?", "Depois da igreja, a festa segue no salão a partir das 17h20. O endereço aparece aqui em breve."],
     ["Onde posso me hospedar?", "Separamos algumas sugestões na seção Local. A semana tem o feriado de Tiradentes, então reserve o quanto antes."],
+    ["E se chover?", "O local tem estrutura coberta. A festa acontece de qualquer jeito."],
     ["Qual o traje?", "Esporte fino é a sugestão. Pense em algo confortável pra dançar a noite toda."],
     ["Como dou um presente?", "Na seção Presentes. Cada cota gera um Pix com o valor certinho, ou você escolhe um valor livre."],
     ["Tem Instagram do casamento?", "Tem! Siga {insta}, compartilhe e marque a gente nas fotos da preparação e do dia."]
@@ -1225,6 +1226,7 @@ CONFIG.cotas.forEach(c => {
   $("#gifts").appendChild(b);
 });
 tearAll();
+$("#key-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) return toast("O Pix fica pronto em breve"); copy(CONFIG.pix.chave, $("#pix-code")); });
 $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) return toast("O Pix fica pronto em breve"); copy($("#pix-code").textContent, $("#pix-code")); });
 /* ---------- mural de recados ---------- */
 (() => {

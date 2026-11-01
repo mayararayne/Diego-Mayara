@@ -6,7 +6,10 @@ export const PRAZO_RSVP = "2027-03-01T23:59:59-03:00";
 export async function chamarPlanilha(payload: Record<string, unknown>) {
   const url = Netlify.env.get("RSVP_SCRIPT_URL");
   const token = Netlify.env.get("RSVP_TOKEN");
-  if (!url || !token) return { status: 503, body: { ok: false, erro: "nao_configurado" } };
+  if (!url || !token) {
+    console.error("planilha: faltam RSVP_SCRIPT_URL ou RSVP_TOKEN (crie no Netlify e faça um novo deploy)");
+    return { status: 503, body: { ok: false, erro: "nao_configurado" } };
+  }
   try {
     const res = await fetch(url, {
       method: "POST",
@@ -15,8 +18,18 @@ export async function chamarPlanilha(payload: Record<string, unknown>) {
       redirect: "follow",
       signal: AbortSignal.timeout(25000),
     });
-    const data = await res.json();
-    if (data?.erro === "nao_autorizado") return { status: 503, body: { ok: false, erro: "nao_configurado" } };
+    const texto = await res.text();
+    let data: any;
+    try { data = JSON.parse(texto); } catch {
+      // Apps Script sem acesso "Qualquer pessoa" devolve uma página de login em HTML
+      console.error("planilha: resposta não é JSON", res.status, texto.slice(0, 200));
+      return { status: 502, body: { ok: false, erro: "planilha_indisponivel" } };
+    }
+    if (data?.erro === "nao_autorizado") {
+      console.error("planilha: TOKEN do Apps Script diferente de RSVP_TOKEN");
+      return { status: 503, body: { ok: false, erro: "nao_configurado" } };
+    }
+    if (data?.erro === "falha") console.error("planilha: erro no script", data.detalhe);
     return { status: data?.ok ? 200 : 400, body: data };
   } catch (err) {
     console.error("planilha", err);

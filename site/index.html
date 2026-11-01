@@ -297,7 +297,7 @@ footer .hand{font-size:1.6rem;color:var(--on-dark)}
 /* capa */
 .cover{position:relative;overflow:hidden;background:var(--sea)}
 .cover video{display:block;width:100%;height:min(88vh,920px);min-height:420px;object-fit:cover;object-position:50% 40%}
-.cover-edge{position:absolute;left:0;right:0;bottom:-2px;height:clamp(70px,11vw,200px);background:url(media/edge-hero.png) center bottom / max(1300px,100%) 100% repeat-x}
+.cover-edge{position:absolute;z-index:2;left:0;right:0;bottom:-2px;height:clamp(70px,11vw,200px);background:url(media/edge-hero.png) center bottom / max(1300px,100%) 100% repeat-x}
 .cover .sim{position:absolute;right:max(16px,7vw);top:clamp(24px,5vw,70px);font-size:clamp(1.8rem,3.6vw,3.2rem);left:auto}
 .cover-note{position:absolute;right:max(16px,6vw);top:clamp(90px,12vw,190px);font-size:clamp(1.5rem,3vw,2.8rem);color:#fff;transform:rotate(-7deg);text-align:center;text-shadow:0 1px 8px rgba(0,40,70,.35)}
 .names-sec{text-align:center;position:relative;z-index:3;padding-top:clamp(36px,5vw,70px)}
@@ -450,11 +450,28 @@ html.locked,html.locked body{overflow:hidden}
   .lift-grid .lift-photo{order:-1}
   .pbreak.lift .rsvp-ph{margin:0 4% 0 auto!important}
 }
+/* capa: o vídeo é em pé (9:16). Em tela larga ele aparece inteiro no centro,
+   com o próprio vídeo desfocado preenchendo as laterais; em tela em pé ocupa tudo. */
+.cover{height:min(88vh,920px);min-height:420px}
+.cover video{position:relative;z-index:1;height:100%!important;min-height:0!important;width:auto!important;max-width:100%;margin-inline:auto;object-fit:contain!important;box-shadow:0 0 70px rgba(10,20,25,.35)}
+.cover-blur{position:absolute;inset:0;width:100%;height:100%;filter:blur(28px) saturate(1.15) brightness(.88);transform:scale(1.2)}
+@media (max-aspect-ratio:4/5){
+  .cover video{width:100%!important;object-fit:cover!important;object-position:50% 40%!important;box-shadow:none}
+  .cover-blur{display:none}
+}
+@media (max-width:640px){ .cover{height:78vh} }
+
 /* ===== seções novas: usam só as cores e fontes que já existem ===== */
 .paperbox{display:grid;gap:20px;background:var(--paper);padding:clamp(28px,4vw,46px) clamp(22px,4vw,44px)}
 .paperbox form{background:none;padding:0}
-.busca-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
-.busca-row input{flex:1 1 220px}
+.rv-busca{gap:10px}
+.rv-busca label{font:400 clamp(1.7rem,3vw,2.3rem)/1.1 var(--f-display);letter-spacing:0;text-transform:none;color:var(--ink)}
+.busca-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.busca-row input[type=text]{flex:1 1 240px;height:58px;padding:0 22px;font-size:1.1rem;background:var(--cream);border:1.5px solid var(--line);border-radius:999px}
+.busca-row input[type=text]:focus{border-color:var(--terra);background:var(--paper)}
+.busca-row input[type=text]::placeholder{color:var(--muted)}
+.busca-row .btn{height:58px}
+@media (max-width:640px){.busca-row .btn{width:100%;justify-content:center}}
 .opcoes{display:grid;gap:10px;justify-items:start}
 .membros{list-style:none;margin:0;padding:0;display:grid}
 .membros li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 18px;padding:14px 0;border-top:1px solid var(--line)}
@@ -501,6 +518,8 @@ html.locked,html.locked body{overflow:hidden}
 .mural-vazio{text-align:center;color:var(--muted)}
 .mural-mais{display:flex;justify-content:center;margin-top:10px}
 .insta-in{display:grid;justify-items:center;text-align:center;gap:18px}
+.boas-vindas{font-size:1.08rem;color:var(--ink);margin-top:6px;max-width:52ch!important}
+.boas-vindas-assin{font-size:1.7rem;color:var(--terra-deep);margin-top:-8px}
 .btn .wa{width:18px;height:18px;flex:none}
 </style>
 </head><body>
@@ -520,6 +539,7 @@ html.locked,html.locked body{overflow:hidden}
 </nav>
 
 <header class="cover" id="inicio">
+  <canvas class="cover-blur" id="cover-blur" width="48" height="85" aria-hidden="true"></canvas>
   <video src="media/header2.mp4" poster="media/header-poster.jpg" autoplay muted loop playsinline preload="auto" fetchpriority="high" aria-label="Vídeo com momentos de Diego e Mayara"></video>
   <div class="cover-edge" aria-hidden="true"></div>
 </header>
@@ -530,6 +550,8 @@ html.locked,html.locked body{overflow:hidden}
     <h1 class="names"><span data-k="nome1">Diego</span> <em>&amp;</em> <span data-k="nome2">Mayara</span></h1>
     <p class="bigdate" data-k="dataNum">23 / 04 / 2027</p>
     <p class="place-line" data-k="cidade">Garopaba · SC</p>
+    <p class="intro boas-vindas">Fizemos este cantinho pra dividir com vocês cada pedacinho do nosso grande dia. Aqui tem tudo: onde, quando, como chegar, onde ficar e um mural pra você deixar seu carinho. Confirma sua presença por aqui e volta sempre que bater saudade. A gente mal pode esperar pra te dar aquele abraço.</p>
+    <p class="hand boas-vindas-assin">com amor, Diego &amp; Mayara</p>
     <div class="count" aria-label="Contagem regressiva" style="margin-top:14px">
       <div><b id="cd-d">–</b><small>dias</small></div><span class="sep"></span>
       <div><b id="cd-h">–</b><small>horas</small></div><span class="sep"></span>
@@ -654,14 +676,14 @@ html.locked,html.locked body{overflow:hidden}
     <div class="head">
       <span class="eyebrow">Onde ficar</span>
       <h2>Reserve <em>cedo</em></h2>
-      <p class="lede">Garopaba é pequena e a semana do casamento tem o feriado de Tiradentes (quarta, 21 de abril). Hotel, pousada ou Airbnb: quanto antes reservar, mais opção você tem perto da igreja.</p>
+      <p class="lede">Vem de longe? Que alegria! Garopaba é pequenininha e a semana do casamento tem o feriado de Tiradentes (quarta, 21 de abril). Pousada, hotel ou Airbnb: quanto antes você reservar, mais pertinho da igreja vai ficar.</p>
     </div>
     <ul class="hosp-grid" id="hosp"></ul>
     <div class="row">
       <a class="btn solid" id="hosp-airbnb" href="https://www.airbnb.com.br/" target="_blank" rel="noopener">Buscar no Airbnb <span class="ar">→</span></a>
       <a class="btn" id="hosp-booking" href="https://www.booking.com/" target="_blank" rel="noopener">Buscar no Booking</a>
     </div>
-    <p class="small" style="margin-top:16px">São sugestões nossas, sem parceria. Confira avaliações, preço e distância até a igreja antes de reservar.</p>
+    <p class="small" style="margin-top:16px">São só dicas nossas, sem parceria nenhuma. Dá uma olhadinha nas avaliações e na distância até a igreja antes de fechar.</p>
   </div>
   <div class="wrap" style="margin-top:clamp(70px,10vw,130px)">
     <figure class="ph single" style="max-width:760px"><img data-src="media/jardim.webp" alt="Os dois num banco de jardim com dois cachorros, em São Leopoldo"><figcaption class="hand">São Leopoldo, RS</figcaption></figure>
@@ -675,7 +697,7 @@ html.locked,html.locked body{overflow:hidden}
     <div class="rsvp-side">
       <span class="eyebrow">Confirmar presença</span>
       <h2 class="rsvp-title"><span class="caps">Você</span><em>vem?</em></h2>
-      <p class="lede">Digite seu nome para encontrar o seu convite. Uma pessoa pode responder pela família toda.</p>
+      <p class="lede">Procura seu nome aqui embaixo e responde por você e por quem está no seu convite. Uma pessoa pode responder pela família toda.</p>
       <span class="deadline hand">até <span data-k="prazoExtenso">23 de abril</span>, combinado?</span>
     </div>
     <div class="lift-photo">
@@ -690,18 +712,18 @@ html.locked,html.locked body{overflow:hidden}
     <div class="formbox">
       <div class="paperbox" id="rsvp" data-tear="6">
         <div id="rv-busca" class="field" style="gap:16px">
-          <form id="rv-form-busca" class="field" novalidate>
-            <label for="rv-nome">Seu nome</label>
+          <form id="rv-form-busca" class="field rv-busca" novalidate>
+            <label for="rv-nome">Qual é o seu nome?</label>
+            <p class="small" id="rv-dica">Escreve como está no convite. Pode ser só o primeiro nome.</p>
             <div class="busca-row">
-              <input type="text" id="rv-nome" autocomplete="given-name" maxlength="80" placeholder="Como está no convite">
+              <input type="text" id="rv-nome" autocomplete="given-name" maxlength="80" placeholder="Digite seu nome aqui" aria-describedby="rv-dica">
               <button class="btn solid" type="submit" id="rv-buscar">Buscar meu convite <span class="ar">→</span></button>
             </div>
-            <p class="small">Digite seu primeiro nome. Se não achar, tente o nome de alguém da sua família.</p>
           </form>
           <div class="opcoes" id="rv-opcoes" hidden></div>
         </div>
         <form id="rv-form" class="field" style="gap:20px" hidden novalidate>
-          <div class="field" style="gap:4px"><span class="eyebrow">Seu convite</span><p class="small">Marque quem vai e quem não vai. Este convite é para:</p></div>
+          <div class="field" style="gap:4px"><span class="eyebrow">Seu convite</span><p class="small">Marca quem vem e quem não vai conseguir. Esse convite é pra:</p></div>
           <ul class="membros" id="rv-membros"></ul>
           <div class="field"><label for="rv-rest">Alguma restrição alimentar?</label><input type="text" id="rv-rest" maxlength="300" placeholder="Vegetariano, sem lactose…"></div>
           <div class="field"><label for="rv-msg">Recado pra gente (opcional)</label><textarea id="rv-msg" maxlength="600" placeholder="Pode escrever à vontade"></textarea></div>
@@ -768,7 +790,7 @@ html.locked,html.locked body{overflow:hidden}
       <article class="notebox" id="prewedding"><div class="note-p" data-tear="5">
         <span class="eyebrow">Ensaio pré-wedding</span>
         <h3>Fotos marcadas para <span data-k="ensaioExtenso">14 de janeiro</span></h3>
-        <p>O ensaio já está marcado. Assim que as fotos ficarem prontas, elas aparecem aqui primeiro.</p>
+        <p>Já tá marcado! Assim que as fotos ficarem prontas, vocês veem aqui antes de todo mundo.</p>
         <p class="hand soon" id="ensaio-cd">em breve</p>
       </div></article>
     </div>
@@ -892,7 +914,7 @@ html.locked,html.locked body{overflow:hidden}
     <span class="kicker">Vamos nos casar</span>
     <p class="intro-names" id="intro-t"><span>Diego</span> <em>&amp;</em> <span>Mayara</span></p>
     <p class="intro-date">23 · 04 · 2027</p>
-    <p class="opening-sign hand">Com carinho, Mayara e Diego</p>
+    <p class="opening-sign hand">Com carinho, Diego e Mayara</p>
     <button class="btn solid" type="button" id="intro-go">Abrir</button>
   </div>
 </div>
@@ -917,10 +939,10 @@ const CONFIG = {
   endereco: "Centro Histórico de Garopaba, em frente à Praça 21 de Abril",
   mapsLink: "",
   mapsBusca: "Igreja Matriz São Joaquim, Garopaba, SC",
-  estacionamento: "As ruas do centro histórico enchem rápido. Venha com folga para estacionar.",
-  hospedagem: "Veja as sugestões logo abaixo e reserve cedo.",
+  estacionamento: "As ruas do centrinho histórico enchem rápido. Chega com folga pra estacionar sem correria.",
+  hospedagem: "Separamos umas dicas logo aqui embaixo. Reserva cedo!",
   cerimoniaNota: "Às 15h, na Igreja Matriz São Joaquim.",
-  festaNota: "Depois da igreja, a festa segue no salão a partir das 17h20. Endereço em breve.",
+  festaNota: "Depois do sim, a festa segue no salão a partir das 17h20. O endereço chega aqui em breve.",
   traje: "Esporte fino",
   trajeNota: "Uma sugestão, não regra. Venha confortável pra dançar.",
   instagram: "diegoemay23042027",
@@ -1097,21 +1119,21 @@ document.querySelectorAll(".frame-wrap").forEach(a => {
     e.preventDefault();
     aviso.hidden = true; opc.hidden = true;
     const nome = $("#rv-nome").value.trim();
-    if (nome.length < 3) return avisar("Digite pelo menos 3 letras do seu nome.");
+    if (nome.length < 3) { $("#rv-nome").focus(); return avisar("Escreva seu nome no campo acima (pelo menos 3 letras) e toque em Buscar meu convite."); }
     carregando($("#rv-buscar"), true);
     try {
       const r = await fetch(`/api/convite?nome=${encodeURIComponent(nome)}`);
       const d = await r.json().catch(() => ({}));
-      if (r.status === 429) return avisar("Muitas buscas seguidas. Espere um minutinho e tente de novo.");
-      if (!r.ok) return avisar("A confirmação pelo site está fora do ar agora. Você pode confirmar direto com a gente:", true);
+      if (r.status === 429) return avisar("Foram muitas buscas seguidas. Espere um minutinho e tente de novo, tá?");
+      if (!r.ok) return avisar("Ops! Não conseguimos abrir a lista de convidados agora. Tente de novo daqui a pouquinho ou, se preferir, confirme direto com a gente:", true);
       const cs = d.convites || [];
-      if (!cs.length) return avisar("Não encontramos esse nome na lista. Tente só o primeiro nome, ou o nome de alguém que está no mesmo convite. Se não der certo, chama a gente:", true);
+      if (!cs.length) return avisar(`Hmm, não encontramos <b>${esc(nome)}</b> na lista. Confira se digitou o nome como está no convite, ou tente o nome de outra pessoa da sua família. Se ainda assim não aparecer, chama a gente:`, true);
       if (cs.length === 1) return abrir(cs[0]);
-      opc.innerHTML = `<p class="small">Achamos mais de um convite com esse nome. Qual é o seu?</p>` + cs.map((c, i) => `<button type="button" class="btn" data-i="${i}">${esc(lista(c.membros))}</button>`).join("");
+      opc.innerHTML = `<p>Achamos mais de um convite com esse nome. Qual é o seu?</p>` + cs.map((c, i) => `<button type="button" class="btn" data-i="${i}">${esc(lista(c.membros))}</button>`).join("");
       opc.querySelectorAll("button").forEach(bt => bt.addEventListener("click", () => abrir(cs[+bt.dataset.i])));
       opc.hidden = false; tearAll();
     } catch (err) {
-      avisar("Não conseguimos falar com a lista agora. Confira sua internet ou confirme direto com a gente:", true);
+      avisar("Parece que a internet falhou por aqui. Confira sua conexão e tente de novo, ou confirme direto com a gente:", true);
     } finally { carregando($("#rv-buscar"), false); }
   });
 
@@ -1282,7 +1304,25 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
   });
   ed.addEventListener("input", atualiza);
 
-  // admin: abra o site com #admin=SEU_TOKEN para poder apagar recados
+  // Segunda camada de proteção: só deixa formatação simples e fotos do próprio mural.
+  const TAGS = new Set(["P", "DIV", "BR", "B", "STRONG", "I", "EM", "U", "S", "STRIKE", "UL", "OL", "LI", "IMG"]);
+  const limpaHtml = html => {
+    const doc = new DOMParser().parseFromString(`<div>${html}</div>`, "text/html");
+    const passa = el => [...el.childNodes].forEach(n => {
+      if (n.nodeType === 3) return;
+      if (n.nodeType !== 1 || !TAGS.has(n.tagName)) return n.remove();
+      const src = n.getAttribute("src");
+      [...n.attributes].forEach(at => n.removeAttribute(at.name));
+      if (n.tagName === "IMG") {
+        if (!/^\/api\/recados\/foto\/[0-9a-f-]{36}$/.test(src || "")) return n.remove();
+        n.src = src; n.alt = "Foto do recado"; n.loading = "lazy"; n.referrerPolicy = "no-referrer";
+      }
+      passa(n);
+    });
+    const raiz = doc.body.firstChild; passa(raiz); return raiz.innerHTML;
+  };
+
+  // admin: abra o site com #admin=SENHA para poder apagar recados
   const m = location.hash.match(/admin=([^&]+)/);
   if (m) { sessionStorage.setItem("mural-admin", m[1]); history.replaceState(null, "", location.pathname + location.search); }
   const admin = sessionStorage.getItem("mural-admin");
@@ -1291,7 +1331,7 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
   const cartao = r => {
     const art = document.createElement("article"); art.className = "recado";
     art.innerHTML = `<div class="note-p" data-tear="5"><div class="r-html"></div><p class="r-assin hand"></p><time class="small"></time></div>`;
-    art.querySelector(".r-html").innerHTML = r.html;            // HTML já limpo pelo servidor
+    art.querySelector(".r-html").innerHTML = limpaHtml(r.html);
     art.querySelector(".r-assin").textContent = `— ${r.nome}`;
     const t = art.querySelector("time"); t.dateTime = r.criadoEm; t.textContent = quando(r.criadoEm);
     if (admin) {
@@ -1306,12 +1346,14 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
     return art;
   };
   let proximo = null;
+  const vistos = new Set();
+  const poe = (r, noTopo) => { if (vistos.has(r.id)) return; vistos.add(r.id); noTopo ? listaEl.prepend(cartao(r)) : listaEl.appendChild(cartao(r)); };
   const carrega = async (antes) => {
     try {
       const r = await fetch(`/api/recados${antes ? `?antes=${encodeURIComponent(antes)}` : ""}`);
       const d = await r.json();
       if (!d.ok) throw new Error();
-      d.recados.forEach(x => listaEl.appendChild(cartao(x)));
+      d.recados.forEach(x => poe(x, false));
       proximo = d.proximo; mais.hidden = !proximo;
       vazio.hidden = listaEl.children.length > 0; vazio.textContent = "Ainda não tem recado. Que tal ser o primeiro?";
     } catch (e) {
@@ -1321,6 +1363,20 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
   };
   listaEl.addEventListener("load", e => { if (e.target.tagName === "IMG") tearAll(); }, true);
   mais.addEventListener("click", () => carrega(proximo));
+  // recados novos aparecem sozinhos, sem precisar atualizar a página
+  const novidades = async () => {
+    if (document.hidden || !iniciado) return;
+    try {
+      const r = await fetch("/api/recados"); const d = await r.json();
+      if (!d.ok) return;
+      const novos = d.recados.filter(x => !vistos.has(x.id));
+      if (!novos.length) return;
+      novos.reverse().forEach(x => poe(x, true));
+      vazio.hidden = true; observeTears(); tearAll();
+    } catch (e) {}
+  };
+  setInterval(novidades, 30000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) novidades(); });
   let iniciado = false;
   const inicia = () => { if (!iniciado) { iniciado = true; carrega(); } };
   if ("IntersectionObserver" in window) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); inicia(); } }, { rootMargin: "800px 0px" }); io.observe($("#recados")); } else inicia();
@@ -1340,7 +1396,7 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
       const d = await r.json().catch(() => ({}));
       if (r.status === 429) return falha("Muitos envios seguidos. Espere um minutinho.");
       if (!r.ok || !d.ok) return falha(d.erro || "Não conseguimos publicar agora. Tente de novo em instantes.");
-      if (d.recado) { listaEl.prepend(cartao(d.recado)); vazio.hidden = true; observeTears(); }
+      if (d.recado) { poe(d.recado, true); vazio.hidden = true; observeTears(); }
       ed.innerHTML = ""; atualiza(); toast("Recado publicado! 💛");
       listaEl.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (e2) { falha("Sem conexão agora. Tente de novo em instantes."); }
@@ -1386,6 +1442,19 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
   track.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
   track.tabIndex = 0; track.addEventListener("keydown", e => { if (e.key === "ArrowRight") { e.preventDefault(); go(cur + 1); } if (e.key === "ArrowLeft") { e.preventDefault(); go(cur - 1); } });
   paint();
+})();
+
+/* ---------- capa: fundo desfocado acompanha o vídeo ---------- */
+(() => {
+  const v = document.querySelector(".cover video"), c = $("#cover-blur");
+  if (!v || !c) return;
+  const g = c.getContext("2d");
+  const poster = new Image(); poster.onload = () => g.drawImage(poster, 0, 0, c.width, c.height); poster.src = v.poster;
+  const desenha = () => {
+    if (v.readyState >= 2 && !document.hidden && c.offsetParent !== null) { try { g.drawImage(v, 0, 0, c.width, c.height); } catch (e) {} }
+    setTimeout(desenha, 120);
+  };
+  desenha();
 })();
 
 /* ---------- carregamento: topo primeiro, resto depois ---------- */

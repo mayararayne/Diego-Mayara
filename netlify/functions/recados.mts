@@ -1,6 +1,5 @@
 import type { Config, Context } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
-import sanitizeHtml from "sanitize-html";
 import { json } from "../lib/planilha.mts";
 
 // Mural de recados. Cada recado é um blob JSON separado (sem leitura-e-escrita no mesmo item).
@@ -18,7 +17,30 @@ const publico = (r: Recado) => ({ id: r.id, nome: r.nome, html: r.html, criadoEm
 
 const decode = (s: string) =>
   s.replace(/&nbsp;/g, " ").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
-const textoPuro = (html: string) => decode(sanitizeHtml(html.replace(/<(br|\/p|\/div|\/li)[^>]*>/gi, " "), { allowedTags: [], allowedAttributes: {} })).replace(/\s+/g, " ").trim();
+const textoPuro = (html: string) => decode(html.replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
+
+// Limpeza do HTML do editor, sem biblioteca externa: fica só formatação simples.
+// Tudo que não é uma tag permitida vira texto (< e > escapados); atributos são descartados.
+const TAGS_OK = new Set(["p", "div", "br", "b", "strong", "i", "em", "u", "s", "strike", "ul", "ol", "li"]);
+const BLOCOS_FORA = /<(script|style|iframe|object|embed|video|audio|noscript|textarea|svg|math|template|source|track|title|head|select|button|form)\b[\s\S]*?<\/\1\s*>/gi;
+export function limparHtml(entrada: string, foto: (tipo: string, base64: string) => string | null): string {
+  const guardados: string[] = [];
+  const guarda = (h: string) => `\u0000${guardados.push(h) - 1}\u0000`;
+  let s = entrada.replace(/\u0000/g, "").slice(0, 3_000_000).replace(/<!--[\s\S]*?-->/g, "").replace(BLOCOS_FORA, "");
+  s = s.replace(/<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b((?:[^>"']|"[^"]*"|'[^']*')*)>/g, (_t, fecha: string, nome: string, attrs: string) => {
+    nome = nome.toLowerCase();
+    if (nome === "img") {
+      if (fecha) return "";
+      const m = /\bsrc\s*=\s*["']data:image\/(jpeg|png|webp|gif);base64,([A-Za-z0-9+/=\s]+)["']/i.exec(attrs);
+      const out = m ? foto(m[1].toLowerCase(), m[2].replace(/\s+/g, "")) : null;
+      return out ? guarda(out) : "";
+    }
+    if (!TAGS_OK.has(nome)) return "";
+    return guarda(nome === "br" ? "<br />" : `<${fecha}${nome}>`);
+  });
+  s = s.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  return s.replace(/\u0000(\d+)\u0000/g, (_m, i: string) => guardados[Number(i)] ?? "");
+}
 
 const TIPOS: Record<string, (b: Uint8Array) => boolean> = {
   jpeg: (b) => b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff,
@@ -34,26 +56,16 @@ async function criar(req: Request) {
   const nome = String(b?.nome || "").replace(/\s+/g, " ").trim();
   if (nome.length < 2 || nome.length > 60) return json({ ok: false, erro: "Escreva seu nome (até 60 letras)." }, 400);
 
-  let html = sanitizeHtml(String(b?.html || "").slice(0, 3_000_000), {
-    allowedTags: ["p", "div", "br", "b", "strong", "i", "em", "u", "s", "strike", "ul", "ol", "li", "img"],
-    allowedAttributes: { img: ["src"] },
-    allowedSchemes: [],
-    allowedSchemesByTag: { img: ["data"] },
-    allowProtocolRelative: false,
-    nonTextTags: ["style", "script", "textarea", "option", "noscript", "video", "audio", "iframe", "object", "embed", "source", "track"],
-  });
-
   const id = crypto.randomUUID();
   const novasFotos: { id: string; bytes: Uint8Array; tipo: string }[] = [];
-  html = html.replace(/<img\b[^>]*>/gi, (tag) => {
-    const m = /src="data:image\/(jpeg|png|webp|gif);base64,([A-Za-z0-9+/=]+)"/i.exec(tag);
-    if (!m || novasFotos.length >= MAX_FOTOS) return "";
-    const tipo = m[1].toLowerCase();
-    const bytes = Uint8Array.from(Buffer.from(m[2], "base64"));
-    if (bytes.length > MAX_FOTO_BYTES || !TIPOS[tipo](bytes)) return "";
+  const nomeAttr = nome.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+  let html = limparHtml(String(b?.html || ""), (tipo, base64) => {
+    if (novasFotos.length >= MAX_FOTOS) return null;
+    const bytes = Uint8Array.from(Buffer.from(base64, "base64"));
+    if (bytes.length > MAX_FOTO_BYTES || !TIPOS[tipo](bytes)) return null;
     const fid = crypto.randomUUID();
     novasFotos.push({ id: fid, bytes, tipo });
-    return `<img src="/api/recados/foto/${fid}" alt="Foto enviada por ${nome.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`)}" loading="lazy" />`;
+    return `<img src="/api/recados/foto/${fid}" alt="Foto enviada por ${nomeAttr}" loading="lazy" />`;
   });
   html = html.replace(/(<p>(\s|<br \/>)*<\/p>|<div>(\s|<br \/>)*<\/div>)+$/g, "").trim();
 

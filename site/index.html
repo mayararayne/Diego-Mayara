@@ -440,12 +440,15 @@ html.locked,html.locked body{overflow:hidden}
 .frog-band .frog-pics img,.frog-band .frog-pics img:nth-child(2){width:auto;height:clamp(200px,34vw,480px);max-width:calc((100% - 2 * clamp(8px,2.5vw,32px)) / 3);object-fit:contain}
 .frog-band .frog-txt{justify-items:center;text-align:center}
 .frog-txt .hand + .handle + .hand{margin-top:6px}
-/* vídeos dos sapinhos: mesmo papel rasgado das fotos, tocando sozinhos */
-.frog-vids{display:flex;justify-content:center;align-items:flex-start;gap:clamp(10px,2.5vw,32px);width:100%;max-width:1000px}
-.frog-vid{flex:0 1 260px;min-width:0;filter:drop-shadow(0 10px 16px rgba(40,30,20,.25))}
-.frog-vid:nth-child(1){transform:rotate(-2deg)} .frog-vid:nth-child(2){transform:rotate(1.5deg);margin-top:24px} .frog-vid:nth-child(3){transform:rotate(-1deg)}
-.frog-vid video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;background:var(--sand)}
-.frog-vids:empty{display:none}
+/* vídeos dos sapinhos: código de incorporação do Instagram dentro do mesmo papel rasgado das fotos */
+.frog-vids{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:clamp(14px,2.5vw,30px);width:100%;max-width:1140px}
+.frog-vid{flex:0 1 350px;min-width:0;filter:drop-shadow(0 10px 16px rgba(40,30,20,.25))}
+.frog-vid:nth-child(1){transform:rotate(-1.5deg)} .frog-vid:nth-child(2){transform:rotate(1.2deg);margin-top:22px} .frog-vid:nth-child(3){transform:rotate(-.8deg)}
+.frog-vid .torn{padding:12px}
+.frog-vid .instagram-media{margin:0!important;min-width:0!important;max-width:none!important;width:100%!important;border-radius:2px!important;box-shadow:none!important;background:var(--paper)!important}
+.frog-vid .instagram-media > a{display:block;padding:40px 16px;text-align:center;font:600 .85rem/1.4 var(--f-body);color:var(--terra-deep)}
+.frog-vid iframe.instagram-media{min-width:0!important}
+@media (max-width:640px){ .frog-vid{flex-basis:100%;max-width:360px} .frog-vid:nth-child(2){margin-top:0} }
 .church{width:100%;max-width:560px;height:auto;mix-blend-mode:multiply;opacity:.92;margin-bottom:-4px}
 .pbreak.lift{position:relative;z-index:4;padding-block:clamp(30px,5vw,60px) 0;margin-top:0}
 .pbreak.lift .rsvp-ph{width:min(340px,70%)}
@@ -919,9 +922,9 @@ html.locked,html.locked body{overflow:hidden}
         <img data-src="media/sapo-c.webp" alt="Dois sapinhos de tricô de suéter listrado deitados na grama">
       </div>
       <div class="frog-vids" id="sapo-vids">
-        <div class="frog-vid"><div class="torn" data-tear="7"><video data-src="media/sapo-video-1.mp4" autoplay muted loop playsinline preload="none" aria-label="Vídeo dos sapinhos de tricô"></video></div></div>
-        <div class="frog-vid"><div class="torn" data-tear="7"><video data-src="media/sapo-video-2.mp4" autoplay muted loop playsinline preload="none" aria-label="Vídeo dos sapinhos de tricô"></video></div></div>
-        <div class="frog-vid"><div class="torn" data-tear="7"><video data-src="media/sapo-video-3.mp4" autoplay muted loop playsinline preload="none" aria-label="Vídeo dos sapinhos de tricô"></video></div></div>
+        <div class="frog-vid"><div class="torn" data-tear="7"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DJT57ovtPKG/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"><a href="https://www.instagram.com/reel/DJT57ovtPKG/" target="_blank" rel="noopener">Ver o vídeo dos sapinhos no Instagram</a></blockquote></div></div>
+        <div class="frog-vid"><div class="torn" data-tear="7"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C0ZScr5o27f/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"><a href="https://www.instagram.com/reel/C0ZScr5o27f/" target="_blank" rel="noopener">Ver o vídeo dos sapinhos no Instagram</a></blockquote></div></div>
+        <div class="frog-vid"><div class="torn" data-tear="7"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/CuJ-dWVoiOD/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"><a href="https://www.instagram.com/reel/CuJ-dWVoiOD/" target="_blank" rel="noopener">Ver o vídeo dos sapinhos no Instagram</a></blockquote></div></div>
       </div>
       <div class="frog-txt">
         <p class="hand">a gente ama os sapinhos de tricô da</p>
@@ -1562,7 +1565,17 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
 })();
 
 /* ---------- vídeos dos sapinhos: some o quadro se o arquivo ainda não existir ---------- */
-document.querySelectorAll(".frog-vid video").forEach(v => v.addEventListener("error", () => { v.closest(".frog-vid").remove(); tearAll(); }));
+(() => {
+  const alvo = $("#sapo-vids"); if (!alvo) return;
+  let feito = false;
+  const carrega = () => {
+    if (feito) return; feito = true;
+    const sc = document.createElement("script"); sc.async = true; sc.src = "https://www.instagram.com/embed.js";
+    sc.onload = () => { window.instgrm && window.instgrm.Embeds.process(); observeTears(); setTimeout(tearAll, 1500); };
+    document.body.appendChild(sc);
+  };
+  if ("IntersectionObserver" in window) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); carrega(); } }, { rootMargin: "900px 0px" }); io.observe(alvo); } else carrega();
+})();
 
 /* ---------- carregamento: topo primeiro, resto depois ---------- */
 (() => {

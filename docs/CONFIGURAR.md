@@ -36,7 +36,7 @@ O site já existe: **diegoemayara** (endereço `https://diegoemayara.netlify.app
 
 1. Abra app.netlify.com/projects/diegoemayara > **Project configuration > Build & deploy > Link repository**.
 2. Escolha **GitHub** > `mayararayne/Diego-Mayara` e o branch `ccr-d3b7acd9-bit47r`. O Netlify lê o `netlify.toml` sozinho: publica a pasta `site` e as funções de `netlify/functions`.
-3. Em **Project configuration > Environment variables**, crie estas três variáveis (escopo: Functions):
+3. Em **Project configuration > Environment variables**, crie estas três variáveis. Para cada uma: **Secret** desmarcado, **Scopes: All scopes** ("Specific scopes" é pago no plano gratuito) e **Same value for all deploy contexts**.
 
 | Variável | Valor |
 |---|---|

@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="preload" href="media/header-poster.jpg" as="image"><meta name="description" content="Diego & Mayara · 23.04.2027 · Garopaba, SC"><meta property="og:title" content="Diego & Mayara"><meta property="og:description" content="23 · 04 · 2027 · Garopaba, SC"><meta property="og:type" content="website"><meta property="og:locale" content="pt_BR"><meta property="og:image" content="media/header-poster.jpg"><meta name="theme-color" content="#EFE8DC">
-<title>Diego & Mayara · 23.04.2027</title>
+<title>Diego e Mayara</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Tenor+Sans&family=Manrope:wght@400;500;600;800&family=La+Belle+Aurore&display=swap">
@@ -429,6 +429,9 @@ footer .hand{font-size:1.6rem;color:var(--on-dark)}
 html.locked,html.locked body{overflow:hidden}
 @media (max-width:640px){ .intro-names span,.intro-names em{display:block} .intro-names em{margin:.05em auto} }
 .intro-count{margin-top:6px}
+.count .seg{margin-left:-6px;opacity:.75}
+.count .seg b{font-size:1.15rem}
+.count .seg small{font-size:.54rem}
 .opening-sign{font-size:clamp(1.3rem,2.6vw,1.8rem);color:var(--terra-deep);margin-top:6px}
 .opening .btn{min-width:180px}
 .gift-pics .ph:first-child figcaption{margin-top:-34px!important}
@@ -568,6 +571,7 @@ html.locked,html.locked body{overflow:hidden}
       <div><b data-cd="d">–</b><small>dias</small></div><span class="sep"></span>
       <div><b data-cd="h">–</b><small>horas</small></div><span class="sep"></span>
       <div><b data-cd="m">–</b><small>minutos</small></div>
+      <div class="seg"><b data-cd="s">–</b><small>segundos</small></div>
     </div>
     <p class="intro boas-vindas">Fizemos este cantinho pra dividir com vocês cada pedacinho do nosso grande dia. Aqui tem tudo: onde, quando, como chegar, onde ficar e um mural pra você deixar seu carinho. Confirma sua presença por aqui e volta sempre que bater saudade. A gente mal pode esperar pra te dar aquele abraço.</p>
     <p class="hand boas-vindas-assin">com carinho, Diego e Mayara</p>
@@ -909,7 +913,7 @@ html.locked,html.locked body{overflow:hidden}
     <div class="head" style="align-content:start">
       <span class="eyebrow">Dúvidas</span>
       <h2>Perguntas <em>frequentes</em></h2>
-      <p class="lede">Outra dúvida? Chama a gente no WhatsApp.</p>
+      <p class="lede">Outra dúvida? Chama a gente no WhatsApp</p>
       <div class="row" id="faq-wa"></div>
     </div>
     <div class="faq-list" id="faq"></div>
@@ -932,6 +936,7 @@ html.locked,html.locked body{overflow:hidden}
       <div><b data-cd="d">–</b><small>dias</small></div><span class="sep"></span>
       <div><b data-cd="h">–</b><small>horas</small></div><span class="sep"></span>
       <div><b data-cd="m">–</b><small>minutos</small></div>
+      <div class="seg"><b data-cd="s">–</b><small>segundos</small></div>
     </div>
     <p class="opening-sign hand">Com carinho, Diego e Mayara</p>
     <button class="btn solid" type="button" id="intro-go">Abrir</button>
@@ -1079,9 +1084,10 @@ function tick(){
   const h = Math.floor(ms / 36e5); ms -= h * 36e5;
   const m = Math.floor(ms / 6e4);
   const poe = (k, v) => document.querySelectorAll(`[data-cd="${k}"]`).forEach(el => { el.textContent = v; });
-  poe("d", d); poe("h", String(h).padStart(2, "0")); poe("m", String(m).padStart(2, "0"));
+  ms -= m * 6e4; const sg = Math.floor(ms / 1000);
+  poe("d", d); poe("h", String(h).padStart(2, "0")); poe("m", String(m).padStart(2, "0")); poe("s", String(sg).padStart(2, "0"));
 }
-tick(); setInterval(tick, 30000);
+tick(); setInterval(tick, 1000);
 
 /* ---------- programação & faq ---------- */
 $("#timeline").innerHTML = CONFIG.programa.map(p => `<li><time>${p.hora}</time><div><h3>${p.titulo}</h3>${p.texto ? `<p>${p.texto}</p>` : ""}</div></li>`).join("");

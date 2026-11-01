@@ -8,8 +8,8 @@
 <style>
 /* Layout: colagem de papel rasgado. Cada seção é uma folha de cor diferente, fotos recortadas à mão por cima, anotações a caneta nas margens. */
 :root{
-  --cream:#EFE8DC; --sand:#E2D6C0; --paper:#F7F3EA;
-  --moss:#3E4C34; --moss-ink:#2A3424; --terra:#C0643F; --terra-deep:#9E4A2A; --sea:#346068;
+  --cream:#F2EFE6; --sand:#E7E1D4; --paper:#F7F3EA;   /* marfim claro e champagne do guia */
+  --moss:#3E4C34; --moss-ink:#2A3424; --terra:#CE7A66; --terra-deep:#8D5A32; --sea:#7F93A3;   /* terracota suave, marrom e azul do noivo */
   --ink:#1F241B; --muted:#5E5A4E; --line:#CFC3AC; --on-dark:#F1EBDF; --on-dark-mute:#C9C6B4;
   --f-display:"Instrument Serif", "Didot", "Bodoni 72", Georgia, serif;
   --f-body:"Manrope", "Avenir Next", "Segoe UI", system-ui, sans-serif;
@@ -34,7 +34,7 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1;text-wrap:ba
 h2{font-size:clamp(2.6rem,6vw,4.6rem)}
 h2 em,h1 em{color:var(--terra)}
 p{margin:0}
-.eyebrow{font:600 .72rem/1.3 var(--f-body);letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{font:600 .72rem/1.3 var(--f-body);letter-spacing:.24em;text-transform:uppercase;color:var(--terra-deep)}
 .hand{font-family:var(--f-hand);line-height:1.3;font-weight:400}
 .lede{max-width:52ch;color:var(--muted);font-size:1.06rem}
 .sec{padding-block:clamp(56px,9vw,110px)}
@@ -43,10 +43,10 @@ p{margin:0}
 /* bordas rasgadas entre folhas */
 .edge{height:clamp(44px,6.2vw,110px);background-repeat:repeat-x;background-position:center bottom;background-size:max(1400px,100%) 100%;margin-top:calc(-1 * clamp(20px,3vw,50px));position:relative;z-index:2;pointer-events:none}
 .edge.b{background-position:center top;margin-top:0;margin-bottom:calc(-1 * clamp(20px,3vw,50px))}
-.bg-sand{background:var(--sand)} .bg-moss{background:var(--moss);color:var(--on-dark)} .bg-terra{background:var(--terra);color:var(--on-dark)}
-.bg-moss .eyebrow,.bg-terra .eyebrow{color:var(--on-dark-mute)}
-.bg-moss h2 em{color:#E7A57F} .bg-terra h2 em{color:var(--moss-ink)}
-.bg-moss .lede,.bg-terra .lede{color:var(--on-dark-mute)}
+.bg-sand{background:var(--sand)} .bg-moss{background:var(--moss);color:var(--on-dark)} .bg-terra{background:#CC8C7D;color:var(--ink)}
+.bg-moss .eyebrow{color:var(--gold)} .bg-terra .eyebrow{color:#3B3530}
+.bg-moss h2 em{color:var(--gold)} .bg-terra h2 em{color:var(--cream)}
+.bg-moss .lede{color:var(--on-dark-mute)} .bg-terra .lede{color:#3B3530}
 
 /* nav */
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--cream) 90%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
@@ -75,12 +75,12 @@ p{margin:0}
 .r1{background:var(--moss-ink);color:var(--on-dark);font:800 .78em/1 var(--f-body);transform:rotate(-4deg)}
 .r2{background:var(--paper);color:var(--ink);font:italic 400 1em/1 var(--f-display);transform:rotate(3deg)}
 .r3{background:var(--terra);color:var(--paper);font:400 .95em/1 var(--f-display);transform:rotate(-2deg)}
-.r4{background:#F2D7A7;color:var(--ink);font:600 .7em/1 ui-monospace,Menlo,monospace;transform:rotate(5deg)}
+.r4{background:#F1C8B2;color:var(--ink);font:600 .7em/1 ui-monospace,Menlo,monospace;transform:rotate(5deg)}
 .r5{background:var(--sea);color:var(--paper);font:800 .74em/1 var(--f-body);transform:rotate(-6deg)}
 .r6{background:var(--paper);color:var(--terra-deep);font:400 1.05em/1 var(--f-display);transform:rotate(-1deg);text-transform:uppercase}
 
 /* fita adesiva */
-.tape{position:absolute;width:90px;height:26px;background:rgba(236,224,190,.72);box-shadow:0 1px 2px rgba(0,0,0,.08);z-index:3;clip-path:polygon(0 8%,6% 0,12% 10%,20% 2%,30% 6%,100% 0,96% 50%,100% 100%,0 100%,4% 50%)}
+.tape{position:absolute;width:90px;height:26px;background:rgba(210,177,126,.6);box-shadow:0 1px 2px rgba(0,0,0,.08);z-index:3;clip-path:polygon(0 8%,6% 0,12% 10%,20% 2%,30% 6%,100% 0,96% 50%,100% 100%,0 100%,4% 50%)}
 
 /* hero */
 .hero{position:relative;overflow:hidden;padding-top:clamp(24px,4vw,40px)}
@@ -169,7 +169,7 @@ p{margin:0}
 .notebox:nth-child(2){transform:rotate(1deg)}
 .notebox:nth-child(3){transform:rotate(-.6deg)}
 .note-p{display:grid;gap:8px;padding:26px 28px;background:var(--paper)}
-.notebox:nth-child(2) .note-p{background:#F2D7A7}
+.notebox:nth-child(2) .note-p{background:#F1C8B2}
 .note-p h3{font-size:1.7rem}
 .note-p p{color:var(--muted)}
 .note-p .row{margin-top:8px}
@@ -218,7 +218,7 @@ fieldset.field .choice{clear:both}
 .gift:nth-child(odd){transform:rotate(-.8deg)} .gift:nth-child(even){transform:rotate(.7deg)}
 .gift:hover{transform:translateY(-4px) rotate(0)}
 .gift::after{content:"";position:absolute;left:14px;right:14px;bottom:62px;border-top:1.5px dashed var(--line)}
-.gift[aria-pressed="true"]{background:#F2D7A7}
+.gift[aria-pressed="true"]{background:#F1C8B2}
 .gift .k{font:600 .64rem/1.4 var(--f-body);letter-spacing:.22em;text-transform:uppercase;color:var(--terra-deep)}
 .gift h3{font-size:1.7rem}
 .gift p{color:var(--muted);font-size:.93rem;margin-bottom:26px}
@@ -251,14 +251,15 @@ fieldset.field .choice{clear:both}
 details{border-bottom:1px solid rgba(241,235,223,.25)}
 summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px 2px;font:400 1.5rem/1.2 var(--f-display)}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";font:300 1.7rem/1 var(--f-body);color:#E7A57F;transition:transform .25s}
+summary::after{content:"+";font:300 1.7rem/1 var(--f-body);color:var(--gold);transition:transform .25s}
 details[open] summary::after{transform:rotate(45deg)}
 details p{padding:0 2px 22px;color:var(--on-dark-mute);max-width:60ch}
 footer{background:var(--moss);color:var(--on-dark);text-align:center}
 footer .wrap{padding-block:20px 64px;display:grid;gap:12px;justify-items:center}
 footer .big{font:400 clamp(1.8rem,5.4vw,4rem)/1.2 var(--f-caps);letter-spacing:.16em;text-transform:uppercase}
 footer .big em{font-family:var(--f-display);text-transform:none;letter-spacing:0;font-size:1.15em}
-footer .big em{color:#E7A57F}
+footer .big em{color:var(--gold)}
+footer .hand{color:var(--gold)!important}
 footer p{color:var(--on-dark-mute)}
 footer .hand{font-size:1.6rem;color:var(--on-dark)}
 
@@ -298,7 +299,7 @@ footer .hand{font-size:1.6rem;color:var(--on-dark)}
 /* capa */
 .cover{position:relative;overflow:hidden;background:var(--sea)}
 .cover video{display:block;width:100%;height:min(88vh,920px);min-height:420px;object-fit:cover;object-position:50% 40%}
-.cover-edge{position:absolute;z-index:2;left:0;right:0;bottom:-2px;height:clamp(70px,11vw,200px);background:url(media/edge-hero.png) center bottom / max(1300px,100%) 100% repeat-x}
+.cover-edge{position:absolute;z-index:2;left:0;right:0;bottom:-2px;height:clamp(70px,11vw,200px);background:url(media/edge-hero.png?v=2) center bottom / max(1300px,100%) 100% repeat-x}
 .cover .sim{position:absolute;right:max(16px,7vw);top:clamp(24px,5vw,70px);font-size:clamp(1.8rem,3.6vw,3.2rem);left:auto}
 .cover-note{position:absolute;right:max(16px,6vw);top:clamp(90px,12vw,190px);font-size:clamp(1.5rem,3vw,2.8rem);color:#fff;transform:rotate(-7deg);text-align:center;text-shadow:0 1px 8px rgba(0,40,70,.35)}
 .names-sec{text-align:center;position:relative;z-index:3;padding-top:clamp(36px,5vw,70px)}
@@ -317,7 +318,7 @@ footer .hand{font-size:1.6rem;color:var(--on-dark)}
 .ph{margin:0;position:relative}
 .ph img{width:100%;height:auto}
 .ph figcaption{font-size:clamp(1.2rem,2vw,1.6rem);margin-top:-14px;padding-left:8%;transform:rotate(-2deg)}
-.bg-moss .ph figcaption,.bg-terra .ph figcaption{color:var(--on-dark)}
+.bg-moss .ph figcaption{color:var(--on-dark)} .bg-terra .ph figcaption{color:var(--ink)}
 .pbreak{padding-block:clamp(30px,6vw,80px)}
 .single{max-width:880px;margin-inline:auto}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,5vw,72px);max-width:1080px;margin-inline:auto;align-items:start}
@@ -350,8 +351,8 @@ footer .hand{font-size:1.6rem;color:var(--on-dark)}
 /* faixas de ponta a ponta */
 .band{position:relative;height:clamp(320px,52vw,720px);background-size:cover;background-repeat:no-repeat;margin-top:clamp(10px,2vw,30px)}
 .band-edge{position:absolute;left:0;right:0;height:clamp(60px,9vw,170px);background-repeat:repeat-x;background-size:max(1300px,100%) 100%;pointer-events:none}
-.band-edge.bot{bottom:-2px;background-image:url(media/edge-hero.png);background-position:center bottom}
-.band-edge.top{top:-2px;background-image:url(media/edge-hero-b.png);background-position:center top}
+.band-edge.bot{bottom:-2px;background-image:url(media/edge-hero.png?v=2);background-position:center bottom}
+.band-edge.top{top:-2px;background-image:url(media/edge-hero-b.png?v=2);background-position:center top}
 .band + .edge{margin-top:calc(-1 * clamp(44px,6.2vw,110px) + 2px)}
 .skate-band{position:relative;margin-top:clamp(50px,8vw,100px);width:100%}
 .skate-band video{display:block;width:100%;height:clamp(360px,52vw,760px);object-fit:cover;object-position:50% 50%}
@@ -359,7 +360,7 @@ footer .hand{font-size:1.6rem;color:var(--on-dark)}
 .vids{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px}
 .vid:nth-child(1){transform:rotate(-2.5deg) translateY(20px)}
 .gift-pics{max-width:900px;margin:0 auto clamp(40px,6vw,70px)}
-.gift-pics .ph figcaption{color:var(--on-dark)}
+.gift-pics .ph figcaption{color:var(--ink)}
 @media (max-width:640px){ .skate-band video{height:70vh} .vids{grid-template-columns:repeat(2,minmax(0,1fr))} }
 .gift-pics{display:flex!important;justify-content:center;align-items:flex-end;gap:clamp(12px,3vw,40px)!important;flex-wrap:nowrap}
 .gift-pics .ph:nth-child(2){margin-top:0}
@@ -385,7 +386,7 @@ footer .hand{font-size:1.6rem;color:var(--on-dark)}
 /* música */
 .music{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:65;display:inline-flex;align-items:center;gap:10px;padding:10px 16px 10px 12px;border:0;border-radius:999px;background:var(--moss-ink);color:var(--on-dark);font:600 .78rem/1 var(--f-body);letter-spacing:.06em;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.25)}
 .music .bars{display:inline-flex;gap:2px;align-items:flex-end;height:14px}
-.music .bars i{width:3px;height:4px;background:#E7A57F;border-radius:1px}
+.music .bars i{width:3px;height:4px;background:var(--gold);border-radius:1px}
 .music.on .bars i{animation:eq 1s ease-in-out infinite}
 .music.on .bars i:nth-child(2){animation-delay:-.3s}.music.on .bars i:nth-child(3){animation-delay:-.6s}
 @keyframes eq{0%,100%{height:4px}50%{height:14px}}
@@ -635,7 +636,7 @@ html.locked,html.locked body{overflow:hidden}
   <div class="band-edge top" aria-hidden="true"></div>
 </section>
 
-<div class="edge" style="background-image:url(media/edge-moss.png)" aria-hidden="true"></div>
+<div class="edge" style="background-image:url(media/edge-moss.png?v=2)" aria-hidden="true"></div>
 <section class="sec bg-moss" style="padding-top:clamp(40px,6vw,70px);padding-bottom:0" aria-labelledby="t-vid">
   <div class="wrap">
     <div class="head" style="text-align:center;justify-items:center">
@@ -654,7 +655,7 @@ html.locked,html.locked body{overflow:hidden}
   </div>
   <div class="skate-band frame-wrap">
     <video data-src="media/skate.mp4" poster="media/skate-poster.jpg" autoplay muted loop playsinline preload="none" aria-label="Vídeo: Mayara andando de skate sentada no estacionamento"></video>
-    <div class="band-edge top" style="background-image:url(media/edge-moss-b.png)" aria-hidden="true"></div>
+    <div class="band-edge top" style="background-image:url(media/edge-moss-b.png?v=2)" aria-hidden="true"></div>
     <div class="band-edge bot" aria-hidden="true"></div>
   </div>
 </section>
@@ -721,7 +722,7 @@ html.locked,html.locked body{overflow:hidden}
   </div>
 </section>
 
-<div class="edge" style="background-image:url(media/edge-sand.png)" aria-hidden="true"></div>
+<div class="edge" style="background-image:url(media/edge-sand.png?v=2)" aria-hidden="true"></div>
 <section class="sec place bg-sand" id="local">
   <div class="wrap">
     <div class="place-art">
@@ -764,7 +765,7 @@ html.locked,html.locked body{overflow:hidden}
     <figure class="ph single" style="max-width:760px"><img data-src="media/jardim.webp" alt="Os dois num banco de jardim com dois cachorros, em São Leopoldo"><figcaption class="hand">São Leopoldo, RS</figcaption></figure>
   </div>
 </section>
-<div class="edge b" style="background-image:url(media/edge-sand-b.png)" aria-hidden="true"></div>
+<div class="edge b" style="background-image:url(media/edge-sand-b.png?v=2)" aria-hidden="true"></div>
 
 <section class="pbreak lift" aria-label="Foto">
   <div class="wrap">
@@ -872,7 +873,7 @@ html.locked,html.locked body{overflow:hidden}
   </div>
 </section>
 
-<div class="edge" style="background-image:url(media/edge-terra.png)" aria-hidden="true"></div>
+<div class="edge" style="background-image:url(media/edge-terra.png?v=2)" aria-hidden="true"></div>
 <section class="sec bg-terra" id="presentes" style="padding-top:clamp(40px,6vw,70px)">
   <div class="wrap">
     <div class="head">
@@ -899,7 +900,7 @@ html.locked,html.locked body{overflow:hidden}
     </div>
   </div>
 </section>
-<div class="edge b" style="background-image:url(media/edge-terra-b.png)" aria-hidden="true"></div>
+<div class="edge b" style="background-image:url(media/edge-terra-b.png?v=2)" aria-hidden="true"></div>
 
 
 <section class="frogs" id="sapos" aria-label="Sapos de tricô">
@@ -964,7 +965,7 @@ html.locked,html.locked body{overflow:hidden}
   </div>
 </section>
 
-<div class="edge" style="background-image:url(media/edge-moss.png)" aria-hidden="true"></div>
+<div class="edge" style="background-image:url(media/edge-moss.png?v=2)" aria-hidden="true"></div>
 <section class="sec faq bg-moss" id="duvidas" style="padding-top:clamp(40px,6vw,70px)">
   <div class="wrap">
     <div class="head" style="align-content:start">

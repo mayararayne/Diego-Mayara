@@ -1487,7 +1487,7 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
 (() => {
   const a = $("#trilha"), b = $("#music"), lbl = $("#music-lbl");
   a.volume = 0.6;
-  let userPaused = false;
+  let userPaused = false, aberto = false;
   const sync = () => { const on = !a.paused; b.classList.toggle("on", on); b.setAttribute("aria-pressed", String(on)); lbl.textContent = on ? "Pausar música" : "Tocar música"; };
   const tryPlay = () => a.play().then(sync).catch(sync);
   a.addEventListener("play", sync); a.addEventListener("pause", sync);
@@ -1500,11 +1500,12 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
     const resumo = document.querySelector(".names-sec");
     const navH = document.querySelector(".nav")?.offsetHeight || 0;
     window.scrollTo({ top: resumo ? resumo.getBoundingClientRect().top + scrollY - navH : 0, left: 0, behavior: "instant" });
+    aberto = true;
     intro.classList.add("gone"); document.documentElement.classList.remove("locked"); document.querySelectorAll("video").forEach(v => { const p = v.play(); if (p) p.catch(() => {}); }); };
   go.addEventListener("click", () => { userPaused = false; tryPlay(); openSite(); });
-  a.play().then(() => { sync(); openSite(); }).catch(sync);
+  // a música só começa quando a pessoa clica em "Abrir"
   go.focus({ preventScroll: true });
-  const unlock = e => { if (e.target.closest && e.target.closest("#music")) return; if (!userPaused && a.paused) tryPlay(); };
+  const unlock = e => { if (!aberto) return; if (e.target.closest && e.target.closest("#music")) return; if (!userPaused && a.paused) tryPlay(); };
   ["pointerdown", "keydown", "touchend"].forEach(ev => document.addEventListener(ev, unlock, { passive: true }));
   b.addEventListener("click", () => { if (a.paused) { userPaused = false; tryPlay(); } else { userPaused = true; a.pause(); } });
 })();

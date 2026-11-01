@@ -534,6 +534,19 @@ html.locked,html.locked body{overflow:hidden}
 .mural-vazio{text-align:center;color:var(--muted)}
 .mural-mais{display:flex;justify-content:center;margin-top:10px}
 .insta-in{display:grid;justify-items:center;text-align:center;gap:18px}
+.traje .wrap{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,6vw,80px);align-items:center}
+.traje .notebox{transform:rotate(.6deg);max-width:620px}
+.traje .note-p{gap:12px;padding:30px 32px;background:var(--paper)!important}
+.cores{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:16px}
+.cores li{display:flex;align-items:center;gap:16px}
+.cores b{display:block;font:400 1.3rem/1.2 var(--f-display);color:var(--ink)}
+.cores small{display:block;color:var(--muted);font-size:.9rem}
+.bolinhas{display:flex;flex:none;min-width:150px}
+.bolinhas i{width:38px;height:38px;border-radius:50%;border:2px solid var(--paper);margin-left:-10px;box-shadow:0 2px 6px rgba(40,30,20,.2)}
+.bolinhas i:first-child{margin-left:0}
+.cores-fim{font-size:1.5rem;color:var(--terra-deep);margin-top:6px}
+@media (max-width:900px){ .traje .wrap{grid-template-columns:minmax(0,1fr)} }
+@media (max-width:640px){ .bolinhas{min-width:110px} .bolinhas i{width:30px;height:30px} .cores b{font-size:1.15rem} }
 .boas-vindas{font-size:1.08rem;color:var(--ink);margin-top:6px;max-width:52ch!important}
 .boas-vindas-assin{font-size:1.7rem;color:var(--terra-deep);margin-top:-8px}
 .btn .wa{width:18px;height:18px;flex:none}
@@ -546,6 +559,7 @@ html.locked,html.locked body{overflow:hidden}
     <ul>
       <li class="hide-s"><a class="l" href="#historia">Nós</a></li>
       <li><a class="l" href="#dia">O dia</a></li>
+      <li class="hide-s"><a class="l" href="#traje">Traje</a></li>
       <li class="hide-s"><a class="l" href="#local">Local</a></li>
       <li><a class="l" href="#presentes">Presentes</a></li>
       <li class="hide-s"><a class="l" href="#recados">Recados</a></li>
@@ -662,6 +676,27 @@ html.locked,html.locked body{overflow:hidden}
         <div class="row"><a class="btn solid" href="#confirmar">Confirmar agora <span class="ar">→</span></a></div>
       </div></div>
     </div>
+  </div>
+</section>
+
+<section class="sec traje" id="traje" aria-labelledby="t-traje" style="padding-top:clamp(10px,2vw,30px)">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Traje</span>
+      <h2 id="t-traje"><span data-k="traje">Esporte fino</span>, <em>do seu jeito</em></h2>
+      <p class="lede" data-k="trajeNota">Uma sugestão, não regra. Venha confortável pra dançar.</p>
+    </div>
+    <div class="notebox"><div class="note-p" data-tear="5">
+      <span class="eyebrow">Um pedido com carinho</span>
+      <h3>Essas cores já têm dono nesse dia</h3>
+      <p>Se der, deixa elas de fora do look. São as cores da noiva, do noivo e das madrinhas, e assim cada um brilha do seu jeitinho nas fotos.</p>
+      <ul class="cores">
+        <li><span class="bolinhas" aria-hidden="true"><i style="background:#FFFFFF"></i><i style="background:#F2EFE6"></i><i style="background:#E7E1D4"></i></span><span><b>Branco, off-white e marfim</b><small>são da noiva</small></span></li>
+        <li><span class="bolinhas" aria-hidden="true"><i style="background:#7F93A3"></i></span><span><b>Azul acinzentado</b><small>é do noivo</small></span></li>
+        <li><span class="bolinhas" aria-hidden="true"><i style="background:#C88F84"></i><i style="background:#D4969B"></i><i style="background:#CE7A66"></i><i style="background:#CC8C7D"></i><i style="background:#C29490"></i></span><span><b>Rosés, rosa queimado e terracota</b><small>são das madrinhas</small></span></li>
+      </ul>
+      <p class="hand cores-fim">o resto do arco-íris é todo seu</p>
+    </div></div>
   </div>
 </section>
 

@@ -440,17 +440,12 @@ html.locked,html.locked body{overflow:hidden}
 .frog-band .frog-pics img,.frog-band .frog-pics img:nth-child(2){width:auto;height:clamp(200px,34vw,480px);max-width:calc((100% - 2 * clamp(8px,2.5vw,32px)) / 3);object-fit:contain}
 .frog-band .frog-txt{justify-items:center;text-align:center}
 .frog-txt .hand + .handle + .hand{margin-top:6px}
-/* cardzinhos de película com os vídeos do Instagram */
-.filmes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,3vw,36px);width:100%;max-width:1000px;margin-top:clamp(20px,3vw,36px)}
-.filme{margin:0;display:grid;gap:10px;justify-items:center}
-.filme:nth-child(1){transform:rotate(-1.5deg)} .filme:nth-child(2){transform:rotate(1deg)} .filme:nth-child(3){transform:rotate(-.6deg)}
-.pelicula{width:100%;padding:0 18px;background:#1F241B;border-radius:4px;filter:var(--shadow);
-  background-image:radial-gradient(circle at 9px 50%, var(--cream) 4px, transparent 4.5px),radial-gradient(circle at calc(100% - 9px) 50%, var(--cream) 4px, transparent 4.5px);
-  background-size:18px 18px;background-repeat:repeat-y;background-position:left top,right top}
-.pelicula iframe{display:block;width:100%;height:540px;border:0;background:var(--paper)}
-.filme-link{font:600 .8rem/1 var(--f-body);color:var(--terra-deep);text-decoration:none}
-.filme-link:hover{text-decoration:underline}
-@media (max-width:900px){ .filmes{grid-template-columns:minmax(0,1fr);max-width:400px} }
+/* vídeos dos sapinhos: mesmo papel rasgado das fotos, tocando sozinhos */
+.frog-vids{display:flex;justify-content:center;align-items:flex-start;gap:clamp(10px,2.5vw,32px);width:100%;max-width:1000px}
+.frog-vid{flex:0 1 260px;min-width:0;filter:drop-shadow(0 10px 16px rgba(40,30,20,.25))}
+.frog-vid:nth-child(1){transform:rotate(-2deg)} .frog-vid:nth-child(2){transform:rotate(1.5deg);margin-top:24px} .frog-vid:nth-child(3){transform:rotate(-1deg)}
+.frog-vid video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;background:var(--sand)}
+.frog-vids:empty{display:none}
 .church{width:100%;max-width:560px;height:auto;mix-blend-mode:multiply;opacity:.92;margin-bottom:-4px}
 .pbreak.lift{position:relative;z-index:4;padding-block:clamp(30px,5vw,60px) 0;margin-top:0}
 .pbreak.lift .rsvp-ph{width:min(340px,70%)}
@@ -503,9 +498,6 @@ html.locked,html.locked body{overflow:hidden}
 .names-sec .bigdate,.intro-date{display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,22px)}
 .names-sec .bigdate::before,.names-sec .bigdate::after,.intro-date::before,.intro-date::after{content:"";width:clamp(28px,5vw,56px);height:1px;background:var(--gold)}
 .names-sec .fio{background:var(--gold);opacity:1}
-/* mapa */
-.mapa{margin:6px 0 0;padding:8px;background:var(--paper);filter:var(--shadow);transform:rotate(-.5deg)}
-.mapa iframe{display:block;width:100%;aspect-ratio:4/3;border:0;background:var(--sand)}
 
 /* ===== seções novas: usam só as cores e fontes que já existem ===== */
 .paperbox{display:grid;gap:20px;background:var(--paper);padding:clamp(28px,4vw,46px) clamp(22px,4vw,44px)}
@@ -566,6 +558,9 @@ html.locked,html.locked body{overflow:hidden}
 .insta-in{display:grid;justify-items:center;text-align:center;gap:18px}
 .traje .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:start}
 .traje .note-p{background:var(--paper)!important}
+.cortejo{margin-top:clamp(18px,3vw,34px);transform:rotate(-1.2deg);filter:drop-shadow(0 10px 16px rgba(40,30,20,.22))}
+.cortejo img{width:100%;height:auto}
+.cortejo figcaption{margin-top:10px}
 .cores{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px}
 .cores li{display:grid;gap:3px;align-content:start}
 .cores b{font:400 1.05rem/1.2 var(--f-display);color:var(--ink)}
@@ -690,7 +685,6 @@ html.locked,html.locked body{overflow:hidden}
         <dt>Estacionamento</dt><dd data-k="estacionamento">Estacionamento no local.</dd>
         <dt>Hospedagem</dt><dd>Vem de fora? Temos algumas <a href="#hospedagem">dicas de onde ficar</a>.</dd>
       </dl>
-      <figure class="mapa"><iframe id="mapa" title="Mapa da Igreja Matriz São Joaquim, em Garopaba" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></figure>
       <div class="row">
         <a class="btn solid" id="maps" href="https://www.google.com/maps" target="_blank" rel="noopener">Abrir no Google Maps <span class="ar">→</span></a>
         <a class="btn" href="#hospedagem">Onde ficar</a>
@@ -834,9 +828,12 @@ html.locked,html.locked body{overflow:hidden}
 
 <section class="sec traje" id="traje" aria-labelledby="t-traje" style="padding-top:clamp(10px,2vw,30px)">
   <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">Traje</span>
-      <h2 id="t-traje">O que <em>vestir</em></h2>
+    <div class="traje-esq">
+      <div class="head">
+        <span class="eyebrow">Traje</span>
+        <h2 id="t-traje">O que <em>vestir</em></h2>
+      </div>
+      <figure class="ph cortejo"><span class="tape" style="top:-8px;left:42%;transform:rotate(-4deg)"></span><div class="torn" data-tear="7"><img data-src="media/traje-cortejo.webp?v=2" alt="Ilustração do cortejo: padrinhos de terno cinza, o noivo de azul acinzentado, a noiva de branco e as madrinhas em tons de rosé e terracota" width="1224" height="507"></div><figcaption class="hand">as cores do nosso cortejo</figcaption></figure>
     </div>
     <div class="notes">
       <div class="notebox"><div class="note-p" data-tear="5">
@@ -921,16 +918,16 @@ html.locked,html.locked body{overflow:hidden}
         <img data-src="media/sapo-b.webp" alt="Dois sapinhos de tricô lendo livros num sofá verde">
         <img data-src="media/sapo-c.webp" alt="Dois sapinhos de tricô de suéter listrado deitados na grama">
       </div>
+      <div class="frog-vids" id="sapo-vids">
+        <div class="frog-vid"><div class="torn" data-tear="7"><video data-src="media/sapo-video-1.mp4" autoplay muted loop playsinline preload="none" aria-label="Vídeo dos sapinhos de tricô"></video></div></div>
+        <div class="frog-vid"><div class="torn" data-tear="7"><video data-src="media/sapo-video-2.mp4" autoplay muted loop playsinline preload="none" aria-label="Vídeo dos sapinhos de tricô"></video></div></div>
+        <div class="frog-vid"><div class="torn" data-tear="7"><video data-src="media/sapo-video-3.mp4" autoplay muted loop playsinline preload="none" aria-label="Vídeo dos sapinhos de tricô"></video></div></div>
+      </div>
       <div class="frog-txt">
         <p class="hand">a gente ama os sapinhos de tricô da</p>
         <a class="handle" href="https://www.instagram.com/dotpebbles_knits/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@dotpebbles_knits</a>
         <p class="hand">e os vídeos da</p>
         <a class="handle" href="https://www.instagram.com/indiarosecrawford/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@indiarosecrawford</a>
-      </div>
-      <div class="filmes">
-        <figure class="filme"><div class="pelicula"><iframe data-src="https://www.instagram.com/p/DJT57ovtPKG/embed/" title="Vídeo dos sapinhos de tricô no Instagram" loading="lazy" scrolling="no" allowtransparency="true"></iframe></div><a class="filme-link" href="https://www.instagram.com/p/DJT57ovtPKG/" target="_blank" rel="noopener">ver no Instagram →</a></figure>
-        <figure class="filme"><div class="pelicula"><iframe data-src="https://www.instagram.com/p/C0ZScr5o27f/embed/" title="Vídeo dos sapinhos de tricô no Instagram" loading="lazy" scrolling="no" allowtransparency="true"></iframe></div><a class="filme-link" href="https://www.instagram.com/p/C0ZScr5o27f/" target="_blank" rel="noopener">ver no Instagram →</a></figure>
-        <figure class="filme"><div class="pelicula"><iframe data-src="https://www.instagram.com/p/CuJ-dWVoiOD/embed/" title="Vídeo dos sapinhos de tricô no Instagram" loading="lazy" scrolling="no" allowtransparency="true"></iframe></div><a class="filme-link" href="https://www.instagram.com/p/CuJ-dWVoiOD/" target="_blank" rel="noopener">ver no Instagram →</a></figure>
       </div>
     </div>
   </div>
@@ -1145,7 +1142,6 @@ document.querySelectorAll("[data-k]").forEach(el => { const v = vals[el.dataset.
 document.querySelectorAll("[data-mono]").forEach(el => el.innerHTML = `${CONFIG.nome1[0]}<i>&amp;</i>${CONFIG.nome2[0]}`);
 const q = encodeURIComponent(CONFIG.mapsBusca || `${CONFIG.local} ${CONFIG.endereco}`);
 $("#maps").href = CONFIG.mapsLink || `https://www.google.com/maps/search/?api=1&query=${q}`;
-$("#mapa").src = `https://www.google.com/maps?q=${q}&z=16&output=embed`;
 
 
 /* ---------- contagem ---------- */
@@ -1564,6 +1560,9 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
   };
   desenha();
 })();
+
+/* ---------- vídeos dos sapinhos: some o quadro se o arquivo ainda não existir ---------- */
+document.querySelectorAll(".frog-vid video").forEach(v => v.addEventListener("error", () => { v.closest(".frog-vid").remove(); tearAll(); }));
 
 /* ---------- carregamento: topo primeiro, resto depois ---------- */
 (() => {

@@ -1,11 +1,9 @@
 import type { Config, Context } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
 import sanitizeHtml from "sanitize-html";
-import { promises as dns } from "node:dns";
 import { json } from "../lib/planilha.mts";
 
 // Mural de recados. Cada recado é um blob JSON separado (sem leitura-e-escrita no mesmo item).
-// O e-mail fica guardado, mas nunca sai na resposta pública.
 
 export const LIMITE_TEXTO = 800;
 const MAX_FOTOS = 3;
@@ -15,7 +13,7 @@ const POR_PAGINA = 20;
 const recados = () => getStore("recados");
 const fotos = () => getStore("recados-fotos");
 
-type Recado = { id: string; nome: string; email: string; html: string; fotos: string[]; criadoEm: string };
+type Recado = { id: string; nome: string; html: string; fotos: string[]; criadoEm: string };
 const publico = (r: Recado) => ({ id: r.id, nome: r.nome, html: r.html, criadoEm: r.criadoEm });
 
 const decode = (s: string) =>
@@ -29,31 +27,12 @@ const TIPOS: Record<string, (b: Uint8Array) => boolean> = {
   webp: (b) => String.fromCharCode(...b.slice(0, 4)) === "RIFF" && String.fromCharCode(...b.slice(8, 12)) === "WEBP",
 };
 
-async function emailValido(email: string) {
-  if (email.length > 120 || !/^[^\s@<>()]+@[^\s@<>()]+\.[a-z]{2,}$/i.test(email)) return false;
-  const dominio = email.split("@").pop()!.toLowerCase();
-  const comPrazo = <T,>(p: Promise<T>) => Promise.race([p, new Promise<never>((_, rej) => setTimeout(() => rej({ code: "TIMEOUT" }), 3000))]);
-  try {
-    const mx = await comPrazo(dns.resolveMx(dominio));
-    return mx.length > 0;
-  } catch (e: any) {
-    if (e?.code === "ENODATA") {
-      try { await comPrazo(dns.resolve4(dominio)); return true; } catch { return false; }
-    }
-    if (e?.code !== "ENOTFOUND") return true; // falha de DNS do nosso lado não pode barrar ninguém
-    // domínio "não existe": só acreditamos se o DNS estiver funcionando para um domínio conhecido
-    try { await comPrazo(dns.resolveMx("gmail.com")); return false; } catch { return true; }
-  }
-}
-
 async function criar(req: Request) {
   let b: any;
   try { b = await req.json(); } catch { return json({ ok: false, erro: "Não conseguimos ler o recado." }, 400); }
   if (b?.site) return json({ ok: true }); // campo-isca: robôs preenchem, pessoas não veem
   const nome = String(b?.nome || "").replace(/\s+/g, " ").trim();
-  const email = String(b?.email || "").trim();
   if (nome.length < 2 || nome.length > 60) return json({ ok: false, erro: "Escreva seu nome (até 60 letras)." }, 400);
-  if (!(await emailValido(email))) return json({ ok: false, erro: "Confira o e-mail: ele precisa ser um endereço válido." }, 400);
 
   let html = sanitizeHtml(String(b?.html || "").slice(0, 3_000_000), {
     allowedTags: ["p", "div", "br", "b", "strong", "i", "em", "u", "s", "strike", "ul", "ol", "li", "img"],
@@ -84,7 +63,7 @@ async function criar(req: Request) {
   if (tamanho < 2 && !novasFotos.length) return json({ ok: false, erro: "Escreva uma mensagem antes de enviar." }, 400);
 
   await Promise.all(novasFotos.map((f) => fotos().set(f.id, f.bytes.buffer as ArrayBuffer, { metadata: { tipo: `image/${f.tipo}`, recado: id } })));
-  const recado: Recado = { id, nome, email, html, fotos: novasFotos.map((f) => f.id), criadoEm: new Date().toISOString() };
+  const recado: Recado = { id, nome, html, fotos: novasFotos.map((f) => f.id), criadoEm: new Date().toISOString() };
   await recados().setJSON(`msg/${recado.criadoEm}_${id}`, recado);
   return json({ ok: true, recado: publico(recado) }, 201);
 }

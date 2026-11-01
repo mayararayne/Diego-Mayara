@@ -1,5 +1,9 @@
 /**
- * Confirmação de presença do site → planilha "Planilha_Organizacao_Casamento May e Diego".
+ * Confirmação de presença do site → aba "Confirmação" da planilha
+ * "Planilha_Organizacao_Casamento May e Diego".
+ *
+ * O site só lê e escreve na aba "Confirmação". A aba "👥 Convidados" é apenas
+ * lida, e só quando você usa o menu Casamento > Trazer convidados novos.
  *
  * Como instalar (uma vez só):
  * 1. Abra a planilha > Extensões > Apps Script. Apague o que estiver lá e cole este arquivo.
@@ -8,33 +12,30 @@
  * 3. Implantar > Nova implantação > tipo "App da Web"
  *      Executar como: Eu  |  Quem pode acessar: Qualquer pessoa
  *    Autorize e copie a URL que termina em /exec (vai no Netlify como RSVP_SCRIPT_URL).
- *
- * O site nunca fala direto com este script: as funções do Netlify fazem a ponte e
- * mandam o TOKEN junto. Sem o TOKEN certo, o script não responde nada.
  */
 
-const ABA = '👥 Convidados';
+const ABA = 'Confirmação';
+const ABA_BASE = '👥 Convidados';
 
-// Colunas que o script lê (pelo nome do cabeçalho na linha 1).
-const COL = {
-  nome: 'Nome',
+// Cabeçalhos da aba Confirmação (o script acha as colunas pelo nome).
+const C = {
+  id: 'ID',
+  nome: 'Nome (aparece no site)',
+  convite: 'Convite',
   lado: 'Lado',
-  grupo: 'Grupo de convite',
   crianca: 'Criança?',
-  conviteSite: 'Convite (site)', // opcional: se preenchida, define quem aparece junto no convite
+  presenca: 'Presença',
+  restricao: 'Restrição alimentar',
+  recado: 'Recado',
+  por: 'Respondido por',
+  em: 'Respondido em',
+  obs: 'Observação',
+  origem: 'Origem (não editar)',
 };
 
-// Colunas que o script escreve. Se não existirem, ele usa as "Coluna N" vazias do fim.
-const SAIDA = [
-  'Presença (site)',
-  'Restrição alimentar (site)',
-  'Recado (site)',
-  'Respondido por (site)',
-  'Respondido em (site)',
-];
+const IGNORAR = ['da', 'de', 'do', 'das', 'dos', 'e', 'vo', 'tia', 'tio'];
 
-const GRUPOS_FORA = ['noivos'];
-const IGNORAR = ['da', 'de', 'do', 'das', 'dos', 'e', 'vo', 'vó', 'tia', 'tio'];
+/* ---------------- site ---------------- */
 
 function doPost(e) {
   try {
@@ -60,93 +61,121 @@ function tokens_(s) {
   return norm_(s).split(' ').filter(t => t.length >= 2 && IGNORAR.indexOf(t) < 0);
 }
 
-/** Lê a aba e devolve as pessoas convidadas, já com a chave do convite. */
-function lerConvidados_() {
+function aba_() {
   const sh = SpreadsheetApp.getActive().getSheetByName(ABA);
+  if (!sh) throw new Error('Aba "' + ABA + '" não encontrada');
   const dados = sh.getDataRange().getValues();
   const cab = dados[0].map(h => String(h).trim());
-  const idx = {};
-  Object.keys(COL).forEach(k => { idx[k] = cab.indexOf(COL[k]); });
-  const presIdx = cab.indexOf(SAIDA[0]);
-  const pessoas = [];
-  for (let r = 1; r < dados.length; r++) {
-    const row = dados[r];
-    const nome = String(row[idx.nome] || '').trim();
-    const lado = idx.lado >= 0 ? String(row[idx.lado] || '').trim() : 'x';
-    if (!nome || !lado) continue; // linhas de resumo/tabela dinâmica não têm "Lado"
-    const conviteSite = idx.conviteSite >= 0 ? String(row[idx.conviteSite] || '').trim() : '';
-    const grupo = conviteSite || String(row[idx.grupo] || '').trim();
-    if (GRUPOS_FORA.indexOf(norm_(grupo)) >= 0) continue;
-    pessoas.push({
+  const col = {};
+  Object.keys(C).forEach(k => { col[k] = cab.indexOf(C[k]); });
+  ['nome', 'convite', 'presenca'].forEach(k => { if (col[k] < 0) throw new Error('Coluna "' + C[k] + '" não encontrada na aba ' + ABA); });
+  return { sh: sh, dados: dados, col: col };
+}
+
+/** Pessoas da aba Confirmação, cada uma com a chave do convite. */
+function pessoas_(a) {
+  const out = [];
+  for (let r = 1; r < a.dados.length; r++) {
+    const row = a.dados[r];
+    const nome = String(row[a.col.nome] || '').trim();
+    if (!nome) continue;
+    const convite = String(row[a.col.convite] || '').trim();
+    out.push({
       linha: r + 1,
       nome: nome,
-      convite: grupo ? 'g:' + norm_(grupo) : 'p:' + (r + 1),
-      rotulo: grupo,
-      crianca: idx.crianca >= 0 && norm_(row[idx.crianca]) === 'sim',
-      presenca: presIdx >= 0 ? String(row[presIdx] || '') : '',
+      convite: convite ? 'g:' + norm_(convite) : 'p:' + (r + 1),
+      crianca: a.col.crianca >= 0 && norm_(row[a.col.crianca]) === 'sim',
+      presenca: String(row[a.col.presenca] || ''),
     });
   }
-  return pessoas;
+  return out;
 }
 
 function buscar_(nome) {
   const q = tokens_(nome);
   if (!q.length || q[0].length < 3) return { ok: true, convites: [] };
-  const pessoas = lerConvidados_();
-  // casa pelo primeiro nome digitado; se a pessoa digitou nome e sobrenome, o sobrenome ajuda a desempatar
+  const pessoas = pessoas_(aba_());
   const achados = pessoas.filter(p => tokens_(p.nome).indexOf(q[0]) >= 0);
   const chaves = [];
   achados.forEach(p => { if (chaves.indexOf(p.convite) < 0) chaves.push(p.convite); });
   const convites = chaves.slice(0, 4).map(ch => ({
     convite: ch,
-    membros: pessoas.filter(p => p.convite === ch).map(p => ({ linha: p.linha, nome: p.nome, crianca: p.crianca, presenca: p.presenca })),
+    membros: pessoas.filter(p => p.convite === ch).map(p => ({
+      linha: p.linha, nome: p.nome, crianca: p.crianca,
+      presenca: /^(vai|não vai)$/i.test(p.presenca) ? p.presenca : '',
+    })),
   }));
   return { ok: true, convites: convites };
-}
-
-function garantirColunas_(sh) {
-  const ultima = sh.getLastColumn();
-  const cab = sh.getRange(1, 1, 1, ultima).getValues()[0].map(h => String(h).trim());
-  const pos = {};
-  SAIDA.forEach(nome => {
-    let i = cab.indexOf(nome);
-    if (i < 0) {
-      i = cab.findIndex((h, j) => /^Coluna \d+$/.test(h) && sh.getRange(2, j + 1, Math.max(sh.getLastRow() - 1, 1), 1).getValues().every(v => v[0] === ''));
-      if (i < 0) { sh.insertColumnAfter(sh.getMaxColumns()); i = sh.getMaxColumns() - 1; }
-      sh.getRange(1, i + 1).setValue(nome).setFontWeight('bold');
-      cab[i] = nome;
-    }
-    pos[nome] = i + 1;
-  });
-  return pos;
 }
 
 function responder_(b) {
   const lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
-    const pessoas = lerConvidados_();
-    const convite = String(b.convite || '');
-    const membros = pessoas.filter(p => p.convite === convite);
+    const a = aba_();
+    const membros = pessoas_(a).filter(p => p.convite === String(b.convite || ''));
     if (!membros.length) return { ok: false, erro: 'convite_nao_encontrado' };
     const respostas = Array.isArray(b.respostas) ? b.respostas : [];
-    const sh = SpreadsheetApp.getActive().getSheetByName(ABA);
-    const pos = garantirColunas_(sh);
     const agora = Utilities.formatDate(new Date(), 'America/Sao_Paulo', 'dd/MM/yyyy HH:mm');
     const limpa = (s, n) => String(s || '').replace(/[\r\n]+/g, ' ').replace(/^[=+\-@]/, "'$&").slice(0, n);
+    const grava = (linha, k, v) => { if (a.col[k] >= 0) a.sh.getRange(linha, a.col[k] + 1).setValue(v); };
     let gravados = 0;
     respostas.forEach(r => {
       const m = membros.find(p => p.linha === Number(r.linha)); // só aceita linhas do próprio convite
       if (!m) return;
-      sh.getRange(m.linha, pos[SAIDA[0]]).setValue(r.vai ? 'Vai' : 'Não vai');
-      sh.getRange(m.linha, pos[SAIDA[1]]).setValue(limpa(b.restricao, 300));
-      sh.getRange(m.linha, pos[SAIDA[2]]).setValue(limpa(b.recado, 600));
-      sh.getRange(m.linha, pos[SAIDA[3]]).setValue(limpa(b.respondidoPor, 80));
-      sh.getRange(m.linha, pos[SAIDA[4]]).setValue(agora);
+      grava(m.linha, 'presenca', r.vai ? 'Vai' : 'Não vai');
+      grava(m.linha, 'restricao', limpa(b.restricao, 300));
+      grava(m.linha, 'recado', limpa(b.recado, 600));
+      grava(m.linha, 'por', limpa(b.respondidoPor, 80));
+      grava(m.linha, 'em', agora);
       gravados++;
     });
     return { ok: gravados > 0, gravados: gravados };
   } finally {
     lock.releaseLock();
   }
+}
+
+/* ---------------- menu da planilha ---------------- */
+
+function onOpen() {
+  SpreadsheetApp.getUi().createMenu('Casamento')
+    .addItem('Trazer convidados novos da aba Convidados', 'trazerConvidadosNovos')
+    .addToUi();
+}
+
+/**
+ * Copia para a aba Confirmação quem está na aba Convidados e ainda não foi copiado.
+ * Não apaga nem altera quem já está na Confirmação (nomes e convites que você ajustou ficam).
+ */
+function trazerConvidadosNovos() {
+  const base = SpreadsheetApp.getActive().getSheetByName(ABA_BASE);
+  const dadosBase = base.getDataRange().getValues();
+  const cb = dadosBase[0].map(h => String(h).trim());
+  const iId = cb.indexOf('ID'), iNome = cb.indexOf('Nome'), iLado = cb.indexOf('Lado'), iGrupo = cb.indexOf('Grupo de convite'), iCri = cb.indexOf('Criança?');
+  const a = aba_();
+  const ja = {};
+  if (a.col.origem >= 0) for (let r = 1; r < a.dados.length; r++) ja[String(a.dados[r][a.col.origem])] = true;
+
+  const largura = Math.max.apply(null, Object.keys(a.col).map(k => a.col[k])) + 1; // só até a última coluna conhecida (o resumo ao lado fica intacto)
+  const novas = [];
+  for (let r = 1; r < dadosBase.length; r++) {
+    const row = dadosBase[r];
+    const nome = String(row[iNome] || '').trim();
+    const lado = String(row[iLado] || '').trim();
+    const grupo = String(row[iGrupo] || '').trim();
+    if (!nome || !lado || norm_(grupo) === 'noivos') continue; // sem "Lado" = linhas de resumo
+    const id = String(row[iId] || '').trim();
+    const origem = id ? 'id:' + id : 'nome:' + nome.toLowerCase();
+    if (ja[origem]) continue;
+    const linha = new Array(largura).fill('');
+    const poe = (k, v) => { if (a.col[k] >= 0) linha[a.col[k]] = v; };
+    poe('id', id); poe('nome', nome); poe('convite', grupo); poe('lado', lado);
+    poe('crianca', iCri >= 0 ? row[iCri] : ''); poe('presenca', 'Aguardando'); poe('origem', origem);
+    poe('obs', grupo ? 'Trazido da aba Convidados.' : 'Trazido da aba Convidados sem grupo: preencha o Convite.');
+    novas.push(linha);
+    ja[origem] = true;
+  }
+  if (novas.length) a.sh.getRange(a.sh.getLastRow() + 1, 1, novas.length, largura).setValues(novas);
+  SpreadsheetApp.getUi().alert(novas.length ? novas.length + ' convidado(s) novo(s) copiado(s) para a aba Confirmação.' : 'Nenhum convidado novo: a aba Confirmação já está em dia.');
 }

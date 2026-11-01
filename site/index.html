@@ -501,6 +501,7 @@ html.locked,html.locked body{overflow:hidden}
 .mural-vazio{text-align:center;color:var(--muted)}
 .mural-mais{display:flex;justify-content:center;margin-top:10px}
 .insta-in{display:grid;justify-items:center;text-align:center;gap:18px}
+.btn .wa{width:18px;height:18px;flex:none}
 </style>
 </head><body>
 
@@ -795,7 +796,7 @@ html.locked,html.locked body{overflow:hidden}
           <h3 id="pix-title">Escolha uma cota</h3>
           <p class="small">No app do banco, escolha <b>Pix › Ler QR code</b> ou <b>Pix copia e cola</b>. Recebedor: <b data-k="pixNome">Nome do recebedor</b>.</p>
           <div class="code" id="pix-code"></div>
-          <div class="row"><button class="btn solid" type="button" id="pix-copy">Copiar código Pix</button><button class="btn" type="button" id="key-copy">Copiar só a chave</button></div>
+          <div class="row"><button class="btn solid" type="button" id="pix-copy">Copiar código Pix</button></div>
         </div>
       </div>
     </div>
@@ -828,10 +829,7 @@ html.locked,html.locked body{overflow:hidden}
       <p class="lede">Escreva pra gente, mande foto, capriche nos emojis. Os recados ficam aqui no mural até o grande dia.</p>
     </div>
     <form id="mural-form" class="mural-form" data-tear="6" novalidate>
-      <div class="two">
-        <div class="field"><label for="mu-nome">Seu nome</label><input type="text" id="mu-nome" maxlength="60" autocomplete="name" placeholder="Como quer assinar"></div>
-        <div class="field"><label for="mu-email">Seu e-mail</label><input type="email" id="mu-email" maxlength="120" autocomplete="email" placeholder="não aparece no mural"></div>
-      </div>
+      <div class="field"><label for="mu-nome">Seu nome</label><input type="text" id="mu-nome" maxlength="60" autocomplete="name" placeholder="Como quer assinar"></div>
       <div class="field">
         <span class="lbl" id="mu-lbl">Sua mensagem</span>
         <div class="editor">
@@ -853,7 +851,6 @@ html.locked,html.locked body{overflow:hidden}
       <input type="text" name="site" id="mu-site" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <p class="err" id="mu-err" hidden></p>
       <div class="row"><button class="btn solid" type="submit" id="mu-enviar">Publicar recado <span class="ar">→</span></button></div>
-      <p class="small">Seu e-mail não aparece no mural. Ele fica só com a gente.</p>
     </form>
     <div id="mural" class="recados" aria-live="polite"></div>
     <p class="mural-vazio" id="mural-vazio" hidden></p>
@@ -928,9 +925,10 @@ const CONFIG = {
   trajeNota: "Uma sugestão, não regra. Venha confortável pra dançar.",
   instagram: "diegoemay23042027",
   contatos: [
-    { quem: "Mayara", whatsapp: "5548991730653" },
-    { quem: "Diego", whatsapp: "5551983211323" }
+    { quem: "Mayara", rotulo: "WhatsApp da noiva", whatsapp: "5548991730653" },
+    { quem: "Diego", rotulo: "WhatsApp do noivo", whatsapp: "5551983211323" }
   ],
+  // chave: use uma CHAVE ALEATÓRIA do banco (nunca CPF): ela vai dentro do QR code e do copia e cola
   pix: { chave: "", nome: "Mayara Rayne Oliveira da Silva", nomeQr: "Mayara Rayne O da Silva", cidade: "Garopaba" },
   programa: [
     { hora: "15h", titulo: "Início", texto: "Entrada dos padrinhos e madrinhas." },
@@ -986,7 +984,6 @@ async function copy(text, el){
   catch(e){ if(el){ const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } toast("Selecionado. Use Copiar"); }
 }
 const brl = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-const fmtPhone = n => { const d = n.replace(/\D/g, "").replace(/^55/, ""); return d.length >= 10 ? `(${d.slice(0,2)}) ${d.slice(2, d.length-4)}-${d.slice(-4)}` : "(00) 00000-0000"; };
 
 /* ---------- papel rasgado (clip-path) ---------- */
 function rnd(seed){ return () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }; }
@@ -1051,7 +1048,8 @@ $("#faq").innerHTML = CONFIG.faq.map(([qq, a]) => `<details><summary>${qq}</summ
 /* ---------- contatos, instagram, hospedagem, ensaio ---------- */
 const esc = t => String(t).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const waLink = (c, txt) => `https://wa.me/${c.whatsapp}?text=${encodeURIComponent(txt || `Oi, ${c.quem}! Sobre o casamento:`)}`;
-const waBtns = (cls, txt) => CONFIG.contatos.map(c => `<a class="btn ${cls}" href="${waLink(c, txt)}" target="_blank" rel="noopener">WhatsApp ${c.quem} · ${fmtPhone(c.whatsapp)}</a>`).join("");
+const WA_ICON = '<svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.2.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.5-.3Z"/></svg>';
+const waBtns = (cls, txt) => CONFIG.contatos.map(c => `<a class="btn ${cls}" href="${waLink(c, txt)}" target="_blank" rel="noopener" aria-label="${c.rotulo}: conversar com ${c.quem}">${WA_ICON}${c.rotulo}</a>`).join("");
 $("#faq-wa").innerHTML = waBtns("light");
 $("#insta").href = `https://www.instagram.com/${CONFIG.instagram}/`; $("#insta-handle").textContent = `@${CONFIG.instagram}`;
 $("#hosp").innerHTML = CONFIG.hospedagens.map(h => `<li><h3>${esc(h.nome)}</h3><p>${esc(h.nota)}</p><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.nome + ", Garopaba, SC")}" target="_blank" rel="noopener">Ver no mapa →</a></li>`).join("");
@@ -1188,7 +1186,7 @@ function showPix(c){
     free.querySelector("input").addEventListener("input", () => showPix(current));
   } else if (c.valor !== null && free) free.remove();
   if (!CONFIG.pix.chave.trim()){
-    $("#pix-code").textContent = "A chave Pix ainda não foi configurada. Em breve!";
+    $("#pix-code").textContent = "O Pix dos presentes fica pronto em breve. Volte aqui daqui a pouquinho!";
     $("#qr").innerHTML = '<span class="small" style="text-align:center">QR code<br>em breve</span>';
   } else {
     const code = pixCode(valor > 0 ? valor : null);
@@ -1205,8 +1203,7 @@ CONFIG.cotas.forEach(c => {
   $("#gifts").appendChild(b);
 });
 tearAll();
-$("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) return toast("Chave Pix ainda não configurada"); copy($("#pix-code").textContent, $("#pix-code")); });
-$("#key-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) return toast("Chave Pix ainda não configurada"); copy(CONFIG.pix.chave, $("#pix-code")); });
+$("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) return toast("O Pix fica pronto em breve"); copy($("#pix-code").textContent, $("#pix-code")); });
 /* ---------- mural de recados ---------- */
 (() => {
   const LIM = 800, MAXF = 3;
@@ -1330,17 +1327,16 @@ $("#key-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
 
   form.addEventListener("submit", async e => {
     e.preventDefault();
-    const nome = $("#mu-nome").value.trim(), email = $("#mu-email").value.trim();
+    const nome = $("#mu-nome").value.trim();
     const falha = msg => { err.textContent = msg; err.hidden = false; tearAll(); };
     if (nome.length < 2) return falha("Escreva seu nome.");
-    if (!/^[^\s@<>()]+@[^\s@<>()]+\.[a-z]{2,}$/i.test(email)) return falha("Confira o e-mail: ele precisa ser um endereço válido.");
     const n = tamanho();
     if (n > LIM) return falha(`O recado passou do limite de ${LIM} caracteres.`);
     if (n < 2 && !fotos()) return falha("Escreva uma mensagem antes de publicar.");
     err.hidden = true;
     const bt = $("#mu-enviar"); bt.disabled = true; bt.style.opacity = .6;
     try {
-      const r = await fetch("/api/recados", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ nome, email, html: ed.innerHTML, site: $("#mu-site").value }) });
+      const r = await fetch("/api/recados", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ nome, html: ed.innerHTML, site: $("#mu-site").value }) });
       const d = await r.json().catch(() => ({}));
       if (r.status === 429) return falha("Muitos envios seguidos. Espere um minutinho.");
       if (!r.ok || !d.ok) return falha(d.erro || "Não conseguimos publicar agora. Tente de novo em instantes.");

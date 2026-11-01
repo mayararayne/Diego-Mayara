@@ -21,12 +21,14 @@ O site tem três partes:
 5. Autorize o acesso quando o Google pedir. Copie a URL que termina em `/exec`.
 
 O que o script faz na planilha:
-- Lê a aba **👥 Convidados** e usa a coluna **Grupo de convite** para saber quem está no mesmo convite.
-- Na primeira resposta, cria cinco colunas no lugar das "Coluna 1" a "Coluna 5", que estão vazias: **Presença (site)**, **Restrição alimentar (site)**, **Recado (site)**, **Respondido por (site)** e **Respondido em (site)**.
-- Cada pessoa recebe **Vai** ou **Não vai** na própria linha. Se alguém responder de novo, a última resposta é a que vale.
-- Não mexe em nenhuma outra coluna.
+- O site lê e grava **só na aba Confirmação**. As outras abas não são alteradas.
+- A pessoa digita o nome e o site mostra todo mundo que tem o mesmo **Convite** (coluna C), para ela responder por todos.
+- Cada pessoa recebe **Vai** ou **Não vai** na coluna Presença, junto com restrição alimentar, recado, quem respondeu e quando. Se responder de novo, vale a última resposta.
+- O resumo ao lado (colunas N e O) conta sozinho quantos vão, quantos não vão e quantos faltam.
 
-**Se o convite de alguém precisar ser diferente do "Grupo de convite"**, crie uma coluna chamada `Convite (site)` e escreva o nome do convite nessa linha. Quando essa coluna está preenchida, ela tem prioridade.
+**Para mudar quem aparece junto**, edite a coluna **Convite**: pessoas com o mesmo texto ficam no mesmo convite. **Para mudar como o nome aparece no site**, edite a coluna **Nome (aparece no site)**.
+
+**Convidado novo:** inclua na aba Convidados, como sempre, e depois use o menu **Casamento > Trazer convidados novos da aba Convidados**. O menu aparece depois de instalar o script e recarregar a planilha. Ele só acrescenta quem ainda não está na Confirmação; não apaga nem muda ninguém. Não edite a coluna **Origem**: é por ela que o script sabe quem já foi copiado.
 
 ## 2. Criar o site no Netlify
 
@@ -46,7 +48,11 @@ O que o script faz na planilha:
 
 Abra o site com `#admin=` e a senha do `RECADOS_ADMIN_TOKEN` no fim do endereço, por exemplo `https://seu-site.netlify.app/#admin=SUA_SENHA`. Cada recado ganha um botão **Apagar recado**. A senha some da barra de endereço e só vale naquela aba.
 
-## 4. Prazo da confirmação
+## 4. Pix dos presentes
+
+O QR code e o "copia e cola" são gerados no próprio site, com o valor de cada cota, a partir da chave em `pix.chave` no `CONFIG`. **Use uma chave aleatória** (no app do banco: Pix > Minhas chaves > Cadastrar chave > Chave aleatória). Nunca use o CPF: qualquer chave vai dentro do QR code e aparece para quem pagar. Enquanto `pix.chave` estiver vazia, o site mostra "o Pix fica pronto em breve".
+
+## 5. Prazo da confirmação
 
 O prazo é `prazo: "2027-03-01"` no `CONFIG` do `site/index.html` e `PRAZO_RSVP` em `netlify/lib/planilha.mts`. **Se mudar a data, mude nos dois lugares.** Depois do prazo:
 - o site esconde a busca e mostra os botões de WhatsApp da Mayara e do Diego;

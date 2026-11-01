@@ -16,6 +16,7 @@
   --f-caps:"Tenor Sans", "Optima", "Gill Sans", "Segoe UI", sans-serif;
   --f-hand:"La Belle Aurore", "Snell Roundhand", "Segoe Script", cursive;
   --shadow:drop-shadow(0 6px 10px rgba(40,30,20,.22));
+  --gold:#D2B17E;
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -477,6 +478,23 @@ html.locked,html.locked body{overflow:hidden}
 .names-sec .row{margin-top:6px}
 @media (min-width:641px){ .names-sec .names{white-space:nowrap} }
 
+/* contagem regressiva em plaquinhas, com detalhe dourado */
+.count{gap:10px;align-items:stretch}
+.count .sep{display:none}
+.count > div{justify-items:center;align-content:center;min-width:84px;padding:12px 12px 9px;background:var(--paper);border:1px solid var(--gold);border-radius:12px;box-shadow:0 6px 14px rgba(40,30,20,.08), inset 0 0 0 3px var(--paper), inset 0 0 0 4px rgba(210,177,126,.45)}
+.count b{line-height:1}
+.count small{color:var(--terra-deep);margin-top:4px}
+.count .seg{min-width:62px;margin-left:0;opacity:1;padding:9px 8px 7px;align-self:center;background:transparent;box-shadow:none;border-style:dashed}
+.count .seg b{font-size:1.1rem}
+@media (max-width:400px){ .count > div{min-width:68px;padding:10px 8px 8px} .count b{font-size:1.6rem} .count .seg{min-width:52px} .count .seg b{font-size:1rem} }
+/* data com fios dourados dos lados */
+.names-sec .bigdate,.intro-date{display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,22px)}
+.names-sec .bigdate::before,.names-sec .bigdate::after,.intro-date::before,.intro-date::after{content:"";width:clamp(28px,5vw,56px);height:1px;background:var(--gold)}
+.names-sec .fio{background:var(--gold);opacity:1}
+/* mapa */
+.mapa{margin:6px 0 0;padding:8px;background:var(--paper);filter:var(--shadow);transform:rotate(-.5deg)}
+.mapa iframe{display:block;width:100%;aspect-ratio:4/3;border:0;background:var(--sand)}
+
 /* ===== seções novas: usam só as cores e fontes que já existem ===== */
 .paperbox{display:grid;gap:20px;background:var(--paper);padding:clamp(28px,4vw,46px) clamp(22px,4vw,44px)}
 .paperbox form{background:none;padding:0}
@@ -719,6 +737,7 @@ html.locked,html.locked body{overflow:hidden}
         <dt>Estacionamento</dt><dd data-k="estacionamento">Estacionamento no local.</dd>
         <dt>Hospedagem</dt><dd data-k="hospedagem">Vem de fora? Fale com a gente que indicamos onde ficar.</dd>
       </dl>
+      <figure class="mapa"><iframe id="mapa" title="Mapa da Igreja Matriz São Joaquim, em Garopaba" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></figure>
       <div class="row">
         <a class="btn solid" id="maps" href="https://www.google.com/maps" target="_blank" rel="noopener">Abrir no Google Maps <span class="ar">→</span></a>
         <a class="btn" href="#hospedagem">Onde ficar</a>
@@ -1110,6 +1129,7 @@ document.querySelectorAll("[data-k]").forEach(el => { const v = vals[el.dataset.
 document.querySelectorAll("[data-mono]").forEach(el => el.innerHTML = `${CONFIG.nome1[0]}<i>&amp;</i>${CONFIG.nome2[0]}`);
 const q = encodeURIComponent(CONFIG.mapsBusca || `${CONFIG.local} ${CONFIG.endereco}`);
 $("#maps").href = CONFIG.mapsLink || `https://www.google.com/maps/search/?api=1&query=${q}`;
+$("#mapa").src = `https://www.google.com/maps?q=${q}&z=16&output=embed`;
 
 
 /* ---------- contagem ---------- */

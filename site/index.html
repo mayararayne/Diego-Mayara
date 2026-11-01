@@ -468,7 +468,10 @@ html.locked,html.locked body{overflow:hidden}
 @media (max-width:900px){
   .lift-grid{grid-template-columns:1fr}
   .lift-grid .lift-photo{order:-1}
-  .pbreak.lift .rsvp-ph{margin:0 4% 0 auto!important}
+  .pbreak.lift .rsvp-ph{margin:0 auto!important}
+  .lift-grid .rsvp-side{justify-items:center;text-align:center}
+  .lift-grid .rsvp-title{justify-items:center}
+  .lift-grid .rsvp-title .caps{margin-right:-.42em}
 }
 /* capa: o vídeo é em pé (9:16). Em tela larga ele aparece inteiro no centro,
    com o próprio vídeo desfocado preenchendo as laterais; em tela em pé ocupa tudo. */
@@ -541,6 +544,7 @@ html.locked,html.locked body{overflow:hidden}
 .membros li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 18px;padding:14px 0;border-top:1px solid var(--line)}
 .membros li:last-child{border-bottom:1px solid var(--line)}
 .membros .m-nome{font:400 1.5rem/1.1 var(--f-display)}
+.membros li.eu .m-nome{color:var(--azul)}
 .membros .m-nome small{font:600 .6rem/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-left:8px}
 .aviso{display:grid;gap:14px;padding:18px;border:1.5px dashed var(--terra);border-radius:4px}
 .aviso p{color:var(--ink)}
@@ -680,7 +684,7 @@ html.locked,html.locked body{overflow:hidden}
           <div class="opcoes" id="rv-opcoes" hidden></div>
         </div>
         <form id="rv-form" class="field" style="gap:20px" hidden novalidate>
-          <div class="field" style="gap:4px"><span class="eyebrow">Seu convite</span><p class="small">Marca quem vem e quem não vai conseguir. Esse convite é pra:</p></div>
+          <div class="field" style="gap:4px"><span class="eyebrow">Seu convite</span><p class="small">Marca se você vem. Se quiser, já responde pelos outros do convite também.</p></div>
           <ul class="membros" id="rv-membros"></ul>
           <div class="field"><label for="rv-rest">Alguma restrição alimentar?</label><input type="text" id="rv-rest" maxlength="300" placeholder="Vegetariano, sem lactose…"></div>
           <div class="field"><label for="rv-msg">Recado pra gente (opcional)</label><textarea id="rv-msg" maxlength="600" placeholder="Pode escrever à vontade"></textarea></div>
@@ -1264,11 +1268,15 @@ document.querySelectorAll(".frame-wrap").forEach(a => {
     } finally { carregando($("#rv-buscar"), false); }
   });
 
+  const simples = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(/[^a-z0-9]+/).filter(x => x.length >= 3 && !["vo", "tia", "tio"].includes(x));
   function abrir(c) {
     atual = c;
+    const busca1 = simples($("#rv-nome").value)[0];
+    const eu = c.membros.find(m => simples(m.nome).includes(busca1)) || c.membros[0];
+    atual.eu = eu.linha;
     $("#rv-membros").innerHTML = c.membros.map(m => {
       const n = `m${m.linha}`, pre = (m.presenca || "").toLowerCase();
-      return `<li><span class="m-nome">${esc(m.nome)}${m.crianca ? "<small>criança</small>" : ""}</span><div class="choice">
+      return `<li class="${m.linha === eu.linha ? "eu" : ""}"><span class="m-nome">${esc(m.nome)}${m.linha === eu.linha ? "<small>você</small>" : ""}${m.crianca ? "<small>criança</small>" : ""}</span><div class="choice">
         <label><input type="radio" name="${n}" value="1" ${pre === "vai" ? "checked" : ""}><span>Vai</span></label>
         <label><input type="radio" name="${n}" value="0" ${pre === "não vai" ? "checked" : ""}><span>Não vai</span></label></div></li>`;
     }).join("");
@@ -1282,19 +1290,23 @@ document.querySelectorAll(".frame-wrap").forEach(a => {
     e.preventDefault();
     const err = $("#rv-err");
     const respostas = atual.membros.map(m => { const v = form.querySelector(`input[name="m${m.linha}"]:checked`); return v ? { linha: m.linha, nome: m.nome, vai: v.value === "1" } : null; });
-    if (respostas.some(r => !r)) { err.textContent = "Marque Vai ou Não vai para cada pessoa do convite."; err.hidden = false; tearAll(); return; }
+    const minha = respostas.find((r, i) => atual.membros[i].linha === atual.eu);
+    if (!minha) { err.textContent = "Marca se você vai ou não. Os outros do convite você pode responder agora ou deixar pra eles."; err.hidden = false; tearAll(); return; }
     err.hidden = true;
     carregando($("#rv-enviar"), true);
     try {
       const r = await fetch("/api/rsvp", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
-        convite: atual.convite, respostas: respostas.map(({ linha, vai }) => ({ linha, vai })),
+        convite: atual.convite, respostas: respostas.filter(Boolean).map(({ linha, vai }) => ({ linha, vai })),
         restricao: $("#rv-rest").value.trim(), recado: $("#rv-msg").value.trim(), respondidoPor: $("#rv-nome").value.trim()
       }) });
       const d = await r.json().catch(() => ({}));
       if (d.erro === "prazo_encerrado") { mostrar(aviso); busca.hidden = true; return avisar("O prazo para confirmar pelo site terminou. Fala com a gente no WhatsApp:", true); }
       if (!r.ok || !d.ok) { err.innerHTML = `Não conseguimos salvar agora. Tente de novo em instantes ou confirme pelo WhatsApp.<div class="row" style="margin-top:10px">${waBtns("", "Oi! Quero confirmar minha presença no casamento.")}</div>`; err.hidden = false; tearAll(); return; }
-      const vao = respostas.filter(x => x.vai), nao = respostas.filter(x => !x.vai);
+      const faltam = atual.membros.filter((m, i) => !respostas[i]);
+      const respondidas = respostas.filter(Boolean);
+      const vao = respondidas.filter(x => x.vai), nao = respondidas.filter(x => !x.vai);
       done.innerHTML = `<p><b>${vao.length ? "Oba, recebemos!" : "Recebemos sua resposta."}</b> ${vao.length ? `Contamos com ${esc(lista(vao))}.` : ""} ${nao.length ? `${esc(lista(nao))} não ${nao.length > 1 ? "vão" : "vai"}${vao.length ? "" : ". Vamos sentir sua falta"}.` : ""}</p>
+        ${faltam.length ? `<p class="small">${esc(lista(faltam))} ainda ${faltam.length > 1 ? "podem" : "pode"} confirmar por aqui, buscando pelo próprio nome.</p>` : ""}
         <p class="small">Mudou algo? Responda de novo até ${vals.prazoExtenso}. A última resposta é a que vale.</p>
         ${vao.length ? `<p>Vem de fora? Dá uma olhadinha no local e nas nossas dicas de onde ficar. Reserva cedo, que a semana tem feriado!</p>` : ""}
         <div class="row">${vao.length ? `<a class="btn solid" href="#local">Ver o local e onde ficar <span class="ar">→</span></a>` : ""}<button class="btn" type="button" id="rv-outro">Responder outro convite</button></div>`;

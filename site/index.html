@@ -45,10 +45,10 @@ p{margin:0}
 /* bordas rasgadas entre folhas */
 .edge{height:clamp(44px,6.2vw,110px);background-repeat:repeat-x;background-position:center bottom;background-size:max(1400px,100%) 100%;margin-top:calc(-1 * clamp(20px,3vw,50px));position:relative;z-index:2;pointer-events:none}
 .edge.b{background-position:center top;margin-top:0;margin-bottom:calc(-1 * clamp(20px,3vw,50px))}
-.bg-sand{background:var(--sand)} .bg-moss{background:var(--moss);color:var(--on-dark)} .bg-terra{background:#CC8C7D;color:var(--ink)}
+.bg-sand{background:var(--sand)} .bg-moss{background:var(--azul);color:var(--on-dark)} .bg-terra{background:#CC8C7D;color:var(--ink)}
 .bg-moss .eyebrow{color:var(--gold)} .bg-terra .eyebrow{color:#3B3530}
 .bg-moss h2 em{color:var(--gold)} .bg-terra h2 em{color:var(--cream)}
-.bg-moss .lede{color:var(--on-dark-mute)} .bg-terra .lede{color:#3B3530}
+.bg-moss .lede{color:#E3E6E8} .bg-terra .lede{color:#3B3530}
 
 /* nav */
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--cream) 90%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
@@ -256,7 +256,7 @@ summary::-webkit-details-marker{display:none}
 summary::after{content:"+";font:300 1.7rem/1 var(--f-body);color:var(--gold);transition:transform .25s}
 details[open] summary::after{transform:rotate(45deg)}
 details p{padding:0 2px 22px;color:var(--on-dark-mute);max-width:60ch}
-footer{background:var(--moss);color:var(--on-dark);text-align:center}
+footer{background:var(--azul);color:var(--on-dark);text-align:center}
 footer .wrap{padding-block:20px 64px;display:grid;gap:12px;justify-items:center}
 footer .big{font:400 clamp(1.8rem,5.4vw,4rem)/1.2 var(--f-caps);letter-spacing:.16em;text-transform:uppercase}
 footer .big em{font-family:var(--f-display);text-transform:none;letter-spacing:0;font-size:1.15em}
@@ -369,6 +369,13 @@ footer .hand{font-size:1.6rem;color:var(--on-dark)}
 .gift-pics .ph{flex:0 1 auto;min-width:0}
 .gift-pics .ph img{height:clamp(150px,30vw,400px);width:auto;max-width:100%;object-fit:contain}
 .skate-band video{height:min(92vh,88vw)!important;object-position:50% 22%!important}
+.skate-band{overflow:hidden}
+.skate-blur{display:none}
+@media (min-aspect-ratio:4/5){
+  .skate-band video{position:relative;z-index:1;width:auto!important;max-width:100%;height:min(92vh,900px)!important;margin-inline:auto;object-fit:contain!important;box-shadow:0 0 60px rgba(10,20,30,.35)}
+  .skate-blur{display:block;position:absolute;inset:0;width:100%;height:100%;filter:blur(26px) saturate(1.1) brightness(.85);transform:scale(1.2)}
+  .skate-band .band-edge{z-index:2}
+}
 @media (max-width:640px){
   .gift-pics{gap:10px;margin-bottom:36px}
   .gift-pics .ph figcaption{font-size:.95rem;padding-left:4%}
@@ -500,7 +507,24 @@ html.locked,html.locked body{overflow:hidden}
 .names-sec .bigdate::before,.names-sec .bigdate::after,.intro-date::before,.intro-date::after{content:"";width:clamp(28px,5vw,56px);height:1px;background:var(--gold)}
 .names-sec .fio{background:var(--gold);opacity:1}
 
-/* ===== seções novas: usam só as cores e fontes que já existem ===== */
+/* menu sanduíche no celular; Confirmar sempre à vista */
+.cta-m,.burger{display:none}
+@media (max-width:640px){
+  .nav .wrap{gap:10px}
+  .nav ul .hide-s{display:list-item!important}
+  .cta-m{display:inline-flex;margin-left:auto}
+  .burger{display:grid;gap:5px;place-content:center;width:44px;height:44px;border:0;border-radius:50%;background:transparent;cursor:pointer;padding:0}
+  .burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s,opacity .25s}
+  .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .nav ul{position:absolute;top:100%;left:0;right:0;margin:0;display:none;flex-direction:column;align-items:stretch;gap:0;padding:6px 20px 16px;background:var(--cream);box-shadow:0 14px 24px rgba(40,30,20,.14);overflow:visible}
+  .nav.aberto ul{display:flex}
+  .nav ul li{border-bottom:1px solid var(--line)}
+  .nav ul li:last-child{display:none}
+  .nav a.l{padding:14px 4px!important;font-size:1.25rem!important}
+  .nav a.cta-m{padding:10px 16px!important;font-size:.82rem!important;margin-left:auto}
+}
 .paperbox{display:grid;gap:20px;background:var(--paper);padding:clamp(28px,4vw,46px) clamp(22px,4vw,44px)}
 .paperbox form{background:none;padding:0}
 .rv-busca{gap:10px}
@@ -581,7 +605,9 @@ html.locked,html.locked body{overflow:hidden}
 <nav class="nav" aria-label="Seções">
   <div class="wrap">
     <a class="mono" href="#inicio"><b data-mono>D<i>&amp;</i>M</b><small>casamento</small></a>
-    <ul>
+    <a class="l cta cta-m" href="#confirmar">Confirmar</a>
+    <button class="burger" type="button" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <ul id="menu">
       <li class="hide-s"><a class="l" href="#local">Local</a></li>
       <li class="hide-s"><a class="l" href="#historia">Nós</a></li>
       <li><a class="l" href="#dia">O dia</a></li>
@@ -731,7 +757,7 @@ html.locked,html.locked body{overflow:hidden}
   <div class="band-edge top" aria-hidden="true"></div>
 </section>
 
-<div class="edge" style="background-image:url(media/edge-moss.png?v=2)" aria-hidden="true"></div>
+<div class="edge" style="background-image:url(media/edge-moss.png?v=3)" aria-hidden="true"></div>
 <section class="sec bg-moss" style="padding-top:clamp(40px,6vw,70px);padding-bottom:0" aria-labelledby="t-vid">
   <div class="wrap">
     <div class="head" style="text-align:center;justify-items:center">
@@ -749,8 +775,9 @@ html.locked,html.locked body{overflow:hidden}
     </div>
   </div>
   <div class="skate-band frame-wrap">
+    <canvas class="skate-blur" id="skate-blur" width="27" height="48" aria-hidden="true"></canvas>
     <video data-src="media/skate.mp4" poster="media/skate-poster.jpg" autoplay muted loop playsinline preload="none" aria-label="Vídeo: Mayara andando de skate sentada no estacionamento"></video>
-    <div class="band-edge top" style="background-image:url(media/edge-moss-b.png?v=2)" aria-hidden="true"></div>
+    <div class="band-edge top" style="background-image:url(media/edge-moss-b.png?v=3)" aria-hidden="true"></div>
     <div class="band-edge bot" aria-hidden="true"></div>
   </div>
 </section>
@@ -980,7 +1007,7 @@ html.locked,html.locked body{overflow:hidden}
   </div>
 </section>
 
-<div class="edge" style="background-image:url(media/edge-moss.png?v=2)" aria-hidden="true"></div>
+<div class="edge" style="background-image:url(media/edge-moss.png?v=3)" aria-hidden="true"></div>
 <section class="sec faq bg-moss" id="duvidas" style="padding-top:clamp(40px,6vw,70px)">
   <div class="wrap">
     <div class="head" style="align-content:start">
@@ -1553,7 +1580,13 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
   paint();
 })();
 
-/* ---------- capa: fundo desfocado acompanha o vídeo ---------- */
+/* ---------- capa e skate: fundo desfocado acompanha o vídeo ---------- */
+[[".skate-band video", "#skate-blur"]].forEach(([vs, cs]) => {
+  const v = document.querySelector(vs), c = document.querySelector(cs); if (!v || !c) return;
+  const g = c.getContext("2d");
+  const desenha = () => { if (v.readyState >= 2 && !document.hidden && c.offsetParent !== null) { try { g.drawImage(v, 0, 0, c.width, c.height); } catch (e) {} } setTimeout(desenha, 150); };
+  const p = new Image(); p.onload = () => g.drawImage(p, 0, 0, c.width, c.height); p.src = v.poster; desenha();
+});
 (() => {
   const v = document.querySelector(".cover video"), c = $("#cover-blur");
   if (!v || !c) return;
@@ -1569,6 +1602,15 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
 /* ---------- vídeos dos sapinhos: some o quadro se o arquivo ainda não existir ---------- */
 // vídeos dos sapinhos: se o arquivo faltar, o quadro some
 document.querySelectorAll(".frog-vid video").forEach(v => v.addEventListener("error", () => { v.closest(".frog-vid").remove(); tearAll(); }));
+
+/* ---------- menu sanduíche ---------- */
+(() => {
+  const nav = document.querySelector(".nav"), bt = $("#burger"); if (!bt) return;
+  const fecha = () => { nav.classList.remove("aberto"); bt.setAttribute("aria-expanded", "false"); bt.setAttribute("aria-label", "Abrir menu"); };
+  bt.addEventListener("click", () => { const ab = !nav.classList.contains("aberto"); nav.classList.toggle("aberto", ab); bt.setAttribute("aria-expanded", String(ab)); bt.setAttribute("aria-label", ab ? "Fechar menu" : "Abrir menu"); });
+  nav.querySelectorAll("#menu a").forEach(a => a.addEventListener("click", fecha));
+  document.addEventListener("click", e => { if (!nav.contains(e.target)) fecha(); });
+})();
 
 /* ---------- carregamento: topo primeiro, resto depois ---------- */
 (() => {

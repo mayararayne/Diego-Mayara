@@ -431,9 +431,7 @@ footer .hand{font-size:1.6rem;color:var(--on-dark)}
 html.locked,html.locked body{overflow:hidden}
 @media (max-width:640px){ .intro-names span,.intro-names em{display:block} .intro-names em{margin:.05em auto} }
 .intro-count{margin-top:6px}
-.count .seg{margin-left:-6px;opacity:.75}
-.count .seg b{font-size:1.15rem}
-.count .seg small{font-size:.54rem}
+
 .opening-sign{font-size:clamp(1.3rem,2.6vw,1.8rem);color:var(--terra-deep);margin-top:6px}
 .opening .btn{min-width:180px}
 .gift-pics .ph:first-child figcaption{margin-top:-34px!important}
@@ -479,15 +477,13 @@ html.locked,html.locked body{overflow:hidden}
 .names-sec .row{margin-top:6px}
 @media (min-width:641px){ .names-sec .names{white-space:nowrap} }
 
-/* contagem regressiva em plaquinhas, com detalhe dourado */
+/* contagem regressiva: plaquinhas no azul do noivo, números em marfim, moldura dourada */
 .count{gap:10px;align-items:stretch}
 .count .sep{display:none}
-.count > div{justify-items:center;align-content:center;min-width:84px;padding:12px 12px 9px;background:var(--paper);border:1px solid var(--gold);border-radius:12px;box-shadow:0 6px 14px rgba(40,30,20,.08), inset 0 0 0 3px var(--paper), inset 0 0 0 4px rgba(210,177,126,.45)}
-.count b{line-height:1}
-.count small{color:var(--terra-deep);margin-top:4px}
-.count .seg{min-width:62px;margin-left:0;opacity:1;padding:9px 8px 7px;align-self:center;background:transparent;box-shadow:none;border-style:dashed}
-.count .seg b{font-size:1.1rem}
-@media (max-width:400px){ .count > div{min-width:68px;padding:10px 8px 8px} .count b{font-size:1.6rem} .count .seg{min-width:52px} .count .seg b{font-size:1rem} }
+.count > div{justify-items:center;align-content:center;min-width:84px;padding:14px 12px 10px;background:var(--sea);border-radius:10px;box-shadow:0 8px 18px rgba(30,40,50,.2), inset 0 0 0 1px rgba(210,177,126,.8)}
+.count b{font:400 2.1rem/1 var(--f-caps);letter-spacing:.06em;color:var(--cream);text-shadow:0 1px 2px rgba(20,30,40,.35)}
+.count small{font:600 .6rem/1.4 var(--f-body);letter-spacing:.2em;color:#F7F3EA;margin-top:6px;text-shadow:0 1px 1px rgba(20,30,40,.3)}
+@media (max-width:400px){ .count{gap:8px} .count > div{min-width:68px;padding:11px 8px 8px} .count b{font-size:1.65rem} .count small{font-size:.52rem;letter-spacing:.14em} }
 /* data com fios dourados dos lados */
 .names-sec .bigdate,.intro-date{display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,22px)}
 .names-sec .bigdate::before,.names-sec .bigdate::after,.intro-date::before,.intro-date::after{content:"";width:clamp(28px,5vw,56px);height:1px;background:var(--gold)}

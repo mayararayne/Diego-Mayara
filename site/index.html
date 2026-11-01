@@ -461,6 +461,18 @@ html.locked,html.locked body{overflow:hidden}
 }
 @media (max-width:640px){ .cover{height:78vh} }
 
+/* bloco do convite logo abaixo do vídeo: nomes numa linha, data delicada, contagem e texto */
+.names-sec{padding-top:clamp(36px,5vw,70px)}
+.names-sec .wrap{gap:clamp(14px,1.8vw,22px);padding-block:0}
+.names-sec .names{font-size:clamp(2.4rem,5.4vw,5.4rem);letter-spacing:.14em;margin-right:-.14em;margin-top:2px;line-height:1.1}
+.names-sec .names em{font-size:1.1em}
+.names-sec .fio{display:block;width:84px;height:1px;background:var(--terra);opacity:.55;margin:4px auto 2px}
+.names-sec .bigdate{font-size:clamp(1.15rem,2.2vw,1.75rem);letter-spacing:.34em;margin-right:-.34em;margin-top:0;color:var(--ink)}
+.names-sec .count{margin-top:clamp(8px,1.6vw,18px)}
+.names-sec .boas-vindas{margin-top:clamp(10px,1.8vw,22px)}
+.names-sec .row{margin-top:6px}
+@media (min-width:641px){ .names-sec .names{white-space:nowrap} }
+
 /* ===== seções novas: usam só as cores e fontes que já existem ===== */
 .paperbox{display:grid;gap:20px;background:var(--paper);padding:clamp(28px,4vw,46px) clamp(22px,4vw,44px)}
 .paperbox form{background:none;padding:0}
@@ -548,15 +560,16 @@ html.locked,html.locked body{overflow:hidden}
   <div class="wrap">
     <span class="kicker">Vamos nos casar</span>
     <h1 class="names"><span data-k="nome1">Diego</span> <em>&amp;</em> <span data-k="nome2">Mayara</span></h1>
+    <span class="fio" aria-hidden="true"></span>
     <p class="bigdate" data-k="dataNum">23 / 04 / 2027</p>
     <p class="place-line" data-k="cidade">Garopaba · SC</p>
-    <p class="intro boas-vindas">Fizemos este cantinho pra dividir com vocês cada pedacinho do nosso grande dia. Aqui tem tudo: onde, quando, como chegar, onde ficar e um mural pra você deixar seu carinho. Confirma sua presença por aqui e volta sempre que bater saudade. A gente mal pode esperar pra te dar aquele abraço.</p>
-    <p class="hand boas-vindas-assin">com carinho, Diego e Mayara</p>
-    <div class="count" aria-label="Contagem regressiva" style="margin-top:14px">
+    <div class="count" aria-label="Contagem regressiva">
       <div><b id="cd-d">–</b><small>dias</small></div><span class="sep"></span>
       <div><b id="cd-h">–</b><small>horas</small></div><span class="sep"></span>
       <div><b id="cd-m">–</b><small>minutos</small></div>
     </div>
+    <p class="intro boas-vindas">Fizemos este cantinho pra dividir com vocês cada pedacinho do nosso grande dia. Aqui tem tudo: onde, quando, como chegar, onde ficar e um mural pra você deixar seu carinho. Confirma sua presença por aqui e volta sempre que bater saudade. A gente mal pode esperar pra te dar aquele abraço.</p>
+    <p class="hand boas-vindas-assin">com carinho, Diego e Mayara</p>
     <div class="row" style="justify-content:center">
       <a class="btn solid" href="#confirmar">Confirmar presença <span class="ar">→</span></a>
       <a class="btn" href="#local">Ver o local</a>
@@ -1416,7 +1429,14 @@ $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) r
   a.addEventListener("play", sync); a.addEventListener("pause", sync);
   const intro = $("#intro"), go = $("#intro-go");
   document.documentElement.classList.add("locked");
-  const openSite = () => { intro.classList.add("gone"); document.documentElement.classList.remove("locked"); document.querySelectorAll("video").forEach(v => { const p = v.play(); if (p) p.catch(() => {}); }); };
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  const openSite = () => {
+    if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+    // quem abre já viu o vídeo no WhatsApp: vai direto pro bloco do convite (o vídeo fica logo acima)
+    const resumo = document.querySelector(".names-sec");
+    const navH = document.querySelector(".nav")?.offsetHeight || 0;
+    window.scrollTo({ top: resumo ? resumo.getBoundingClientRect().top + scrollY - navH : 0, left: 0, behavior: "instant" });
+    intro.classList.add("gone"); document.documentElement.classList.remove("locked"); document.querySelectorAll("video").forEach(v => { const p = v.play(); if (p) p.catch(() => {}); }); };
   go.addEventListener("click", () => { userPaused = false; tryPlay(); openSite(); });
   a.play().then(() => { sync(); openSite(); }).catch(sync);
   go.focus({ preventScroll: true });

@@ -452,10 +452,10 @@ html.locked,html.locked body{overflow:hidden}
 .filme-link:hover{text-decoration:underline}
 @media (max-width:900px){ .filmes{grid-template-columns:minmax(0,1fr);max-width:400px} }
 .church{width:100%;max-width:560px;height:auto;mix-blend-mode:multiply;opacity:.92;margin-bottom:-4px}
-.pbreak.lift{position:relative;z-index:4;padding-block:0;margin-top:calc(-1 * clamp(150px,20vw,260px))}
+.pbreak.lift{position:relative;z-index:4;padding-block:clamp(30px,5vw,60px) 0;margin-top:0}
 .pbreak.lift .rsvp-ph{width:min(340px,70%)}
 @media (min-width:901px){.pbreak.lift .rsvp-ph{margin-left:auto;margin-right:16%}}
-@media (max-width:900px){.pbreak.lift{margin-top:-70px}.pbreak.lift .rsvp-ph{width:62%;margin-right:4%}}
+@media (max-width:900px){.pbreak.lift{margin-top:0}.pbreak.lift .rsvp-ph{width:62%;margin-right:4%}}
 .lift-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:end}
 .lift-grid .rsvp-side{padding-bottom:clamp(10px,3vw,40px)}
 .pbreak.lift .rsvp-ph{margin:0 auto!important}
@@ -586,10 +586,10 @@ html.locked,html.locked body{overflow:hidden}
   <div class="wrap">
     <a class="mono" href="#inicio"><b data-mono>D<i>&amp;</i>M</b><small>casamento</small></a>
     <ul>
+      <li class="hide-s"><a class="l" href="#local">Local</a></li>
       <li class="hide-s"><a class="l" href="#historia">Nós</a></li>
       <li><a class="l" href="#dia">O dia</a></li>
       <li class="hide-s"><a class="l" href="#traje">Traje</a></li>
-      <li class="hide-s"><a class="l" href="#local">Local</a></li>
       <li><a class="l" href="#presentes">Presentes</a></li>
       <li class="hide-s"><a class="l" href="#recados">Recados</a></li>
       <li><a class="l cta" href="#confirmar">Confirmar</a></li>
@@ -624,6 +624,97 @@ html.locked,html.locked body{overflow:hidden}
     </div>
   </div>
 </section>
+
+<section class="pbreak lift" aria-label="Foto">
+  <div class="wrap">
+    <div class="lift-grid">
+    <div class="rsvp-side">
+      <span class="eyebrow">Confirmar presença</span>
+      <h2 class="rsvp-title"><span class="caps">Você</span><em>vem?</em></h2>
+      <p class="lede">Uma pessoa pode responder pela família toda.</p>
+      <span class="deadline hand">até <span data-k="prazoExtenso">23 de abril</span>, combinado?</span>
+    </div>
+    <div class="lift-photo">
+      <figure class="ph rsvp-ph center"><span class="tape" style="top:-6px;left:36%;transform:rotate(-5deg)"></span><img data-src="media/beijo.webp" alt="Mayara de óculos escuros mandando um beijo"><figcaption class="hand">esperando sua resposta</figcaption></figure>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec rsvp" id="confirmar" style="padding-top:clamp(36px,5vw,60px)">
+  <div class="wrap">
+    <div class="formbox">
+      <div class="paperbox" id="rsvp" data-tear="6">
+        <div id="rv-busca" class="field" style="gap:16px">
+          <form id="rv-form-busca" class="field rv-busca" novalidate>
+            <label for="rv-nome">Qual é o seu nome?</label>
+            <p class="small" id="rv-dica">Escreve como está no convite. Pode ser só o primeiro nome.</p>
+            <div class="busca-row">
+              <input type="text" id="rv-nome" autocomplete="given-name" maxlength="80" placeholder="Digite seu nome aqui" aria-describedby="rv-dica">
+              <button class="btn solid" type="submit" id="rv-buscar">Buscar meu convite <span class="ar">→</span></button>
+            </div>
+          </form>
+          <div class="opcoes" id="rv-opcoes" hidden></div>
+        </div>
+        <form id="rv-form" class="field" style="gap:20px" hidden novalidate>
+          <div class="field" style="gap:4px"><span class="eyebrow">Seu convite</span><p class="small">Marca quem vem e quem não vai conseguir. Esse convite é pra:</p></div>
+          <ul class="membros" id="rv-membros"></ul>
+          <div class="field"><label for="rv-rest">Alguma restrição alimentar?</label><input type="text" id="rv-rest" maxlength="300" placeholder="Vegetariano, sem lactose…"></div>
+          <div class="field"><label for="rv-msg">Recado pra gente (opcional)</label><textarea id="rv-msg" maxlength="600" placeholder="Pode escrever à vontade"></textarea></div>
+          <p class="err" id="rv-err" hidden></p>
+          <div class="row"><button class="btn solid" type="submit" id="rv-enviar">Enviar confirmação <span class="ar">→</span></button><button class="btn" type="button" id="rv-voltar">Não é o meu convite</button></div>
+        </form>
+        <div class="done" id="rv-done" hidden></div>
+        <div class="aviso" id="rv-aviso" hidden></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="edge" style="background-image:url(media/edge-sand.png?v=2)" aria-hidden="true"></div>
+<section class="sec place bg-sand" id="local">
+  <div class="wrap">
+    <div class="place-art">
+      <img data-src="media/amigos.webp" alt="Diego e Mayara numa selfie ao ar livre">
+      <p class="note hand">tragam a família toda</p>
+    </div>
+    <div class="place-text">
+      <img class="church" data-src="media/igreja.webp" alt="Ilustração a lápis da igreja de Garopaba, com a escadaria na frente" width="1100" height="801">
+      <span class="eyebrow">O local</span>
+      <h2 data-k="local">Local a definir</h2>
+      <p class="addr" data-k="endereco">Endereço completo · Cidade, UF</p>
+      <dl class="facts">
+        <dt>Cerimônia</dt><dd data-k="cerimoniaNota">Cerimônia e festa no mesmo lugar.</dd>
+        <dt>Chegada</dt><dd>Sugerimos chegar às 14h30, com calma pra se acomodar e viver cada momento com a gente.</dd>
+        <dt>Festa</dt><dd data-k="festaNota">No mesmo local: a festa é no salão ao lado da igreja, logo depois da cerimônia.</dd>
+        <dt>Estacionamento</dt><dd data-k="estacionamento">Estacionamento no local.</dd>
+        <dt>Hospedagem</dt><dd>Vem de fora? Temos algumas <a href="#hospedagem">dicas de onde ficar</a>.</dd>
+      </dl>
+      <figure class="mapa"><iframe id="mapa" title="Mapa da Igreja Matriz São Joaquim, em Garopaba" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></figure>
+      <div class="row">
+        <a class="btn solid" id="maps" href="https://www.google.com/maps" target="_blank" rel="noopener">Abrir no Google Maps <span class="ar">→</span></a>
+        <a class="btn" href="#hospedagem">Onde ficar</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap hosp" id="hospedagem">
+    <div class="head">
+      <span class="eyebrow">Onde ficar</span>
+      <h2>Reserve <em>cedo</em></h2>
+      <p class="lede">Vem de longe? Que alegria! Garopaba é pequenininha e a semana do casamento tem o feriado de Tiradentes (quarta, 21 de abril). Pousada, hotel ou Airbnb: quanto antes você reservar, mais pertinho da igreja vai ficar.</p>
+    </div>
+    <ul class="hosp-grid" id="hosp"></ul>
+    <div class="row">
+      <a class="btn solid" id="hosp-airbnb" href="https://www.airbnb.com.br/" target="_blank" rel="noopener">Buscar no Airbnb <span class="ar">→</span></a>
+      <a class="btn" id="hosp-booking" href="https://www.booking.com/" target="_blank" rel="noopener">Buscar no Booking</a>
+    </div>
+    <p class="small" style="margin-top:16px">São só dicas nossas, sem parceria nenhuma. Dá uma olhadinha nas avaliações e na distância até a igreja antes de fechar.</p>
+  </div>
+  <div class="wrap" style="margin-top:clamp(70px,10vw,130px)">
+    <figure class="ph single" style="max-width:760px"><img data-src="media/jardim.webp" alt="Os dois num banco de jardim com dois cachorros, em São Leopoldo"><figcaption class="hand">São Leopoldo, RS</figcaption></figure>
+  </div>
+</section>
+<div class="edge b" style="background-image:url(media/edge-sand-b.png?v=2)" aria-hidden="true"></div>
 
 <section class="sec story" id="historia">
   <div class="wrap">
@@ -678,6 +769,43 @@ html.locked,html.locked body{overflow:hidden}
   </div>
 </section>
 
+<section class="sec road" aria-labelledby="t-road">
+  <div class="wrap">
+    <div class="head" style="text-align:center;justify-items:center">
+      <span class="eyebrow">Recortes</span>
+      <h2 id="t-road">Uma estrada <em>longa</em></h2>
+    </div>
+    <div class="carousel" aria-roledescription="carrossel" aria-label="Fotos de Diego e Mayara">
+      <div class="car-frame"><div class="car-paper" data-tear="6"><ul class="car-track" id="car-track">
+        <li class="slide" aria-roledescription="slide" aria-label="1 de 22"><img data-src="media/c-meias.jpg" alt="Pés com meias, uma preta e uma cinza, sobre cobertores" width="1080" height="1350" loading="eager"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="2 de 22"><img data-src="media/c-sunset.jpg" alt="Os dois abraçados olhando o pôr do sol na beira de um lago" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="3 de 22"><img data-src="media/c-praia.jpg" alt="Os dois na beira do mar com a prancha azul" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="4 de 22"><img data-src="media/c-surf.jpg" alt="Diego surfando uma onda" width="1080" height="1350" loading="eager"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="5 de 22"><img data-src="media/c-selfie.jpg" alt="Selfie dos dois ao lado de uma casa de madeira" width="1080" height="1350" loading="eager"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="6 de 22"><img data-src="media/c-pole.jpg" alt="Mayara fazendo uma figura no pole dance" width="1080" height="1350" loading="eager"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="7 de 22"><img data-src="media/c-kids.jpg" alt="Três crianças sorrindo embaixo de um cobertor" width="1080" height="1350" loading="eager"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="8 de 22"><img data-src="media/c-cavalo.jpg" alt="Diego montado num cavalo" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="9 de 22"><img data-src="media/c-beijo-noite.jpg" alt="Os dois se beijando à noite, com uma guitarra iluminada ao fundo" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="10 de 22"><img data-src="media/c-praia-noite.jpg" alt="Mayara caminhando na beira do mar à noite" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="11 de 22"><img data-src="media/c-sofa.jpg" alt="Mayara beijando a cabeça de Diego no sofá" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="12 de 22"><img data-src="media/c-meninos.jpg" alt="Diego com três crianças num gramado" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="13 de 22"><img data-src="media/c-serra.jpg" alt="Os dois com duas crianças numa estrada entre paredões de pedra" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="14 de 22"><img data-src="media/c-canela.jpg" alt="Selfie dos dois em frente a uma catedral de pedra" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="15 de 22"><img data-src="media/c-show.jpg" alt="Selfie dos dois num show à noite" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="16 de 22"><img data-src="media/c-barraca.jpg" alt="Vista de dentro da barraca para uma fogueira ao entardecer" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="17 de 22"><img data-src="media/c-flor.jpg" alt="Os dois dançando, ela com uma flor rosa na boca" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="18 de 22"><img data-src="media/c-oculos.jpg" alt="Mayara de óculos redondos" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="19 de 22"><img data-src="media/c-ponte.jpg" alt="Os dois com duas crianças numa ponte de madeira no parque" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="20 de 22"><img data-src="media/c-feira.jpg" alt="Selfie dos dois numa feira de rua ao entardecer" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="21 de 22"><img data-src="media/c-acampamento.jpg" alt="Selfie dos dois no acampamento, com a barraca ao fundo" width="1080" height="1350"></li>
+        <li class="slide" aria-roledescription="slide" aria-label="22 de 22"><img data-src="media/c-balanco.jpg" alt="Diego com três crianças num balanço de jardim" width="1080" height="1350"></li>
+      </ul></div></div>
+      <button class="car-btn prev" type="button" id="car-prev" aria-label="Foto anterior"><span aria-hidden="true">←</span></button>
+      <button class="car-btn next" type="button" id="car-next" aria-label="Próxima foto"><span aria-hidden="true">→</span></button>
+      <div class="car-foot"><span class="car-count" id="car-count">1 / 22</span><div class="car-dots" id="car-dots"></div></div>
+    </div>
+  </div>
+</section>
 <section class="sec day" id="dia" style="padding-top:clamp(20px,3vw,40px)">
   <div class="wrap">
     <div>
@@ -732,134 +860,6 @@ html.locked,html.locked body{overflow:hidden}
   </div>
 </section>
 
-<div class="edge" style="background-image:url(media/edge-sand.png?v=2)" aria-hidden="true"></div>
-<section class="sec place bg-sand" id="local">
-  <div class="wrap">
-    <div class="place-art">
-      <img data-src="media/amigos.webp" alt="Diego e Mayara numa selfie ao ar livre">
-      <p class="note hand">tragam a família toda</p>
-    </div>
-    <div class="place-text">
-      <img class="church" data-src="media/igreja.webp" alt="Ilustração a lápis da igreja de Garopaba, com a escadaria na frente" width="1100" height="801">
-      <span class="eyebrow">O local</span>
-      <h2 data-k="local">Local a definir</h2>
-      <p class="addr" data-k="endereco">Endereço completo · Cidade, UF</p>
-      <dl class="facts">
-        <dt>Cerimônia</dt><dd data-k="cerimoniaNota">Cerimônia e festa no mesmo lugar.</dd>
-        <dt>Chegada</dt><dd>Sugerimos chegar às 14h30, com calma pra se acomodar e viver cada momento com a gente.</dd>
-        <dt>Festa</dt><dd data-k="festaNota">No mesmo local: a festa é no salão ao lado da igreja, logo depois da cerimônia.</dd>
-        <dt>Estacionamento</dt><dd data-k="estacionamento">Estacionamento no local.</dd>
-        <dt>Hospedagem</dt><dd>Vem de fora? Temos algumas <a href="#hospedagem">dicas de onde ficar</a>.</dd>
-      </dl>
-      <figure class="mapa"><iframe id="mapa" title="Mapa da Igreja Matriz São Joaquim, em Garopaba" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></figure>
-      <div class="row">
-        <a class="btn solid" id="maps" href="https://www.google.com/maps" target="_blank" rel="noopener">Abrir no Google Maps <span class="ar">→</span></a>
-        <a class="btn" href="#hospedagem">Onde ficar</a>
-      </div>
-    </div>
-  </div>
-  <div class="wrap hosp" id="hospedagem">
-    <div class="head">
-      <span class="eyebrow">Onde ficar</span>
-      <h2>Reserve <em>cedo</em></h2>
-      <p class="lede">Vem de longe? Que alegria! Garopaba é pequenininha e a semana do casamento tem o feriado de Tiradentes (quarta, 21 de abril). Pousada, hotel ou Airbnb: quanto antes você reservar, mais pertinho da igreja vai ficar.</p>
-    </div>
-    <ul class="hosp-grid" id="hosp"></ul>
-    <div class="row">
-      <a class="btn solid" id="hosp-airbnb" href="https://www.airbnb.com.br/" target="_blank" rel="noopener">Buscar no Airbnb <span class="ar">→</span></a>
-      <a class="btn" id="hosp-booking" href="https://www.booking.com/" target="_blank" rel="noopener">Buscar no Booking</a>
-    </div>
-    <p class="small" style="margin-top:16px">São só dicas nossas, sem parceria nenhuma. Dá uma olhadinha nas avaliações e na distância até a igreja antes de fechar.</p>
-  </div>
-  <div class="wrap" style="margin-top:clamp(70px,10vw,130px)">
-    <figure class="ph single" style="max-width:760px"><img data-src="media/jardim.webp" alt="Os dois num banco de jardim com dois cachorros, em São Leopoldo"><figcaption class="hand">São Leopoldo, RS</figcaption></figure>
-  </div>
-</section>
-<div class="edge b" style="background-image:url(media/edge-sand-b.png?v=2)" aria-hidden="true"></div>
-
-<section class="pbreak lift" aria-label="Foto">
-  <div class="wrap">
-    <div class="lift-grid">
-    <div class="rsvp-side">
-      <span class="eyebrow">Confirmar presença</span>
-      <h2 class="rsvp-title"><span class="caps">Você</span><em>vem?</em></h2>
-      <p class="lede">Uma pessoa pode responder pela família toda.</p>
-      <span class="deadline hand">até <span data-k="prazoExtenso">23 de abril</span>, combinado?</span>
-    </div>
-    <div class="lift-photo">
-      <figure class="ph rsvp-ph center"><span class="tape" style="top:-6px;left:36%;transform:rotate(-5deg)"></span><img data-src="media/beijo.webp" alt="Mayara de óculos escuros mandando um beijo"><figcaption class="hand">esperando sua resposta</figcaption></figure>
-    </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec rsvp" id="confirmar" style="padding-top:clamp(36px,5vw,60px)">
-  <div class="wrap">
-    <div class="formbox">
-      <div class="paperbox" id="rsvp" data-tear="6">
-        <div id="rv-busca" class="field" style="gap:16px">
-          <form id="rv-form-busca" class="field rv-busca" novalidate>
-            <label for="rv-nome">Qual é o seu nome?</label>
-            <p class="small" id="rv-dica">Escreve como está no convite. Pode ser só o primeiro nome.</p>
-            <div class="busca-row">
-              <input type="text" id="rv-nome" autocomplete="given-name" maxlength="80" placeholder="Digite seu nome aqui" aria-describedby="rv-dica">
-              <button class="btn solid" type="submit" id="rv-buscar">Buscar meu convite <span class="ar">→</span></button>
-            </div>
-          </form>
-          <div class="opcoes" id="rv-opcoes" hidden></div>
-        </div>
-        <form id="rv-form" class="field" style="gap:20px" hidden novalidate>
-          <div class="field" style="gap:4px"><span class="eyebrow">Seu convite</span><p class="small">Marca quem vem e quem não vai conseguir. Esse convite é pra:</p></div>
-          <ul class="membros" id="rv-membros"></ul>
-          <div class="field"><label for="rv-rest">Alguma restrição alimentar?</label><input type="text" id="rv-rest" maxlength="300" placeholder="Vegetariano, sem lactose…"></div>
-          <div class="field"><label for="rv-msg">Recado pra gente (opcional)</label><textarea id="rv-msg" maxlength="600" placeholder="Pode escrever à vontade"></textarea></div>
-          <p class="err" id="rv-err" hidden></p>
-          <div class="row"><button class="btn solid" type="submit" id="rv-enviar">Enviar confirmação <span class="ar">→</span></button><button class="btn" type="button" id="rv-voltar">Não é o meu convite</button></div>
-        </form>
-        <div class="done" id="rv-done" hidden></div>
-        <div class="aviso" id="rv-aviso" hidden></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec road" aria-labelledby="t-road">
-  <div class="wrap">
-    <div class="head" style="text-align:center;justify-items:center">
-      <span class="eyebrow">Recortes</span>
-      <h2 id="t-road">Uma estrada <em>longa</em></h2>
-    </div>
-    <div class="carousel" aria-roledescription="carrossel" aria-label="Fotos de Diego e Mayara">
-      <div class="car-frame"><div class="car-paper" data-tear="6"><ul class="car-track" id="car-track">
-        <li class="slide" aria-roledescription="slide" aria-label="1 de 22"><img data-src="media/c-meias.jpg" alt="Pés com meias, uma preta e uma cinza, sobre cobertores" width="1080" height="1350" loading="eager"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="2 de 22"><img data-src="media/c-sunset.jpg" alt="Os dois abraçados olhando o pôr do sol na beira de um lago" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="3 de 22"><img data-src="media/c-praia.jpg" alt="Os dois na beira do mar com a prancha azul" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="4 de 22"><img data-src="media/c-surf.jpg" alt="Diego surfando uma onda" width="1080" height="1350" loading="eager"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="5 de 22"><img data-src="media/c-selfie.jpg" alt="Selfie dos dois ao lado de uma casa de madeira" width="1080" height="1350" loading="eager"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="6 de 22"><img data-src="media/c-pole.jpg" alt="Mayara fazendo uma figura no pole dance" width="1080" height="1350" loading="eager"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="7 de 22"><img data-src="media/c-kids.jpg" alt="Três crianças sorrindo embaixo de um cobertor" width="1080" height="1350" loading="eager"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="8 de 22"><img data-src="media/c-cavalo.jpg" alt="Diego montado num cavalo" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="9 de 22"><img data-src="media/c-beijo-noite.jpg" alt="Os dois se beijando à noite, com uma guitarra iluminada ao fundo" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="10 de 22"><img data-src="media/c-praia-noite.jpg" alt="Mayara caminhando na beira do mar à noite" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="11 de 22"><img data-src="media/c-sofa.jpg" alt="Mayara beijando a cabeça de Diego no sofá" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="12 de 22"><img data-src="media/c-meninos.jpg" alt="Diego com três crianças num gramado" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="13 de 22"><img data-src="media/c-serra.jpg" alt="Os dois com duas crianças numa estrada entre paredões de pedra" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="14 de 22"><img data-src="media/c-canela.jpg" alt="Selfie dos dois em frente a uma catedral de pedra" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="15 de 22"><img data-src="media/c-show.jpg" alt="Selfie dos dois num show à noite" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="16 de 22"><img data-src="media/c-barraca.jpg" alt="Vista de dentro da barraca para uma fogueira ao entardecer" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="17 de 22"><img data-src="media/c-flor.jpg" alt="Os dois dançando, ela com uma flor rosa na boca" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="18 de 22"><img data-src="media/c-oculos.jpg" alt="Mayara de óculos redondos" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="19 de 22"><img data-src="media/c-ponte.jpg" alt="Os dois com duas crianças numa ponte de madeira no parque" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="20 de 22"><img data-src="media/c-feira.jpg" alt="Selfie dos dois numa feira de rua ao entardecer" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="21 de 22"><img data-src="media/c-acampamento.jpg" alt="Selfie dos dois no acampamento, com a barraca ao fundo" width="1080" height="1350"></li>
-        <li class="slide" aria-roledescription="slide" aria-label="22 de 22"><img data-src="media/c-balanco.jpg" alt="Diego com três crianças num balanço de jardim" width="1080" height="1350"></li>
-      </ul></div></div>
-      <button class="car-btn prev" type="button" id="car-prev" aria-label="Foto anterior"><span aria-hidden="true">←</span></button>
-      <button class="car-btn next" type="button" id="car-next" aria-label="Próxima foto"><span aria-hidden="true">→</span></button>
-      <div class="car-foot"><span class="car-count" id="car-count">1 / 22</span><div class="car-dots" id="car-dots"></div></div>
-    </div>
-  </div>
-</section>
 <section class="sec embreve" id="embreve" aria-labelledby="t-breve" style="padding-top:0">
   <div class="wrap">
     <div class="head" style="text-align:center;justify-items:center">
@@ -1267,7 +1267,8 @@ document.querySelectorAll(".frame-wrap").forEach(a => {
       const vao = respostas.filter(x => x.vai), nao = respostas.filter(x => !x.vai);
       done.innerHTML = `<p><b>${vao.length ? "Oba, recebemos!" : "Recebemos sua resposta."}</b> ${vao.length ? `Contamos com ${esc(lista(vao))}.` : ""} ${nao.length ? `${esc(lista(nao))} não ${nao.length > 1 ? "vão" : "vai"}${vao.length ? "" : ". Vamos sentir sua falta"}.` : ""}</p>
         <p class="small">Mudou algo? Responda de novo até ${vals.prazoExtenso}. A última resposta é a que vale.</p>
-        <div class="row"><button class="btn" type="button" id="rv-outro">Responder outro convite</button></div>`;
+        ${vao.length ? `<p>Vem de fora? Dá uma olhadinha no local e nas nossas dicas de onde ficar. Reserva cedo, que a semana tem feriado!</p>` : ""}
+        <div class="row">${vao.length ? `<a class="btn solid" href="#local">Ver o local e onde ficar <span class="ar">→</span></a>` : ""}<button class="btn" type="button" id="rv-outro">Responder outro convite</button></div>`;
       mostrar(done); busca.hidden = true;
       $("#rv-outro").addEventListener("click", () => { form.reset(); $("#rv-nome").value = ""; mostrar(busca); aviso.hidden = true; opc.hidden = true; });
       done.scrollIntoView({ behavior: "smooth", block: "nearest" });

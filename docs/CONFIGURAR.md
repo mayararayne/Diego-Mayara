@@ -30,10 +30,12 @@ O que o script faz na planilha:
 
 **Convidado novo:** inclua na aba Convidados, como sempre, e depois use o menu **Casamento > Trazer convidados novos da aba Convidados**. O menu aparece depois de instalar o script e recarregar a planilha. Ele só acrescenta quem ainda não está na Confirmação; não apaga nem muda ninguém. Não edite a coluna **Origem**: é por ela que o script sabe quem já foi copiado.
 
-## 2. Criar o site no Netlify
+## 2. Ligar o site do Netlify ao GitHub
 
-1. Em app.netlify.com, clique em **Add new project > Import an existing project > GitHub** e escolha o repositório `mayararayne/Diego-Mayara`.
-2. O Netlify lê o `netlify.toml` sozinho: a pasta publicada é `site` e as funções ficam em `netlify/functions`.
+O site já existe: **diegoemay23042027** (endereço `https://diegoemay23042027.netlify.app`). O endereço principal é público; as versões de teste pedem login da equipe.
+
+1. Abra app.netlify.com/projects/diegoemay23042027 > **Project configuration > Build & deploy > Link repository**.
+2. Escolha **GitHub** > `mayararayne/Diego-Mayara` e o branch `ccr-d3b7acd9-bit47r`. O Netlify lê o `netlify.toml` sozinho: publica a pasta `site` e as funções de `netlify/functions`.
 3. Em **Project configuration > Environment variables**, crie estas três variáveis (escopo: Functions):
 
 | Variável | Valor |
@@ -42,7 +44,9 @@ O que o script faz na planilha:
 | `RSVP_TOKEN` | a mesma senha do `TOKEN` do passo 1 |
 | `RECADOS_ADMIN_TOKEN` | outra senha, para apagar recados |
 
-4. Faça um novo deploy (**Deploys > Trigger deploy**) para as variáveis valerem.
+4. Faça um novo deploy (**Deploys > Trigger deploy**) para as variáveis valerem. A partir daí, cada envio para o branch atualiza o site sozinho.
+
+Enquanto `RSVP_SCRIPT_URL` não estiver configurada, a confirmação mostra os botões de WhatsApp no lugar da busca. O mural de recados funciona desde o primeiro deploy.
 
 ## 3. Apagar um recado do mural
 

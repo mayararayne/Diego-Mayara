@@ -1,0 +1,13 @@
+# Site estático: o Netlify publica a pasta raiz como está, sem build.
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/media/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

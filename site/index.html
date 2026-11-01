@@ -17,6 +17,8 @@
   --f-hand:"La Belle Aurore", "Snell Roundhand", "Segoe Script", cursive;
   --shadow:drop-shadow(0 6px 10px rgba(40,30,20,.22));
   --gold:#D2B17E;
+  --azul:#5B7386;   /* azul do terno do noivo, mais profundo: botões e contagem */
+  --azul-hover:#4E6577;
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -59,12 +61,12 @@ p{margin:0}
 .nav ul::-webkit-scrollbar{display:none}
 .nav a.l{display:block;padding:8px 12px;text-decoration:none;font:400 1.02rem/1 var(--f-display);white-space:nowrap;color:var(--ink)}
 .nav a.l:hover{color:var(--terra)}
-.nav a.cta{font:600 .82rem/1 var(--f-body);background:var(--moss-ink);color:var(--on-dark);border-radius:999px;padding:11px 16px;margin-left:8px}
-.nav a.cta:hover{color:var(--on-dark);background:var(--moss)}
+.nav a.cta{font:600 .82rem/1 var(--f-body);background:var(--azul);color:var(--on-dark);border-radius:999px;padding:11px 16px;margin-left:8px}
+.nav a.cta:hover{color:var(--on-dark);background:var(--azul-hover)}
 
 .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;border:1.5px solid currentColor;background:transparent;color:inherit;font:600 .9rem/1 var(--f-body);text-decoration:none;cursor:pointer;transition:transform .2s,background .2s}
 .btn:hover{transform:translateY(-2px)}
-.btn.solid{background:var(--moss-ink);border-color:var(--moss-ink);color:var(--on-dark)}
+.btn.solid{background:var(--azul);border-color:var(--azul);color:var(--on-dark)}
 .btn.light{background:var(--on-dark);border-color:var(--on-dark);color:var(--ink)}
 .btn .ar{font-family:var(--f-display);font-size:1.2rem;line-height:0}
 .row{display:flex;flex-wrap:wrap;gap:12px}
@@ -205,7 +207,7 @@ fieldset.field .choice{clear:both}
 .choice label{position:relative;display:inline-flex;text-transform:none;letter-spacing:0;font:500 .98rem/1 var(--f-body);color:var(--ink);margin:0}
 .choice input{position:absolute;opacity:0;pointer-events:none}
 .choice span{display:inline-flex;align-items:center;height:46px;padding:0 20px;border-radius:999px;border:1.5px solid var(--line);cursor:pointer}
-.choice input:checked + span{border-color:var(--moss-ink);background:var(--moss-ink);color:var(--on-dark)}
+.choice input:checked + span{border-color:var(--azul);background:var(--azul);color:var(--on-dark)}
 .choice input:focus-visible + span{outline:2px solid var(--terra);outline-offset:2px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .err{color:#A63A22;font-size:.95rem}
@@ -384,7 +386,7 @@ footer .hand{font-size:1.6rem;color:var(--on-dark)}
   .gift-pics .ph figcaption{font-size:1.2rem!important}
 }
 /* música */
-.music{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:65;display:inline-flex;align-items:center;gap:10px;padding:10px 16px 10px 12px;border:0;border-radius:999px;background:var(--moss-ink);color:var(--on-dark);font:600 .78rem/1 var(--f-body);letter-spacing:.06em;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.music{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:65;display:inline-flex;align-items:center;gap:10px;padding:10px 16px 10px 12px;border:0;border-radius:999px;background:var(--azul);color:var(--on-dark);font:600 .78rem/1 var(--f-body);letter-spacing:.06em;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.25)}
 .music .bars{display:inline-flex;gap:2px;align-items:flex-end;height:14px}
 .music .bars i{width:3px;height:4px;background:var(--gold);border-radius:1px}
 .music.on .bars i{animation:eq 1s ease-in-out infinite}
@@ -413,7 +415,7 @@ footer .hand{font-size:1.6rem;color:var(--on-dark)}
   .car-foot{justify-content:space-between;gap:18px;margin-top:18px}
   .car-dots{flex-wrap:wrap}
 }
-.car-btn{background:var(--moss-ink);color:var(--on-dark);width:58px;height:58px;font-size:1.7rem;box-shadow:0 8px 20px rgba(20,25,15,.35)}
+.car-btn{background:var(--azul);color:var(--on-dark);width:58px;height:58px;font-size:1.7rem;box-shadow:0 8px 20px rgba(20,25,15,.35)}
 .car-btn.prev{left:-84px}.car-btn.next{right:-84px}
 .car-btn[disabled]{opacity:.3}
 @media (max-width:720px){ .car-btn{width:46px;height:46px;font-size:1.3rem}.car-btn.prev{left:-6px}.car-btn.next{right:-6px} }
@@ -483,15 +485,15 @@ html.locked,html.locked body{overflow:hidden}
 .names-sec .row{margin-top:6px}
 @media (min-width:641px){ .names-sec .names{white-space:nowrap} }
 
-/* contagem regressiva: plaquinhas no verde estrutural do guia, números em marfim, moldura dourada */
+/* contagem regressiva: plaquinhas no azul do terno do noivo, números em marfim, moldura dourada */
 .count{gap:10px;align-items:stretch}
 .count .sep{display:none}
-.count > div{justify-items:center;align-content:center;min-width:84px;padding:14px 12px 10px;background:#6F876A;border-radius:10px;box-shadow:0 8px 18px rgba(30,40,25,.2), inset 0 0 0 1px rgba(210,177,126,.8)}
+.count > div{justify-items:center;align-content:center;min-width:84px;padding:14px 12px 10px;background:var(--azul);border-radius:10px;box-shadow:0 8px 18px rgba(30,40,55,.2), inset 0 0 0 1px rgba(210,177,126,.8)}
 .count b{font:400 2.1rem/1 var(--f-caps);letter-spacing:.06em;color:var(--cream);text-shadow:0 1px 2px rgba(20,30,15,.35)}
 .count small{font:600 .6rem/1.4 var(--f-body);letter-spacing:.2em;color:#F7F3EA;margin-top:6px;text-shadow:0 1px 1px rgba(20,30,15,.3)}
 .count{gap:20px}
 .count > div{position:relative}
-.count > div ~ div::before{content:":";position:absolute;left:-10px;top:50%;transform:translate(-50%,-58%);font:600 2.2rem/1 var(--f-display);color:var(--moss);text-shadow:none}
+.count > div ~ div::before{content:":";position:absolute;left:-10px;top:50%;transform:translate(-50%,-58%);font:600 2.2rem/1 var(--f-display);color:var(--azul);text-shadow:none}
 @media (max-width:400px){ .count{gap:14px} .count > div ~ div::before{left:-7px;font-size:1.7rem} .count > div{min-width:64px;padding:11px 6px 8px} .count b{font-size:1.65rem} .count small{font-size:.52rem;letter-spacing:.14em} }
 /* data com fios dourados dos lados */
 .names-sec .bigdate,.intro-date{display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,22px)}

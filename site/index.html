@@ -562,6 +562,7 @@ html.locked,html.locked body{overflow:hidden}
 .bolinhas{display:flex;flex:none;min-width:150px}
 .bolinhas i{width:38px;height:38px;border-radius:50%;border:2px solid var(--paper);margin-left:-10px;box-shadow:0 2px 6px rgba(40,30,20,.2)}
 .bolinhas i:first-child{margin-left:0}
+.horarios-nota{font-style:italic}
 .cores-fim{font-size:1.5rem;color:var(--terra-deep);margin-top:6px}
 @media (max-width:900px){ .traje .wrap{grid-template-columns:minmax(0,1fr)} }
 @media (max-width:640px){ .bolinhas{min-width:110px} .bolinhas i{width:30px;height:30px} .cores b{font-size:1.15rem} }
@@ -673,6 +674,8 @@ html.locked,html.locked body{overflow:hidden}
       <div class="head">
         <span class="eyebrow">O dia</span>
         <h2>Como vai ser <em>a celebração</em></h2>
+        <p class="lede">Vem vivenciar com a gente o dia em que vamos receber a bênção de Deus pra nossa família. Ter você lá, testemunhando o nosso sim e celebrando cada momento, é o que deixa tudo completo.</p>
+        <p class="small horarios-nota">Os horários são estimados: é o nosso planejado. Pode mudar um pouquinho no dia, mas vamos seguir o mais fiel possível.</p>
       </div>
       <ol class="timeline" id="timeline"></ol>
     </div>
@@ -732,10 +735,10 @@ html.locked,html.locked body{overflow:hidden}
       <p class="addr" data-k="endereco">Endereço completo · Cidade, UF</p>
       <dl class="facts">
         <dt>Cerimônia</dt><dd data-k="cerimoniaNota">Cerimônia e festa no mesmo lugar.</dd>
-        <dt>Chegada</dt><dd>Chegue 30 minutos antes. A cerimônia começa no horário.</dd>
-        <dt>Festa</dt><dd data-k="festaNota">Depois da igreja, a festa segue no salão a partir das 17h20.</dd>
+        <dt>Chegada</dt><dd>Sugerimos chegar às 14h30, com calma pra se acomodar e viver cada momento com a gente.</dd>
+        <dt>Festa</dt><dd data-k="festaNota">No mesmo local: a festa é no salão ao lado da igreja, logo depois da cerimônia.</dd>
         <dt>Estacionamento</dt><dd data-k="estacionamento">Estacionamento no local.</dd>
-        <dt>Hospedagem</dt><dd data-k="hospedagem">Vem de fora? Fale com a gente que indicamos onde ficar.</dd>
+        <dt>Hospedagem</dt><dd>Vem de fora? Temos algumas <a href="#hospedagem">dicas de onde ficar</a>.</dd>
       </dl>
       <figure class="mapa"><iframe id="mapa" title="Mapa da Igreja Matriz São Joaquim, em Garopaba" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></figure>
       <div class="row">
@@ -1018,9 +1021,9 @@ const CONFIG = {
   mapsLink: "",
   mapsBusca: "Igreja Matriz São Joaquim, Garopaba, SC",
   estacionamento: "Estacionamento no local.",
-  hospedagem: "Vem de fora? Fale com a gente que indicamos onde ficar.",
+  hospedagem: "Vem de fora? Temos algumas dicas de onde ficar.",
   cerimoniaNota: "Na igreja de Garopaba.",
-  festaNota: "Depois do sim, a festa segue no salão a partir das 17h20. O endereço chega aqui em breve.",
+  festaNota: "No mesmo local: a festa é no salão ao lado da igreja, logo depois da cerimônia.",
   traje: "Esporte fino",
   trajeNota: "Uma sugestão, não regra. Venha confortável pra dançar.",
   instagram: "diegoemay23042027",
@@ -1031,18 +1034,12 @@ const CONFIG = {
   // chave: use uma CHAVE ALEATÓRIA do banco (nunca CPF): ela vai dentro do QR code e do copia e cola
   pix: { chave: "4db7f4d8-67ab-4c40-b223-b5d10b6c6e80", nome: "Mayara Rayne Oliveira da Silva", nomeQr: "Mayara Rayne O da Silva", cidade: "Garopaba" },
   programa: [
-    { hora: "15h", titulo: "Início", texto: "Entrada dos padrinhos e madrinhas." },
-    { hora: "15h05", titulo: "Entrada do noivo", texto: "Diego entra com a mãe e a avó." },
-    { hora: "15h10", titulo: "Entrada da florista", texto: "" },
-    { hora: "15h25", titulo: "Entrada da noiva", texto: "Mayara entra com os dois pais. O sim, as lágrimas e os abraços." },
-    { hora: "15h40", titulo: "Entrada das alianças", texto: "" },
-    { hora: "16h", titulo: "Fim da cerimônia", texto: "Depois, sessão de fotos até o pôr do sol." },
-    { hora: "17h20", titulo: "Chegada ao salão", texto: "Brindes, corte do bolo e trend." },
+    { hora: "14h30", titulo: "Chegada", texto: "Chega com calminha pra se acomodar e sentir a igreja com a gente." },
+    { hora: "15h", titulo: "Cerimônia", texto: "Diante de Deus e de quem a gente ama. O sim, as lágrimas e os abraços." },
+    { hora: "16h", titulo: "Recepção", texto: "Todo mundo segue pro salão ao lado da igreja, com entradinhas e bebidas esperando por vocês." },
+    { hora: "17h20", titulo: "Entrada dos noivos no salão", texto: "" },
     { hora: "19h", titulo: "Jantar", texto: "Comida boa e mesa cheia." },
-    { hora: "20h", titulo: "Fim do jantar", texto: "" },
-    { hora: "20h05", titulo: "Gravata", texto: "Hora de passar a gravata." },
-    { hora: "20h30", titulo: "Buquê e whisky", texto: "" },
-    { hora: "21h", titulo: "Valsa e festa", texto: "Pista aberta até alguém pedir pra parar." },
+    { hora: "21h", titulo: "Valsa e pista", texto: "Pista aberta até alguém pedir pra parar." },
     { hora: "0h", titulo: "Encerramento", texto: "" }
   ],
   hospedagens: [
@@ -1067,8 +1064,8 @@ const CONFIG = {
     ["Crianças podem ir?", "Sim! As crianças da família são muito bem-vindas. Informe quantas vêm na confirmação."],
     ["Como confirmo minha presença?", "Na seção Confirmar: digite seu nome, encontre o seu convite e marque quem vai e quem não vai. Uma pessoa pode responder pela família toda. O prazo é {prazo}."],
     ["E se eu perder o prazo?", "Depois de {prazo} a confirmação pelo site fecha. Aí é só chamar um de nós no WhatsApp."],
-    ["Que horas devo chegar?", "Chegue uns 30 minutos antes. A cerimônia começa pontualmente."],
-    ["Onde é a festa?", "Depois da igreja, a festa segue no salão a partir das 17h20. O endereço aparece aqui em breve."],
+    ["Que horas devo chegar?", "Sugerimos chegar às 14h30, com calma pra se acomodar. A cerimônia começa às 15h."],
+    ["Onde é a festa?", "No mesmo local: no salão ao lado da igreja. Depois da cerimônia é só seguir pro salão, onde vai ter entradinhas e bebidas esperando por vocês."],
     ["Onde posso me hospedar?", "Separamos algumas sugestões na seção Local. A semana tem o feriado de Tiradentes, então reserve o quanto antes."],
     ["E se chover?", "O local tem estrutura coberta. A festa acontece de qualquer jeito."],
     ["Qual o traje?", "Esporte fino é a sugestão. Pense em algo confortável pra dançar a noite toda."],

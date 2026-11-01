@@ -929,7 +929,7 @@ const CONFIG = {
     { quem: "Diego", rotulo: "WhatsApp do noivo", whatsapp: "5551983211323" }
   ],
   // chave: use uma CHAVE ALEATÓRIA do banco (nunca CPF): ela vai dentro do QR code e do copia e cola
-  pix: { chave: "", nome: "Mayara Rayne Oliveira da Silva", nomeQr: "Mayara Rayne O da Silva", cidade: "Garopaba" },
+  pix: { chave: "4db7f4d8-67ab-4c40-b223-b5d10b6c6e80", nome: "Mayara Rayne Oliveira da Silva", nomeQr: "Mayara Rayne O da Silva", cidade: "Garopaba" },
   programa: [
     { hora: "15h", titulo: "Início", texto: "Entrada dos padrinhos e madrinhas." },
     { hora: "15h05", titulo: "Entrada do noivo", texto: "Diego entra com a mãe e a avó." },
@@ -1181,7 +1181,7 @@ function showPix(c){
   let free = $("#free-wrap");
   if (c.valor === null && !free){
     free = document.createElement("div"); free.id = "free-wrap"; free.className = "free";
-    free.innerHTML = '<label class="small" for="free-val">Quanto?</label><input type="number" id="free-val" min="1" step="1" placeholder="R$ 100" inputmode="decimal"><span class="small">ou deixe em branco e digite no app</span>';
+    free.innerHTML = '<label class="small" for="free-val">Quanto?</label><input type="text" id="free-val" placeholder="R$ 100" inputmode="decimal" autocomplete="off"><span class="small">ou deixe em branco e digite no app</span>';
     info.insertBefore(free, $("#pix-code"));
     free.querySelector("input").addEventListener("input", () => showPix(current));
   } else if (c.valor !== null && free) free.remove();

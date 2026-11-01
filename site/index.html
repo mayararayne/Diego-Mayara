@@ -195,7 +195,7 @@ form{display:grid;gap:20px;background:var(--paper);padding:clamp(28px,4vw,46px) 
 .field{display:grid;gap:8px;min-width:0}
 .field label,.field legend{font:600 .68rem/1.3 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 fieldset{border:0;padding:0;margin:0;display:grid;gap:10px;min-width:0}
-input[type=text],input[type=number],textarea{width:100%;font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:1.5px solid var(--line);border-radius:0;padding:10px 2px}
+input[type=text],input[type=email],input[type=number],textarea{width:100%;font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:1.5px solid var(--line);border-radius:0;padding:10px 2px}
 input:focus,textarea:focus{outline:none;border-color:var(--terra)}
 textarea{min-height:84px;resize:vertical}
 .choice{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
@@ -450,6 +450,57 @@ html.locked,html.locked body{overflow:hidden}
   .lift-grid .lift-photo{order:-1}
   .pbreak.lift .rsvp-ph{margin:0 4% 0 auto!important}
 }
+/* ===== seções novas: usam só as cores e fontes que já existem ===== */
+.paperbox{display:grid;gap:20px;background:var(--paper);padding:clamp(28px,4vw,46px) clamp(22px,4vw,44px)}
+.paperbox form{background:none;padding:0}
+.busca-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.busca-row input{flex:1 1 220px}
+.opcoes{display:grid;gap:10px;justify-items:start}
+.membros{list-style:none;margin:0;padding:0;display:grid}
+.membros li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 18px;padding:14px 0;border-top:1px solid var(--line)}
+.membros li:last-child{border-bottom:1px solid var(--line)}
+.membros .m-nome{font:400 1.5rem/1.1 var(--f-display)}
+.membros .m-nome small{font:600 .6rem/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-left:8px}
+.aviso{display:grid;gap:14px;padding:18px;border:1.5px dashed var(--terra);border-radius:4px}
+.aviso p{color:var(--ink)}
+.em-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:28px;max-width:1000px;margin-inline:auto}
+.soon{font-size:1.6rem;color:var(--terra-deep);margin-top:4px}
+.place .wrap.hosp{display:block;margin-top:clamp(70px,10vw,130px)}
+.hosp-grid{list-style:none;margin:0 0 28px;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:18px}
+.hosp-grid li{display:grid;gap:6px;align-content:start;padding:22px 22px 20px;background:var(--paper);filter:var(--shadow)}
+.hosp-grid li:nth-child(odd){transform:rotate(-.6deg)} .hosp-grid li:nth-child(even){transform:rotate(.5deg)}
+.hosp-grid h3{font-size:1.5rem}
+.hosp-grid p{color:var(--muted);font-size:.93rem}
+.hosp-grid a{font:600 .82rem/1.2 var(--f-body);color:var(--terra-deep);text-decoration:none;margin-top:6px}
+.hosp-grid a:hover{text-decoration:underline}
+.mural-form{max-width:880px;margin:0 auto clamp(48px,7vw,80px);filter:drop-shadow(0 10px 20px rgba(40,30,20,.18))}
+.lbl{font:600 .68rem/1.3 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.editor{border:1.5px solid var(--line);background:var(--cream)}
+.editor:focus-within{border-color:var(--terra)}
+.tb{display:flex;flex-wrap:wrap;gap:4px;padding:8px;border-bottom:1.5px solid var(--line)}
+.tb button{height:38px;min-width:38px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:var(--ink);font:500 .92rem/1 var(--f-body);cursor:pointer}
+.tb button:hover,.tb button[aria-expanded="true"]{background:var(--sand)}
+.emojis{display:flex;flex-wrap:wrap;gap:2px;padding:8px;border-bottom:1.5px solid var(--line)}
+.emojis button{width:42px;height:42px;border:0;background:none;font-size:1.35rem;cursor:pointer;border-radius:8px}
+.emojis button:hover{background:var(--sand)}
+.ed{min-height:160px;max-height:440px;overflow:auto;padding:14px 16px;outline:none;line-height:1.6;overflow-wrap:anywhere}
+.ed:empty::before{content:attr(data-ph);color:var(--muted)}
+.ed ul,.ed ol,.r-html ul,.r-html ol{margin:6px 0;padding-left:1.3em}
+.ed img,.r-html img{max-width:100%;max-height:340px;width:auto;height:auto;margin:8px 0;display:block}
+.ed-foot{display:flex;justify-content:space-between;gap:12px;padding:6px 12px 8px;border-top:1px dashed var(--line)}
+#mu-count{white-space:nowrap}
+#mu-count.over{color:#A63A22;font-weight:600}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+.recados{columns:3 280px;column-gap:26px}
+.recado{break-inside:avoid;margin:0 0 28px;filter:var(--shadow)}
+.recado:nth-child(3n+1){transform:rotate(-.7deg)} .recado:nth-child(3n+2){transform:rotate(.6deg)}
+.recado .note-p{gap:10px}
+.r-html{color:var(--ink);overflow-wrap:anywhere}
+.r-assin{font-size:1.5rem;color:var(--terra-deep);line-height:1.2}
+.r-del{justify-self:start;border:0;background:none;color:#A63A22;font:600 .78rem/1 var(--f-body);cursor:pointer;padding:4px 0}
+.mural-vazio{text-align:center;color:var(--muted)}
+.mural-mais{display:flex;justify-content:center;margin-top:10px}
+.insta-in{display:grid;justify-items:center;text-align:center;gap:18px}
 </style>
 </head><body>
 
@@ -461,6 +512,7 @@ html.locked,html.locked body{overflow:hidden}
       <li><a class="l" href="#dia">O dia</a></li>
       <li class="hide-s"><a class="l" href="#local">Local</a></li>
       <li><a class="l" href="#presentes">Presentes</a></li>
+      <li class="hide-s"><a class="l" href="#recados">Recados</a></li>
       <li><a class="l cta" href="#confirmar">Confirmar</a></li>
     </ul>
   </div>
@@ -560,7 +612,7 @@ html.locked,html.locked body{overflow:hidden}
       <div class="notebox"><div class="note-p" data-tear="5">
         <span class="eyebrow">Crianças</span>
         <h3>São muito bem-vindas</h3>
-        <p>As crianças da família estão no convite. Informe quantas vêm na confirmação.</p>
+        <p>As crianças convidadas já aparecem com o nome delas, junto com a família, na confirmação de presença.</p>
       </div></div>
       <div class="notebox"><div class="note-p" data-tear="5">
         <span class="eyebrow">Prazo</span>
@@ -586,14 +638,29 @@ html.locked,html.locked body{overflow:hidden}
       <p class="addr" data-k="endereco">Endereço completo · Cidade, UF</p>
       <dl class="facts">
         <dt>Cerimônia</dt><dd data-k="cerimoniaNota">Cerimônia e festa no mesmo lugar.</dd>
-        <dt>Chegada</dt><dd>Chegue 30 minutos antes. A cerimônia começa no horário.</dd>
+        <dt>Chegada</dt><dd>Chegue 30 minutos antes. A cerimônia começa às 15h em ponto.</dd>
+        <dt>Festa</dt><dd data-k="festaNota">Depois da igreja, a festa segue no salão a partir das 17h20.</dd>
         <dt>Estacionamento</dt><dd data-k="estacionamento">Estacionamento no local.</dd>
         <dt>Hospedagem</dt><dd data-k="hospedagem">Vem de fora? Fale com a gente que indicamos onde ficar.</dd>
       </dl>
       <div class="row">
         <a class="btn solid" id="maps" href="https://www.google.com/maps" target="_blank" rel="noopener">Abrir no Google Maps <span class="ar">→</span></a>
+        <a class="btn" href="#hospedagem">Onde ficar</a>
       </div>
     </div>
+  </div>
+  <div class="wrap hosp" id="hospedagem">
+    <div class="head">
+      <span class="eyebrow">Onde ficar</span>
+      <h2>Reserve <em>cedo</em></h2>
+      <p class="lede">Garopaba é pequena e a semana do casamento tem o feriado de Tiradentes (quarta, 21 de abril). Hotel, pousada ou Airbnb: quanto antes reservar, mais opção você tem perto da igreja.</p>
+    </div>
+    <ul class="hosp-grid" id="hosp"></ul>
+    <div class="row">
+      <a class="btn solid" id="hosp-airbnb" href="https://www.airbnb.com.br/" target="_blank" rel="noopener">Buscar no Airbnb <span class="ar">→</span></a>
+      <a class="btn" id="hosp-booking" href="https://www.booking.com/" target="_blank" rel="noopener">Buscar no Booking</a>
+    </div>
+    <p class="small" style="margin-top:16px">São sugestões nossas, sem parceria. Confira avaliações, preço e distância até a igreja antes de reservar.</p>
   </div>
   <div class="wrap" style="margin-top:clamp(70px,10vw,130px)">
     <figure class="ph single" style="max-width:760px"><img data-src="media/jardim.webp" alt="Os dois num banco de jardim com dois cachorros, em São Leopoldo"><figcaption class="hand">São Leopoldo, RS</figcaption></figure>
@@ -607,7 +674,7 @@ html.locked,html.locked body{overflow:hidden}
     <div class="rsvp-side">
       <span class="eyebrow">Confirmar presença</span>
       <h2 class="rsvp-title"><span class="caps">Você</span><em>vem?</em></h2>
-      <p class="lede">Uma pessoa pode responder pela família toda. A confirmação chega direto no nosso WhatsApp.</p>
+      <p class="lede">Digite seu nome para encontrar o seu convite. Uma pessoa pode responder pela família toda.</p>
       <span class="deadline hand">até <span data-k="prazoExtenso">23 de abril</span>, combinado?</span>
     </div>
     <div class="lift-photo">
@@ -620,38 +687,29 @@ html.locked,html.locked body{overflow:hidden}
 <section class="sec rsvp" id="confirmar" style="padding-top:clamp(36px,5vw,60px)">
   <div class="wrap">
     <div class="formbox">
-      <form id="rsvp" novalidate data-tear="6">
-        <div class="field">
-          <label for="r-nome">Seu nome completo</label>
-          <input type="text" id="r-nome" autocomplete="name" placeholder="Como está no convite">
+      <div class="paperbox" id="rsvp" data-tear="6">
+        <div id="rv-busca" class="field" style="gap:16px">
+          <form id="rv-form-busca" class="field" novalidate>
+            <label for="rv-nome">Seu nome</label>
+            <div class="busca-row">
+              <input type="text" id="rv-nome" autocomplete="given-name" maxlength="80" placeholder="Como está no convite">
+              <button class="btn solid" type="submit" id="rv-buscar">Buscar meu convite <span class="ar">→</span></button>
+            </div>
+            <p class="small">Digite seu primeiro nome. Se não achar, tente o nome de alguém da sua família.</p>
+          </form>
+          <div class="opcoes" id="rv-opcoes" hidden></div>
         </div>
-        <fieldset class="field">
-          <legend>Você vai?</legend>
-          <div class="choice">
-            <label><input type="radio" name="vai" id="r-sim" value="sim" checked><span>Vou, claro!</span></label>
-            <label><input type="radio" name="vai" id="r-nao" value="nao"><span>Infelizmente não vou</span></label>
-          </div>
-        </fieldset>
-        <div id="r-extra" class="field" style="gap:20px">
-          <div class="two">
-            <div class="field"><label for="r-adultos">Adultos (com você)</label><input type="number" id="r-adultos" min="1" max="12" value="1" inputmode="numeric"></div>
-            <div class="field"><label for="r-criancas">Crianças</label><input type="number" id="r-criancas" min="0" max="12" value="0" inputmode="numeric"></div>
-          </div>
-          <div class="field"><label for="r-quem">Nome de quem vem com você</label><input type="text" id="r-quem" placeholder="Ex.: Ana (esposa), Theo (8 anos)"></div>
-          <div class="field"><label for="r-rest">Alguma restrição alimentar?</label><input type="text" id="r-rest" placeholder="Vegetariano, sem lactose…"></div>
-        </div>
-        <div class="field"><label for="r-msg">Recado pra gente (opcional)</label><textarea id="r-msg" placeholder="Pode escrever à vontade"></textarea></div>
-        <p class="err" id="r-err" hidden></p>
-        <div class="row"><button class="btn solid" type="submit">Enviar confirmação <span class="ar">→</span></button></div>
-        <div class="done" id="r-done" hidden>
-          <p><b>Quase lá.</b> Abrimos o WhatsApp com sua mensagem pronta. Se ele não abriu, copie o texto e mande pra gente no número <b data-k="whatsappFmt">(00) 00000-0000</b>.</p>
-          <pre id="r-text"></pre>
-          <div class="row">
-            <a class="btn solid" id="r-wa" href="#" target="_blank" rel="noopener">Abrir WhatsApp de novo</a>
-            <button class="btn" type="button" id="r-copy">Copiar texto</button>
-          </div>
-        </div>
-      </form>
+        <form id="rv-form" class="field" style="gap:20px" hidden novalidate>
+          <div class="field" style="gap:4px"><span class="eyebrow">Seu convite</span><p class="small">Marque quem vai e quem não vai. Este convite é para:</p></div>
+          <ul class="membros" id="rv-membros"></ul>
+          <div class="field"><label for="rv-rest">Alguma restrição alimentar?</label><input type="text" id="rv-rest" maxlength="300" placeholder="Vegetariano, sem lactose…"></div>
+          <div class="field"><label for="rv-msg">Recado pra gente (opcional)</label><textarea id="rv-msg" maxlength="600" placeholder="Pode escrever à vontade"></textarea></div>
+          <p class="err" id="rv-err" hidden></p>
+          <div class="row"><button class="btn solid" type="submit" id="rv-enviar">Enviar confirmação <span class="ar">→</span></button><button class="btn" type="button" id="rv-voltar">Não é o meu convite</button></div>
+        </form>
+        <div class="done" id="rv-done" hidden></div>
+        <div class="aviso" id="rv-aviso" hidden></div>
+      </div>
     </div>
   </div>
 </section>
@@ -693,6 +751,29 @@ html.locked,html.locked body{overflow:hidden}
     </div>
   </div>
 </section>
+<section class="sec embreve" id="embreve" aria-labelledby="t-breve" style="padding-top:0">
+  <div class="wrap">
+    <div class="head" style="text-align:center;justify-items:center">
+      <span class="eyebrow">Em breve</span>
+      <h2 id="t-breve">Vem <em>novidade</em> por aí</h2>
+    </div>
+    <div class="em-grid">
+      <article class="notebox" id="padrinhos"><div class="note-p" data-tear="5">
+        <span class="eyebrow">Padrinhos e madrinhas</span>
+        <h3>Quem vai estar no altar com a gente</h3>
+        <p>Estamos preparando tudo com muito carinho para fazer os convites oficiais. Assim que eles receberem, a gente conta aqui quem são, por que escolhemos cada um e mostra as fotos juntos.</p>
+        <p class="hand soon">aguarde…</p>
+      </div></article>
+      <article class="notebox" id="prewedding"><div class="note-p" data-tear="5">
+        <span class="eyebrow">Ensaio pré-wedding</span>
+        <h3>Fotos marcadas para <span data-k="ensaioExtenso">14 de janeiro</span></h3>
+        <p>O ensaio já está marcado. Assim que as fotos ficarem prontas, elas aparecem aqui primeiro.</p>
+        <p class="hand soon" id="ensaio-cd">em breve</p>
+      </div></article>
+    </div>
+  </div>
+</section>
+
 <div class="edge" style="background-image:url(media/edge-terra.png)" aria-hidden="true"></div>
 <section class="sec bg-terra" id="presentes" style="padding-top:clamp(40px,6vw,70px)">
   <div class="wrap">
@@ -739,13 +820,64 @@ html.locked,html.locked body{overflow:hidden}
   </div>
 </section>
 
+<section class="sec mural" id="recados" aria-labelledby="t-mural" style="padding-top:clamp(20px,4vw,50px)">
+  <div class="wrap">
+    <div class="head" style="text-align:center;justify-items:center">
+      <span class="eyebrow">Mural de recados</span>
+      <h2 id="t-mural">Deixe seu <em>recado</em></h2>
+      <p class="lede">Escreva pra gente, mande foto, capriche nos emojis. Os recados ficam aqui no mural até o grande dia.</p>
+    </div>
+    <form id="mural-form" class="mural-form" data-tear="6" novalidate>
+      <div class="two">
+        <div class="field"><label for="mu-nome">Seu nome</label><input type="text" id="mu-nome" maxlength="60" autocomplete="name" placeholder="Como quer assinar"></div>
+        <div class="field"><label for="mu-email">Seu e-mail</label><input type="email" id="mu-email" maxlength="120" autocomplete="email" placeholder="não aparece no mural"></div>
+      </div>
+      <div class="field">
+        <span class="lbl" id="mu-lbl">Sua mensagem</span>
+        <div class="editor">
+          <div class="tb" role="toolbar" aria-label="Formatação do recado">
+            <button type="button" data-cmd="bold" aria-label="Negrito" title="Negrito"><b>B</b></button>
+            <button type="button" data-cmd="italic" aria-label="Itálico" title="Itálico"><i>I</i></button>
+            <button type="button" data-cmd="underline" aria-label="Sublinhado" title="Sublinhado"><u>U</u></button>
+            <button type="button" data-cmd="strikeThrough" aria-label="Riscado" title="Riscado"><s>S</s></button>
+            <button type="button" data-cmd="insertUnorderedList" aria-label="Lista" title="Lista">• Lista</button>
+            <button type="button" id="mu-emoji-btn" aria-expanded="false" aria-controls="mu-emojis">☺ Emoji</button>
+            <button type="button" id="mu-foto-btn">+ Foto</button>
+            <input type="file" id="mu-foto" accept="image/jpeg,image/png,image/webp,image/gif" multiple hidden>
+          </div>
+          <div class="emojis" id="mu-emojis" hidden></div>
+          <div id="mu-editor" class="ed" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="mu-lbl" data-ph="Escreva aqui. Dá pra usar negrito, itálico, lista, emoji e até 3 fotos."></div>
+          <div class="ed-foot"><span class="small">Só fotos. Vídeo e áudio não entram.</span><span id="mu-count" class="small">0 / 800</span></div>
+        </div>
+      </div>
+      <input type="text" name="site" id="mu-site" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="err" id="mu-err" hidden></p>
+      <div class="row"><button class="btn solid" type="submit" id="mu-enviar">Publicar recado <span class="ar">→</span></button></div>
+      <p class="small">Seu e-mail não aparece no mural. Ele fica só com a gente.</p>
+    </form>
+    <div id="mural" class="recados" aria-live="polite"></div>
+    <p class="mural-vazio" id="mural-vazio" hidden></p>
+    <div class="mural-mais"><button class="btn" type="button" id="mural-mais" hidden>Ver recados mais antigos</button></div>
+  </div>
+</section>
+
+<section class="sec insta" aria-labelledby="t-insta" style="padding-top:0">
+  <div class="wrap insta-in">
+    <span class="eyebrow">No Instagram</span>
+    <h2 id="t-insta">Acompanhe <em>tudo</em> por lá</h2>
+    <p class="lede">Da preparação até o dia: siga o perfil do casamento, compartilhe e marque a gente nas suas fotos.</p>
+    <a class="handle" id="insta" href="https://www.instagram.com/diegoemay23042027/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span id="insta-handle">@diegoemay23042027</span></a>
+  </div>
+</section>
+
 <div class="edge" style="background-image:url(media/edge-moss.png)" aria-hidden="true"></div>
 <section class="sec faq bg-moss" id="duvidas" style="padding-top:clamp(40px,6vw,70px)">
   <div class="wrap">
     <div class="head" style="align-content:start">
       <span class="eyebrow">Dúvidas</span>
       <h2>Perguntas <em>frequentes</em></h2>
-      <p class="lede">Outra dúvida? Chama a gente no WhatsApp <b data-k="whatsappFmt" style="color:var(--on-dark)">(00) 00000-0000</b>.</p>
+      <p class="lede">Outra dúvida? Chama a gente no WhatsApp.</p>
+      <div class="row" id="faq-wa"></div>
     </div>
     <div class="faq-list" id="faq"></div>
   </div>
@@ -779,27 +911,51 @@ html.locked,html.locked body{overflow:hidden}
 const CONFIG = {
   nome1: "Diego",
   nome2: "Mayara",
-  data: "2027-04-23T16:30:00-03:00",      // data e hora da cerimônia (horário a confirmar)
-  prazo: "2027-04-23",                    // prazo para confirmar presença
-  local: "Igreja de Garopaba",
+  data: "2027-04-23T15:00:00-03:00",      // data e hora da cerimônia
+  prazo: "2027-03-01",                    // último dia para confirmar presença pelo site
+  ensaio: "2027-01-14",                   // ensaio pré-wedding
+  local: "Igreja Matriz São Joaquim",
   localCurto: "Garopaba · SC",
   cidade: "Garopaba · SC",
-  endereco: "Garopaba · SC",
-  mapsLink: "https://share.google/FcorQlziORZmz8Tsd",
-  mapsBusca: "",                          // texto para buscar no Maps
-  estacionamento: "Estacionamento no local.",
-  hospedagem: "Vem de fora? Fale com a gente que indicamos onde ficar.",
-  cerimoniaNota: "Na igreja de Garopaba.",
+  endereco: "Centro Histórico de Garopaba, em frente à Praça 21 de Abril",
+  mapsLink: "",
+  mapsBusca: "Igreja Matriz São Joaquim, Garopaba, SC",
+  estacionamento: "As ruas do centro histórico enchem rápido. Venha com folga para estacionar.",
+  hospedagem: "Veja as sugestões logo abaixo e reserve cedo.",
+  cerimoniaNota: "Às 15h, na Igreja Matriz São Joaquim.",
+  festaNota: "Depois da igreja, a festa segue no salão a partir das 17h20. Endereço em breve.",
   traje: "Esporte fino",
   trajeNota: "Uma sugestão, não regra. Venha confortável pra dançar.",
-  whatsapp: "",                           // só números com DDI, ex.: "5548999990000"
-  pix: { chave: "", nome: "Nome do recebedor", cidade: "Garopaba" },
-  programa: [
-    { hora: "16h", titulo: "Chegada", texto: "Recepção dos convidados com uma bebida gelada." },
-    { hora: "16h30", titulo: "Cerimônia", texto: "O sim, as lágrimas e os abraços." },
-    { hora: "18h", titulo: "Jantar", texto: "Comida boa e mesa cheia." },
-    { hora: "20h", titulo: "Festa", texto: "Pista aberta até alguém pedir pra parar." }
+  instagram: "diegoemay23042027",
+  contatos: [
+    { quem: "Mayara", whatsapp: "5548991730653" },
+    { quem: "Diego", whatsapp: "5551983211323" }
   ],
+  pix: { chave: "", nome: "Mayara Rayne Oliveira da Silva", nomeQr: "Mayara Rayne O da Silva", cidade: "Garopaba" },
+  programa: [
+    { hora: "15h", titulo: "Início", texto: "Entrada dos padrinhos e madrinhas." },
+    { hora: "15h05", titulo: "Entrada do noivo", texto: "Diego entra com a mãe e a avó." },
+    { hora: "15h10", titulo: "Entrada da florista", texto: "" },
+    { hora: "15h25", titulo: "Entrada da noiva", texto: "Mayara entra com os dois pais e começa a cerimônia." },
+    { hora: "15h40", titulo: "Entrada das alianças", texto: "" },
+    { hora: "16h", titulo: "Fim da cerimônia", texto: "Depois, sessão de fotos até o pôr do sol." },
+    { hora: "17h20", titulo: "Chegada ao salão", texto: "Brindes, corte do bolo e trend." },
+    { hora: "19h", titulo: "Jantar", texto: "Comida boa e mesa cheia." },
+    { hora: "20h", titulo: "Fim do jantar", texto: "" },
+    { hora: "20h05", titulo: "Gravata", texto: "Hora de passar a gravata." },
+    { hora: "20h30", titulo: "Buquê e whisky", texto: "" },
+    { hora: "21h", titulo: "Valsa", texto: "Valsa e abertura da pista." },
+    { hora: "0h", titulo: "Encerramento", texto: "Até alguém pedir pra parar." }
+  ],
+  hospedagens: [
+    { nome: "Pousada Village Garopaba", nota: "Pousada familiar, com piscina e café da manhã." },
+    { nome: "Pousada A Cabana", nota: "Perto do centro e da Praia do Silveira." },
+    { nome: "Hotel Pousada da Lagoa", nota: "Mais estrutura, com piscina. Uns 20 minutos a pé da igreja." },
+    { nome: "Pousada Colina Verde", nota: "No alto de um morro, a cerca de 900 m do centro." },
+    { nome: "Pousada do Sol Garopaba", nota: "Simples, com café da manhã, perto das ruas principais." },
+    { nome: "Pousada Maré Mar", nota: "Em frente à praia, perto do centro histórico." }
+  ],
+  estadia: { checkin: "2027-04-22", checkout: "2027-04-25" },
   cotas: [
     { tag: "Lua de mel", titulo: "Café da manhã na viagem", texto: "Pra começar o dia com vista pro mar.", valor: 80 },
     { tag: "Lua de mel", titulo: "Aula de surf a dois", texto: "Ele já tem a prancha. Falta o mar.", valor: 150 },
@@ -809,12 +965,16 @@ const CONFIG = {
     { tag: "Do seu jeito", titulo: "Valor livre", texto: "Você escolhe quanto quer dar.", valor: null }
   ],
   faq: [
-    ["Posso levar acompanhante?", "O convite é por família e já indica quem está incluído. Se tiver dúvida, fale com a gente."],
-    ["Crianças podem ir?", "Sim! As crianças da família são muito bem-vindas. Informe quantas vêm na confirmação."],
+    ["Posso levar acompanhante?", "A gente montou a lista com muito carinho e dentro do limite de pessoas que o espaço comporta. Por isso, o convite vale para os nomes que aparecem na sua confirmação de presença. Se ficou alguma dúvida sobre o seu convite, fala com a gente no WhatsApp."],
+    ["Crianças podem ir?", "As crianças que estão no convite são muito bem-vindas! Elas já aparecem com o nome delas na confirmação, junto com a família."],
+    ["Como confirmo minha presença?", "Na seção Confirmar: digite seu nome, encontre o seu convite e marque quem vai e quem não vai. Uma pessoa pode responder pela família toda. O prazo é {prazo}."],
+    ["E se eu perder o prazo?", "Depois de {prazo} a confirmação pelo site fecha. Aí é só chamar um de nós no WhatsApp."],
+    ["Que horas devo chegar?", "A cerimônia começa às 15h em ponto na Igreja Matriz São Joaquim. Chegue uns 30 minutos antes."],
+    ["Onde é a festa?", "Depois da igreja, a festa segue no salão a partir das 17h20. O endereço aparece aqui em breve."],
+    ["Onde posso me hospedar?", "Separamos algumas sugestões na seção Local. A semana tem o feriado de Tiradentes, então reserve o quanto antes."],
     ["Qual o traje?", "Esporte fino é a sugestão. Pense em algo confortável pra dançar a noite toda."],
-    ["Que horas devo chegar?", "Chegue uns 30 minutos antes. A cerimônia começa pontualmente."],
-    ["E se chover?", "O local tem estrutura coberta. A festa acontece de qualquer jeito."],
-    ["Como dou um presente?", "Na seção Presentes. Cada cota gera um Pix com o valor certinho, ou você escolhe um valor livre."]
+    ["Como dou um presente?", "Na seção Presentes. Cada cota gera um Pix com o valor certinho, ou você escolhe um valor livre."],
+    ["Tem Instagram do casamento?", "Tem! Siga {insta}, compartilhe e marque a gente nas fotos da preparação e do dia."]
   ]
 };
 
@@ -842,7 +1002,9 @@ function tear(el, i){
 }
 const tearAll = () => document.querySelectorAll("[data-tear]").forEach(tear);
 tearAll();
-if (window.ResizeObserver){ const ro = new ResizeObserver(() => tearAll()); document.querySelectorAll("[data-tear]").forEach(e => ro.observe(e)); }
+const tearRO = window.ResizeObserver ? new ResizeObserver(() => tearAll()) : null;
+const observeTears = () => tearRO && document.querySelectorAll("[data-tear]").forEach(e => tearRO.observe(e));
+observeTears();
 
 /* ---------- dados na página ---------- */
 const dt = new Date(CONFIG.data);
@@ -860,8 +1022,11 @@ const vals = {
   local: CONFIG.local, localCurto: CONFIG.localCurto, endereco: CONFIG.endereco,
   estacionamento: CONFIG.estacionamento, hospedagem: CONFIG.hospedagem, cerimoniaNota: CONFIG.cerimoniaNota,
   traje: CONFIG.traje, trajeNota: CONFIG.trajeNota,
-  whatsappFmt: fmtPhone(CONFIG.whatsapp), pixNome: CONFIG.pix.nome
+  festaNota: CONFIG.festaNota,
+  ensaioExtenso: new Date(CONFIG.ensaio + "T12:00:00-03:00").toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric", ...tz }),
+  pixNome: CONFIG.pix.nome
 };
+vals.prazoExtenso = vals.prazoExtenso.replace(/^1 de/, "1º de");
 document.querySelectorAll("[data-k]").forEach(el => { const v = vals[el.dataset.k]; if (v != null) el.textContent = v; });
 document.querySelectorAll("[data-mono]").forEach(el => el.innerHTML = `${CONFIG.nome1[0]}<i>&amp;</i>${CONFIG.nome2[0]}`);
 const q = encodeURIComponent(CONFIG.mapsBusca || `${CONFIG.local} ${CONFIG.endereco}`);
@@ -879,8 +1044,23 @@ function tick(){
 tick(); setInterval(tick, 30000);
 
 /* ---------- programação & faq ---------- */
-$("#timeline").innerHTML = CONFIG.programa.map(p => `<li><time>${p.hora}</time><div><h3>${p.titulo}</h3><p>${p.texto}</p></div></li>`).join("");
-$("#faq").innerHTML = CONFIG.faq.map(([qq, a]) => `<details><summary>${qq}</summary><p>${a}</p></details>`).join("");
+$("#timeline").innerHTML = CONFIG.programa.map(p => `<li><time>${p.hora}</time><div><h3>${p.titulo}</h3>${p.texto ? `<p>${p.texto}</p>` : ""}</div></li>`).join("");
+const fillFaq = t => t.replace("{prazo}", `${vals.prazoExtenso} de ${CONFIG.prazo.slice(0, 4)}`).replace("{insta}", `<a href="https://www.instagram.com/${CONFIG.instagram}/" target="_blank" rel="noopener">@${CONFIG.instagram}</a>`);
+$("#faq").innerHTML = CONFIG.faq.map(([qq, a]) => `<details><summary>${qq}</summary><p>${fillFaq(a)}</p></details>`).join("");
+
+/* ---------- contatos, instagram, hospedagem, ensaio ---------- */
+const esc = t => String(t).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const waLink = (c, txt) => `https://wa.me/${c.whatsapp}?text=${encodeURIComponent(txt || `Oi, ${c.quem}! Sobre o casamento:`)}`;
+const waBtns = (cls, txt) => CONFIG.contatos.map(c => `<a class="btn ${cls}" href="${waLink(c, txt)}" target="_blank" rel="noopener">WhatsApp ${c.quem} · ${fmtPhone(c.whatsapp)}</a>`).join("");
+$("#faq-wa").innerHTML = waBtns("light");
+$("#insta").href = `https://www.instagram.com/${CONFIG.instagram}/`; $("#insta-handle").textContent = `@${CONFIG.instagram}`;
+$("#hosp").innerHTML = CONFIG.hospedagens.map(h => `<li><h3>${esc(h.nome)}</h3><p>${esc(h.nota)}</p><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.nome + ", Garopaba, SC")}" target="_blank" rel="noopener">Ver no mapa →</a></li>`).join("");
+$("#hosp-airbnb").href = `https://www.airbnb.com.br/s/Garopaba--SC--Brasil/homes?checkin=${CONFIG.estadia.checkin}&checkout=${CONFIG.estadia.checkout}`;
+$("#hosp-booking").href = `https://www.booking.com/searchresults.pt-br.html?ss=Garopaba&checkin=${CONFIG.estadia.checkin}&checkout=${CONFIG.estadia.checkout}&group_adults=2`;
+(() => {
+  const dias = Math.ceil((new Date(CONFIG.ensaio + "T12:00:00-03:00") - Date.now()) / 864e5);
+  $("#ensaio-cd").textContent = dias > 1 ? `faltam ${dias} dias` : dias === 1 ? "é amanhã!" : "fotos chegando…";
+})();
 
 /* ---------- vídeos ---------- */
 document.querySelectorAll(".frame-wrap").forEach(a => {
@@ -896,29 +1076,88 @@ document.querySelectorAll(".frame-wrap").forEach(a => {
   });
 });
 
-/* ---------- RSVP ---------- */
-const form = $("#rsvp");
-form.addEventListener("change", () => { $("#r-extra").hidden = $("#r-nao").checked; tearAll(); });
-form.addEventListener("submit", e => {
-  e.preventDefault();
-  const nome = $("#r-nome").value.trim(), err = $("#r-err");
-  if (nome.length < 3) { err.textContent = "Escreva seu nome completo para a gente encontrar seu convite."; err.hidden = false; $("#r-nome").focus(); return; }
-  err.hidden = true;
-  const vai = $("#r-sim").checked;
-  const linhas = [`💌 Confirmação de presença – casamento ${CONFIG.nome1} & ${CONFIG.nome2}`, "", `Nome: ${nome}`, `Presença: ${vai ? "Sim, vou!" : "Não poderei ir"}`];
-  if (vai) {
-    linhas.push(`Adultos: ${$("#r-adultos").value || 1}`, `Crianças: ${$("#r-criancas").value || 0}`);
-    if ($("#r-quem").value.trim()) linhas.push(`Quem vem junto: ${$("#r-quem").value.trim()}`);
-    if ($("#r-rest").value.trim()) linhas.push(`Restrição alimentar: ${$("#r-rest").value.trim()}`);
+/* ---------- RSVP ligado à lista de convidados ---------- */
+(() => {
+  const PRAZO_FIM = new Date(CONFIG.prazo + "T23:59:59-03:00");
+  const busca = $("#rv-busca"), fBusca = $("#rv-form-busca"), opc = $("#rv-opcoes"), form = $("#rv-form"), done = $("#rv-done"), aviso = $("#rv-aviso");
+  const lista = m => m.map(x => x.nome).join(", ").replace(/, ([^,]*)$/, " e $1");
+  const mostrar = el => { [busca, form, done, aviso].forEach(x => { x.hidden = x !== el; }); tearAll(); };
+  const avisar = (msg, comWa) => {
+    aviso.innerHTML = `<p>${msg}</p>${comWa ? `<div class="row">${waBtns("solid", "Oi! Quero falar sobre a minha confirmação de presença no casamento.")}</div>` : ""}`;
+    aviso.hidden = false; tearAll();
+  };
+  if (Date.now() > PRAZO_FIM) {
+    busca.hidden = true;
+    avisar(`O prazo para confirmar pelo site terminou em ${vals.prazoExtenso}. Ainda precisa falar com a gente? Chama um de nós no WhatsApp:`, true);
+    document.querySelectorAll('a[href="#confirmar"]').forEach(a => { if (a.classList.contains("btn")) a.lastChild && (a.firstChild.textContent = "Falar com os noivos "); });
+    return;
   }
-  if ($("#r-msg").value.trim()) linhas.push("", `Recado: ${$("#r-msg").value.trim()}`);
-  const texto = linhas.join("\n");
-  const url = `https://wa.me/${CONFIG.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(texto)}`;
-  $("#r-text").textContent = texto; $("#r-wa").href = url; $("#r-done").hidden = false; tearAll();
-  window.open(url, "_blank", "noopener");
-  $("#r-done").scrollIntoView({ behavior: "smooth", block: "nearest" });
-});
-$("#r-copy").addEventListener("click", () => copy($("#r-text").textContent, $("#r-text")));
+  let atual = null;
+  const carregando = (btn, on) => { btn.disabled = on; btn.style.opacity = on ? .6 : ""; };
+
+  fBusca.addEventListener("submit", async e => {
+    e.preventDefault();
+    aviso.hidden = true; opc.hidden = true;
+    const nome = $("#rv-nome").value.trim();
+    if (nome.length < 3) return avisar("Digite pelo menos 3 letras do seu nome.");
+    carregando($("#rv-buscar"), true);
+    try {
+      const r = await fetch(`/api/convite?nome=${encodeURIComponent(nome)}`);
+      const d = await r.json().catch(() => ({}));
+      if (r.status === 429) return avisar("Muitas buscas seguidas. Espere um minutinho e tente de novo.");
+      if (!r.ok) return avisar("A confirmação pelo site está fora do ar agora. Você pode confirmar direto com a gente:", true);
+      const cs = d.convites || [];
+      if (!cs.length) return avisar("Não encontramos esse nome na lista. Tente só o primeiro nome, ou o nome de alguém que está no mesmo convite. Se não der certo, chama a gente:", true);
+      if (cs.length === 1) return abrir(cs[0]);
+      opc.innerHTML = `<p class="small">Achamos mais de um convite com esse nome. Qual é o seu?</p>` + cs.map((c, i) => `<button type="button" class="btn" data-i="${i}">${esc(lista(c.membros))}</button>`).join("");
+      opc.querySelectorAll("button").forEach(bt => bt.addEventListener("click", () => abrir(cs[+bt.dataset.i])));
+      opc.hidden = false; tearAll();
+    } catch (err) {
+      avisar("Não conseguimos falar com a lista agora. Confira sua internet ou confirme direto com a gente:", true);
+    } finally { carregando($("#rv-buscar"), false); }
+  });
+
+  function abrir(c) {
+    atual = c;
+    $("#rv-membros").innerHTML = c.membros.map(m => {
+      const n = `m${m.linha}`, pre = (m.presenca || "").toLowerCase();
+      return `<li><span class="m-nome">${esc(m.nome)}${m.crianca ? "<small>criança</small>" : ""}</span><div class="choice">
+        <label><input type="radio" name="${n}" value="1" ${pre === "vai" ? "checked" : ""}><span>Vai</span></label>
+        <label><input type="radio" name="${n}" value="0" ${pre === "não vai" ? "checked" : ""}><span>Não vai</span></label></div></li>`;
+    }).join("");
+    $("#rv-err").hidden = true;
+    mostrar(form); busca.hidden = true;
+    form.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+  $("#rv-voltar").addEventListener("click", () => { atual = null; mostrar(busca); aviso.hidden = true; opc.hidden = true; $("#rv-nome").focus(); });
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const err = $("#rv-err");
+    const respostas = atual.membros.map(m => { const v = form.querySelector(`input[name="m${m.linha}"]:checked`); return v ? { linha: m.linha, nome: m.nome, vai: v.value === "1" } : null; });
+    if (respostas.some(r => !r)) { err.textContent = "Marque Vai ou Não vai para cada pessoa do convite."; err.hidden = false; tearAll(); return; }
+    err.hidden = true;
+    carregando($("#rv-enviar"), true);
+    try {
+      const r = await fetch("/api/rsvp", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
+        convite: atual.convite, respostas: respostas.map(({ linha, vai }) => ({ linha, vai })),
+        restricao: $("#rv-rest").value.trim(), recado: $("#rv-msg").value.trim(), respondidoPor: $("#rv-nome").value.trim()
+      }) });
+      const d = await r.json().catch(() => ({}));
+      if (d.erro === "prazo_encerrado") { mostrar(aviso); busca.hidden = true; return avisar("O prazo para confirmar pelo site terminou. Fala com a gente no WhatsApp:", true); }
+      if (!r.ok || !d.ok) { err.innerHTML = `Não conseguimos salvar agora. Tente de novo em instantes ou confirme pelo WhatsApp.<div class="row" style="margin-top:10px">${waBtns("", "Oi! Quero confirmar minha presença no casamento.")}</div>`; err.hidden = false; tearAll(); return; }
+      const vao = respostas.filter(x => x.vai), nao = respostas.filter(x => !x.vai);
+      done.innerHTML = `<p><b>${vao.length ? "Oba, recebemos!" : "Recebemos sua resposta."}</b> ${vao.length ? `Contamos com ${esc(lista(vao))}.` : ""} ${nao.length ? `${esc(lista(nao))} não ${nao.length > 1 ? "vão" : "vai"}${vao.length ? "" : ". Vamos sentir sua falta"}.` : ""}</p>
+        <p class="small">Mudou algo? Responda de novo até ${vals.prazoExtenso}. A última resposta é a que vale.</p>
+        <div class="row"><button class="btn" type="button" id="rv-outro">Responder outro convite</button></div>`;
+      mostrar(done); busca.hidden = true;
+      $("#rv-outro").addEventListener("click", () => { form.reset(); $("#rv-nome").value = ""; mostrar(busca); aviso.hidden = true; opc.hidden = true; });
+      done.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    } catch (e2) {
+      err.textContent = "Sem conexão agora. Tente de novo em instantes."; err.hidden = false;
+    } finally { carregando($("#rv-enviar"), false); }
+  });
+})();
 
 /* ---------- Pix (BR Code) ---------- */
 const clean = (s, n) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z0-9 ]/g, "").toUpperCase().slice(0, n);
@@ -928,7 +1167,7 @@ function pixCode(valor){
   const p = CONFIG.pix;
   let s = f("00", "01") + f("26", f("00", "br.gov.bcb.pix") + f("01", p.chave.trim())) + f("52", "0000") + f("53", "986");
   if (valor) s += f("54", valor.toFixed(2));
-  s += f("58", "BR") + f("59", clean(p.nome, 25) || "RECEBEDOR") + f("60", clean(p.cidade, 15) || "BRASIL") + f("62", f("05", "CASAMENTO")) + "6304";
+  s += f("58", "BR") + f("59", clean(p.nomeQr || p.nome, 25).trim() || "RECEBEDOR") + f("60", clean(p.cidade, 15) || "BRASIL") + f("62", f("05", "CASAMENTO")) + "6304";
   return s + crc16(s);
 }
 let current = null;
@@ -968,6 +1207,151 @@ CONFIG.cotas.forEach(c => {
 tearAll();
 $("#pix-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) return toast("Chave Pix ainda não configurada"); copy($("#pix-code").textContent, $("#pix-code")); });
 $("#key-copy").addEventListener("click", () => { if (!CONFIG.pix.chave.trim()) return toast("Chave Pix ainda não configurada"); copy(CONFIG.pix.chave, $("#pix-code")); });
+/* ---------- mural de recados ---------- */
+(() => {
+  const LIM = 800, MAXF = 3;
+  const form = $("#mural-form"), ed = $("#mu-editor"), cnt = $("#mu-count"), err = $("#mu-err");
+  const listaEl = $("#mural"), vazio = $("#mural-vazio"), mais = $("#mural-mais");
+  const EMOJIS = "😀 😂 🥹 😍 🥰 😘 😎 🤩 🥳 😭 🙏 👏 🙌 💪 🫶 🤍 💙 💛 💚 🧡 💖 💍 💐 🌸 🌻 🌊 🏄 ☀️ 🌅 🥂 🍾 🎉 🎊 🕺 💃 🐸 ✨ ⛪ 📸 🤵 👰".split(" ");
+  let sel = null;
+  const textoDe = () => ed.innerText.replace(/\s+/g, " ").trim();
+  const tamanho = () => [...textoDe()].length;
+  const fotos = () => ed.querySelectorAll("img").length;
+  const atualiza = () => {
+    ed.querySelectorAll("img").forEach((im, i) => { if (i >= MAXF) im.remove(); });
+    ed.querySelectorAll("video,audio,iframe,object,embed,source").forEach(x => x.remove());
+    const n = tamanho(); cnt.textContent = `${n} / ${LIM}`; cnt.classList.toggle("over", n > LIM);
+    if (!textoDe() && !fotos()) ed.innerHTML = "";
+  };
+  const guarda = () => { const s = getSelection(); if (s.rangeCount && ed.contains(s.anchorNode)) sel = s.getRangeAt(0).cloneRange(); };
+  const volta = () => { ed.focus(); if (sel) { const s = getSelection(); s.removeAllRanges(); s.addRange(sel); } };
+  document.addEventListener("selectionchange", guarda);
+
+  form.querySelectorAll(".tb [data-cmd]").forEach(b => {
+    b.addEventListener("mousedown", e => e.preventDefault());
+    b.addEventListener("click", () => { volta(); document.execCommand(b.dataset.cmd); atualiza(); });
+  });
+  const painel = $("#mu-emojis"), bEmoji = $("#mu-emoji-btn");
+  painel.innerHTML = EMOJIS.map(e => `<button type="button" aria-label="Inserir ${e}">${e}</button>`).join("");
+  bEmoji.addEventListener("mousedown", e => e.preventDefault());
+  bEmoji.addEventListener("click", () => { painel.hidden = !painel.hidden; bEmoji.setAttribute("aria-expanded", String(!painel.hidden)); tearAll(); });
+  painel.querySelectorAll("button").forEach(b => {
+    b.addEventListener("mousedown", e => e.preventDefault());
+    b.addEventListener("click", () => { if (tamanho() + 2 > LIM) return toast("Chegou no limite de caracteres"); volta(); document.execCommand("insertText", false, b.textContent); atualiza(); });
+  });
+
+  // fotos: reduz no navegador antes de enviar (máx. 1280 px, JPEG)
+  const reduz = file => new Promise((ok, falha) => {
+    if (!/^image\/(jpeg|png|webp|gif)$/.test(file.type)) return falha(new Error("tipo"));
+    const url = URL.createObjectURL(file), img = new Image();
+    img.onload = () => {
+      const k = Math.min(1, 1280 / Math.max(img.width, img.height));
+      const c = document.createElement("canvas"); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+      const g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, c.width, c.height); g.drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      let q = .82, d = c.toDataURL("image/jpeg", q);
+      while (d.length * .75 > 1_300_000 && q > .4) { q -= .12; d = c.toDataURL("image/jpeg", q); }
+      ok(d);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); falha(new Error("leitura")); };
+    img.src = url;
+  });
+  const poeFotos = async files => {
+    const imgs = [...files].filter(f => f.type.startsWith("image/"));
+    if ([...files].some(f => /^(video|audio)\//.test(f.type))) toast("Vídeo e áudio não entram no mural");
+    for (const f of imgs) {
+      if (fotos() >= MAXF) { toast(`Máximo de ${MAXF} fotos por recado`); break; }
+      try { const d = await reduz(f); volta(); document.execCommand("insertImage", false, d); document.execCommand("insertParagraph"); }
+      catch (e) { toast("Não deu pra usar essa foto"); }
+    }
+    atualiza();
+  };
+  $("#mu-foto-btn").addEventListener("mousedown", e => e.preventDefault());
+  $("#mu-foto-btn").addEventListener("click", () => { guarda(); $("#mu-foto").click(); });
+  $("#mu-foto").addEventListener("change", e => { poeFotos(e.target.files); e.target.value = ""; });
+  ed.addEventListener("paste", e => {
+    e.preventDefault();
+    const fs = [...(e.clipboardData?.files || [])];
+    if (fs.length) return poeFotos(fs);
+    const resta = LIM - tamanho();
+    const t = [...(e.clipboardData?.getData("text/plain") || "")].slice(0, Math.max(0, resta)).join("");
+    if (t) document.execCommand("insertText", false, t);
+    atualiza();
+  });
+  ed.addEventListener("dragover", e => e.preventDefault());
+  ed.addEventListener("drop", e => { e.preventDefault(); if (e.dataTransfer?.files?.length) poeFotos(e.dataTransfer.files); });
+  ed.addEventListener("beforeinput", e => {
+    if (/^insert(Text|ReplacementText|CompositionText)$/.test(e.inputType) && tamanho() + (e.data || "").length > LIM) e.preventDefault();
+  });
+  ed.addEventListener("input", atualiza);
+
+  // admin: abra o site com #admin=SEU_TOKEN para poder apagar recados
+  const m = location.hash.match(/admin=([^&]+)/);
+  if (m) { sessionStorage.setItem("mural-admin", m[1]); history.replaceState(null, "", location.pathname + location.search); }
+  const admin = sessionStorage.getItem("mural-admin");
+
+  const quando = iso => new Date(iso).toLocaleDateString("pt-BR", { day: "numeric", month: "long", ...tz });
+  const cartao = r => {
+    const art = document.createElement("article"); art.className = "recado";
+    art.innerHTML = `<div class="note-p" data-tear="5"><div class="r-html"></div><p class="r-assin hand"></p><time class="small"></time></div>`;
+    art.querySelector(".r-html").innerHTML = r.html;            // HTML já limpo pelo servidor
+    art.querySelector(".r-assin").textContent = `— ${r.nome}`;
+    const t = art.querySelector("time"); t.dateTime = r.criadoEm; t.textContent = quando(r.criadoEm);
+    if (admin) {
+      const b = document.createElement("button"); b.type = "button"; b.className = "r-del"; b.textContent = "Apagar recado";
+      b.addEventListener("click", async () => {
+        if (!confirm(`Apagar o recado de ${r.nome}?`)) return;
+        const res = await fetch(`/api/recados?id=${encodeURIComponent(r.id)}`, { method: "DELETE", headers: { "x-admin-token": admin } });
+        if (res.ok) { art.remove(); toast("Recado apagado"); } else toast("Não foi possível apagar");
+      });
+      art.querySelector(".note-p").appendChild(b);
+    }
+    return art;
+  };
+  let proximo = null;
+  const carrega = async (antes) => {
+    try {
+      const r = await fetch(`/api/recados${antes ? `?antes=${encodeURIComponent(antes)}` : ""}`);
+      const d = await r.json();
+      if (!d.ok) throw new Error();
+      d.recados.forEach(x => listaEl.appendChild(cartao(x)));
+      proximo = d.proximo; mais.hidden = !proximo;
+      vazio.hidden = listaEl.children.length > 0; vazio.textContent = "Ainda não tem recado. Que tal ser o primeiro?";
+    } catch (e) {
+      vazio.hidden = false; vazio.textContent = "Os recados aparecem aqui assim que o mural carregar.";
+    }
+    observeTears(); tearAll();
+  };
+  listaEl.addEventListener("load", e => { if (e.target.tagName === "IMG") tearAll(); }, true);
+  mais.addEventListener("click", () => carrega(proximo));
+  let iniciado = false;
+  const inicia = () => { if (!iniciado) { iniciado = true; carrega(); } };
+  if ("IntersectionObserver" in window) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); inicia(); } }, { rootMargin: "800px 0px" }); io.observe($("#recados")); } else inicia();
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const nome = $("#mu-nome").value.trim(), email = $("#mu-email").value.trim();
+    const falha = msg => { err.textContent = msg; err.hidden = false; tearAll(); };
+    if (nome.length < 2) return falha("Escreva seu nome.");
+    if (!/^[^\s@<>()]+@[^\s@<>()]+\.[a-z]{2,}$/i.test(email)) return falha("Confira o e-mail: ele precisa ser um endereço válido.");
+    const n = tamanho();
+    if (n > LIM) return falha(`O recado passou do limite de ${LIM} caracteres.`);
+    if (n < 2 && !fotos()) return falha("Escreva uma mensagem antes de publicar.");
+    err.hidden = true;
+    const bt = $("#mu-enviar"); bt.disabled = true; bt.style.opacity = .6;
+    try {
+      const r = await fetch("/api/recados", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ nome, email, html: ed.innerHTML, site: $("#mu-site").value }) });
+      const d = await r.json().catch(() => ({}));
+      if (r.status === 429) return falha("Muitos envios seguidos. Espere um minutinho.");
+      if (!r.ok || !d.ok) return falha(d.erro || "Não conseguimos publicar agora. Tente de novo em instantes.");
+      if (d.recado) { listaEl.prepend(cartao(d.recado)); vazio.hidden = true; observeTears(); }
+      ed.innerHTML = ""; atualiza(); toast("Recado publicado! 💛");
+      listaEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (e2) { falha("Sem conexão agora. Tente de novo em instantes."); }
+    finally { bt.disabled = false; bt.style.opacity = ""; tearAll(); }
+  });
+})();
+
 /* ---------- trilha sonora ---------- */
 (() => {
   const a = $("#trilha"), b = $("#music"), lbl = $("#music-lbl");

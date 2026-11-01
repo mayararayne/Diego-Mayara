@@ -32,9 +32,9 @@ O que o script faz na planilha:
 
 ## 2. Ligar o site do Netlify ao GitHub
 
-O site já existe: **diegoemay23042027** (endereço `https://diegoemay23042027.netlify.app`). O endereço principal é público; as versões de teste pedem login da equipe.
+O site já existe: **diegoemayara** (endereço `https://diegoemayara.netlify.app`). O endereço principal é público; as versões de teste pedem login da equipe.
 
-1. Abra app.netlify.com/projects/diegoemay23042027 > **Project configuration > Build & deploy > Link repository**.
+1. Abra app.netlify.com/projects/diegoemayara > **Project configuration > Build & deploy > Link repository**.
 2. Escolha **GitHub** > `mayararayne/Diego-Mayara` e o branch `ccr-d3b7acd9-bit47r`. O Netlify lê o `netlify.toml` sozinho: publica a pasta `site` e as funções de `netlify/functions`.
 3. Em **Project configuration > Environment variables**, crie estas três variáveis (escopo: Functions):
 
@@ -50,7 +50,7 @@ Enquanto `RSVP_SCRIPT_URL` não estiver configurada, a confirmação mostra os b
 
 ## 3. Apagar um recado do mural
 
-Abra o site com `#admin=` e a senha do `RECADOS_ADMIN_TOKEN` no fim do endereço, por exemplo `https://seu-site.netlify.app/#admin=SUA_SENHA`. Cada recado ganha um botão **Apagar recado**. A senha some da barra de endereço e só vale naquela aba.
+Abra o site com `#admin=` e a senha do `RECADOS_ADMIN_TOKEN` no fim do endereço, por exemplo `https://diegoemayara.netlify.app/#admin=SUA_SENHA`. Cada recado ganha um botão **Apagar recado**. A senha some da barra de endereço e só vale naquela aba.
 
 ## 4. Pix dos presentes
 

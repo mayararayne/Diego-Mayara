@@ -81,6 +81,18 @@ body{background:var(--sand)}
 .pg{padding-top:calc(44px + env(safe-area-inset-top));padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .cores{gap:10px}.cores i{width:48px;height:48px}
 
+.missao,.mimos{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.missao li,.mimos li{display:grid;gap:0;border-top:1px solid var(--line);padding-top:7px}
+.missao{gap:7px}
+.missao b,.mimos b{font:400 1.25rem/1.15 var(--f-display)}
+.missao b::before{content:"✦ ";color:var(--gold);font-size:.8em}
+.missao span,.mimos span{color:var(--muted);font-size:.9rem;line-height:1.45}
+.sos{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
+.sos li{font-size:.92rem;line-height:1.35;padding-left:1.2em;position:relative}
+.sos li::before{content:"♡";position:absolute;left:0;color:var(--terra)}
+/* mini selo D&M assinando cada folha */
+.in::after{content:"D&M";position:absolute;right:16px;bottom:-14px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:italic 400 .82rem/1 var(--f-display);letter-spacing:-.02em;color:#F2EFE6;background:radial-gradient(circle at 35% 30%,#7189A0,#5B7386 55%,#4A6072);box-shadow:0 3px 6px rgba(30,40,55,.35),inset 0 0 0 2px rgba(210,177,126,.6);transform:rotate(-10deg)}
+
 /* envelope de abertura */
 .env{position:fixed;inset:0;z-index:50;display:grid;place-items:center;align-content:center;gap:26px;background:var(--cream);transition:opacity .7s ease .1s,visibility .7s}
 .env::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.25;background:url(/media/grain.png) repeat;background-size:200px}
@@ -177,6 +189,41 @@ body{background:var(--sand)}
     <p class="hand">um presentinho meu, com todo o amor</p>
   </div></section>
 
+  <section class="pg" aria-label="Uma missão"><div class="in">
+    <span class="k">Uma missão, se quiser</span>
+    <h2>Me ajuda com a <em>tradição?</em></h2>
+    <p>Diz a tradição que a noiva leva no dia uma coisinha de cada. Se quiser, escolhe uma (ou mais) e me entrega no nosso cantinho. Não é obrigatório, e pode repetir sem problema!</p>
+    <ul class="missao">
+      <li><b>Algo velho</b><span>as raízes, a família, tudo que veio antes</span></li>
+      <li><b>Algo novo</b><span>a vida nova que começa</span></li>
+      <li><b>Algo emprestado</b><span>a amizade e o carinho de quem empresta</span></li>
+      <li><b>Algo azul</b><span>o amor fiel e verdadeiro</span></li>
+      <li><b>Uma moedinha no sapato</b><span>prosperidade pro casal. Pode ser mais de uma, cabe todas!</span></li>
+    </ul>
+    <p class="dica">Combinem no grupo, ou façam surpresa. Eu vou amar de qualquer jeito.</p>
+  </div></section>
+
+  <section class="pg" aria-label="Pequenos mimos"><div class="in">
+    <span class="k">Pequenos mimos</span>
+    <h2>Pra deixar o dia <em>mais nosso</em></h2>
+    <ul class="mimos">
+      <li><b>Uma cartinha pra mim</b><span>Se quiser, escreve um bilhetinho pra eu ler enquanto me arrumo. Me entrega fechadinho no nosso cantinho.</span></li>
+      <li><b>A playlist do cantinho</b><span>Manda no grupo uma música que tem a sua cara, pra tocar enquanto a gente se arruma juntas.</span></li>
+    </ul>
+    <p class="hand">são só ideias, nada de obrigação</p>
+  </div></section>
+
+  <section class="pg" aria-label="Kit SOS"><div class="in">
+    <span class="k">Pra bolsinha</span>
+    <h2>Kit <em>SOS</em> da madrinha</h2>
+    <p>Umas coisinhas que salvam o dia (o seu e o meu):</p>
+    <ul class="sos">
+      <li>grampos e elástico de cabelo</li><li>agulha, linha e alfinete</li><li>lenço de papel</li>
+      <li>curativo pra bolhinha</li><li>o batom do seu look</li><li>protetor de salto</li>
+      <li>rasteirinha pra pista</li><li>carregador portátil</li>
+    </ul>
+  </div></section>
+
   <section class="pg" aria-label="O dia"><div class="in">
     <span class="k">O nosso dia</span>
     <h2>Juntinhas <em>desde cedo</em></h2>
@@ -207,8 +254,8 @@ body{background:var(--sand)}
   <section class="pg" aria-label="Até lá"><div class="in capa">
     <span class="k">Até lá</span>
     <h2>Conta <em>comigo</em></h2>
-    <p>Qualquer dúvida, foto de vestido pra mostrar ou só vontade de conversar, me chama.</p>
-    <a class="btn" href="https://wa.me/5548991730653?text=Oi%2C%20May!%20Sobre%20o%20manual%20das%20madrinhas%3A" target="_blank" rel="noopener">Falar com a noiva no WhatsApp</a>
+    <p>Qualquer dúvida, foto de vestido pra mostrar, música pra playlist ou só vontade de conversar: o nosso grupo é o lugar.</p>
+    <a class="btn" href="https://chat.whatsapp.com/IYevAqZHkAXJc7HP1v88Ws" target="_blank" rel="noopener">Entrar no grupo das madrinhas</a>
     <div class="fio"></div>
     <p class="hand">amo vocês. nos vemos no altar 💐</p>
   </div></section>

@@ -31,6 +31,7 @@ const C = {
   em: 'Respondido em',
   obs: 'Observação',
   origem: 'Origem (não editar)',
+  idade: 'Idade no dia',
 };
 
 const IGNORAR = ['da', 'de', 'do', 'das', 'dos', 'e', 'vo', 'tia', 'tio'];
@@ -124,6 +125,8 @@ function responder_(b) {
       const m = membros.find(p => p.linha === Number(r.linha)); // só aceita linhas do próprio convite
       if (!m) return;
       grava(m.linha, 'presenca', r.vai ? 'Vai' : 'Não vai');
+      const idade = Number(r.idade);
+      if (r.vai && r.idade !== undefined && r.idade !== null && r.idade !== '' && idade >= 0 && idade <= 16) grava(m.linha, 'idade', idade);
       grava(m.linha, 'restricao', limpa(b.restricao, 300));
       grava(m.linha, 'recado', limpa(b.recado, 600));
       grava(m.linha, 'por', limpa(b.respondidoPor, 80));

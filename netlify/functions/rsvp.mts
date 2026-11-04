@@ -11,7 +11,7 @@ export default async (req: Request) => {
   const r = await chamarPlanilha({
     acao: "responder",
     convite: String(b.convite).slice(0, 200),
-    respostas: respostas.map((x: any) => ({ linha: Number(x?.linha), vai: Boolean(x?.vai) })),
+    respostas: respostas.map((x: any) => ({ linha: Number(x?.linha), vai: Boolean(x?.vai), ...(x?.idade !== undefined && x?.idade !== null && x?.idade !== "" ? { idade: Math.max(0, Math.min(16, Math.round(Number(x.idade)) || 0)) } : {}) })),
     restricao: String(b.restricao || "").slice(0, 300),
     recado: String(b.recado || "").slice(0, 600),
     respondidoPor: String(b.respondidoPor || "").slice(0, 80),

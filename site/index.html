@@ -540,11 +540,22 @@ html.locked,html.locked body{overflow:hidden}
 .busca-row .btn{height:58px}
 @media (max-width:640px){.busca-row .btn{width:100%;justify-content:center}}
 .opcoes{display:grid;gap:10px;justify-items:start}
+.opcoes .opcao{display:grid;justify-items:start;gap:2px;text-align:left;border-radius:14px;padding:12px 18px;line-height:1.3;height:auto}
+.opcoes .opcao b{font:400 1.25rem/1.1 var(--f-display)}
+.opcoes .opcao span{font:500 .82rem/1.3 var(--f-body);color:var(--muted)}
+.idade{display:flex;align-items:center;gap:10px;flex-basis:100%;padding-top:4px}
+.idade[hidden]{display:none!important}
+.idade label{font:600 .66rem/1.2 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:var(--terra-deep)}
+.idade select{font:500 1rem/1 var(--f-body);color:var(--ink);background:var(--cream);border:1.5px solid var(--line);border-radius:999px;padding:10px 14px}
+.idade select:focus{outline:none;border-color:var(--azul)}
 .membros{list-style:none;margin:0;padding:0;display:grid}
 .membros li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 18px;padding:14px 0;border-top:1px solid var(--line)}
 .membros li:last-child{border-bottom:1px solid var(--line)}
 .membros .m-nome{font:400 1.5rem/1.1 var(--f-display)}
 .membros li.eu .m-nome{color:var(--azul)}
+.contamos{font:400 1.3rem/1.2 var(--f-display);color:var(--ink);margin-top:2px}
+.contamos-lista{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.contamos-lista li{font:500 .95rem/1 var(--f-body);background:var(--azul);color:var(--on-dark);padding:9px 14px;border-radius:999px}
 .membros .m-nome small{font:600 .6rem/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-left:8px}
 .aviso{display:grid;gap:14px;padding:18px;border:1.5px dashed var(--terra);border-radius:4px}
 .aviso p{color:var(--ink)}
@@ -675,9 +686,9 @@ html.locked,html.locked body{overflow:hidden}
         <div id="rv-busca" class="field" style="gap:16px">
           <form id="rv-form-busca" class="field rv-busca" novalidate>
             <label for="rv-nome">Qual é o seu nome?</label>
-            <p class="small" id="rv-dica">Escreve como está no convite. Pode ser só o primeiro nome.</p>
+            <p class="small" id="rv-dica">Digite só o seu primeiro nome, do jeitinho que está no convite.</p>
             <div class="busca-row">
-              <input type="text" id="rv-nome" autocomplete="given-name" maxlength="80" placeholder="Digite seu nome aqui" aria-describedby="rv-dica">
+              <input type="text" id="rv-nome" autocomplete="given-name" maxlength="80" placeholder="Seu primeiro nome" aria-describedby="rv-dica">
               <button class="btn solid" type="submit" id="rv-buscar">Buscar meu convite <span class="ar">→</span></button>
             </div>
           </form>
@@ -1232,6 +1243,7 @@ document.querySelectorAll(".frame-wrap").forEach(a => {
   const PRAZO_FIM = new Date(CONFIG.prazo + "T23:59:59-03:00");
   const busca = $("#rv-busca"), fBusca = $("#rv-form-busca"), opc = $("#rv-opcoes"), form = $("#rv-form"), done = $("#rv-done"), aviso = $("#rv-aviso");
   const lista = m => m.map(x => x.nome).join(", ").replace(/, ([^,]*)$/, " e $1");
+  const simples = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(/[^a-z0-9]+/).filter(x => x.length >= 3 && !["vo", "tia", "tio"].includes(x));
   const mostrar = el => { [busca, form, done, aviso].forEach(x => { x.hidden = x !== el; }); tearAll(); };
   const avisar = (msg, comWa) => {
     aviso.innerHTML = `<p>${msg}</p>${comWa ? `<div class="row">${waBtns("solid", "Oi! Quero falar sobre a minha confirmação de presença no casamento.")}</div>` : ""}`;
@@ -1260,7 +1272,13 @@ document.querySelectorAll(".frame-wrap").forEach(a => {
       const cs = d.convites || [];
       if (!cs.length) return avisar(`Hmm, não encontramos <b>${esc(nome)}</b> na lista. Confira se digitou o nome como está no convite, ou tente o nome de outra pessoa da sua família. Se ainda assim não aparecer, chama a gente:`, true);
       if (cs.length === 1) return abrir(cs[0]);
-      opc.innerHTML = `<p>Achamos mais de um convite com esse nome. Qual é o seu?</p>` + cs.map((c, i) => `<button type="button" class="btn" data-i="${i}">${esc(lista(c.membros))}</button>`).join("");
+      const pri = simples(nome)[0];
+      const rotulo = c => {
+        const eu = c.membros.find(m => simples(m.nome).includes(pri)) || c.membros[0];
+        const outros = c.membros.filter(m => m !== eu);
+        return `<b>${esc(eu.nome)}</b> ${outros.length ? `<span>com ${esc(lista(outros))}</span>` : "<span>convite individual</span>"}`;
+      };
+      opc.innerHTML = `<p>Tem mais de uma pessoa com esse nome na lista. Qual é você? Olha com quem você vem:</p>` + cs.map((c, i) => `<button type="button" class="btn opcao" data-i="${i}">${rotulo(c)}</button>`).join("");
       opc.querySelectorAll("button").forEach(bt => bt.addEventListener("click", () => abrir(cs[+bt.dataset.i])));
       opc.hidden = false; tearAll();
     } catch (err) {
@@ -1268,7 +1286,6 @@ document.querySelectorAll(".frame-wrap").forEach(a => {
     } finally { carregando($("#rv-buscar"), false); }
   });
 
-  const simples = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(/[^a-z0-9]+/).filter(x => x.length >= 3 && !["vo", "tia", "tio"].includes(x));
   function abrir(c) {
     atual = c;
     const busca1 = simples($("#rv-nome").value)[0];
@@ -1278,8 +1295,13 @@ document.querySelectorAll(".frame-wrap").forEach(a => {
       const n = `m${m.linha}`, pre = (m.presenca || "").toLowerCase();
       return `<li class="${m.linha === eu.linha ? "eu" : ""}"><span class="m-nome">${esc(m.nome)}${m.linha === eu.linha ? "<small>você</small>" : ""}${m.crianca ? "<small>criança</small>" : ""}</span><div class="choice">
         <label><input type="radio" name="${n}" value="1" ${pre === "vai" ? "checked" : ""}><span>Vai</span></label>
-        <label><input type="radio" name="${n}" value="0" ${pre === "não vai" ? "checked" : ""}><span>Não vai</span></label></div></li>`;
+        <label><input type="radio" name="${n}" value="0" ${pre === "não vai" ? "checked" : ""}><span>Não vai</span></label></div>
+        ${m.crianca ? `<div class="idade" ${pre === "vai" ? "" : "hidden"}><label for="id${m.linha}">Idade no dia do casamento</label><select id="id${m.linha}"><option value="">escolha</option>${Array.from({ length: 17 }, (_, k) => `<option value="${k}">${k === 0 ? "menos de 1 ano" : k === 1 ? "1 ano" : k + " anos"}</option>`).join("")}</select></div>` : ""}</li>`;
     }).join("");
+    $("#rv-membros").querySelectorAll("li").forEach(li => {
+      const box = li.querySelector(".idade"); if (!box) return;
+      li.querySelectorAll('input[type=radio]').forEach(r => r.addEventListener("change", () => { box.hidden = !(r.checked && r.value === "1"); tearAll(); }));
+    });
     $("#rv-err").hidden = true;
     mostrar(form); busca.hidden = true;
     form.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -1290,13 +1312,16 @@ document.querySelectorAll(".frame-wrap").forEach(a => {
     e.preventDefault();
     const err = $("#rv-err");
     const respostas = atual.membros.map(m => { const v = form.querySelector(`input[name="m${m.linha}"]:checked`); return v ? { linha: m.linha, nome: m.nome, vai: v.value === "1" } : null; });
+    respostas.forEach((r, i) => { const m = atual.membros[i]; if (r && r.vai && m.crianca) { const v = $(`#id${m.linha}`).value; r.idade = v === "" ? null : Number(v); } });
+    const semIdade = respostas.filter((r, i) => r && r.vai && atual.membros[i].crianca && r.idade === null);
+    if (semIdade.length) { err.textContent = `Conta pra gente a idade que ${lista(semIdade)} vai ter no dia do casamento.`; err.hidden = false; tearAll(); return; }
     const minha = respostas.find((r, i) => atual.membros[i].linha === atual.eu);
     if (!minha) { err.textContent = "Marca se você vai ou não. Os outros do convite você pode responder agora ou deixar pra eles."; err.hidden = false; tearAll(); return; }
     err.hidden = true;
     carregando($("#rv-enviar"), true);
     try {
       const r = await fetch("/api/rsvp", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
-        convite: atual.convite, respostas: respostas.filter(Boolean).map(({ linha, vai }) => ({ linha, vai })),
+        convite: atual.convite, respostas: respostas.filter(Boolean).map(({ linha, vai, idade }) => (idade === undefined || idade === null ? { linha, vai } : { linha, vai, idade })),
         restricao: $("#rv-rest").value.trim(), recado: $("#rv-msg").value.trim(), respondidoPor: $("#rv-nome").value.trim()
       }) });
       const d = await r.json().catch(() => ({}));
@@ -1305,7 +1330,7 @@ document.querySelectorAll(".frame-wrap").forEach(a => {
       const faltam = atual.membros.filter((m, i) => !respostas[i]);
       const respondidas = respostas.filter(Boolean);
       const vao = respondidas.filter(x => x.vai), nao = respondidas.filter(x => !x.vai);
-      done.innerHTML = `<p><b>${vao.length ? "Oba, recebemos!" : "Recebemos sua resposta."}</b> ${vao.length ? `Contamos com ${esc(lista(vao))}.` : ""} ${nao.length ? `${esc(lista(nao))} não ${nao.length > 1 ? "vão" : "vai"}${vao.length ? "" : ". Vamos sentir sua falta"}.` : ""}</p>
+      done.innerHTML = `<p><b>${vao.length ? "Oba, recebemos!" : "Recebemos sua resposta."}</b> ${vao.length ? `</p><p class="contamos">Contamos com:</p><ul class="contamos-lista">${vao.map(x => `<li>${esc(x.nome)}</li>`).join("")}</ul><p>` : ""} ${nao.length ? `${esc(lista(nao))} não ${nao.length > 1 ? "vão" : "vai"}${vao.length ? "" : ". Vamos sentir sua falta"}.` : ""}</p>
         ${faltam.length ? `<p class="small">${esc(lista(faltam))} ainda ${faltam.length > 1 ? "podem" : "pode"} confirmar por aqui, buscando pelo próprio nome.</p>` : ""}
         <p class="small">Mudou algo? Responda de novo até ${vals.prazoExtenso}. A última resposta é a que vale.</p>
         ${vao.length ? `<p>Vem de fora? Dá uma olhadinha no local e nas nossas dicas de onde ficar. Reserva cedo, que a semana tem feriado!</p>` : ""}

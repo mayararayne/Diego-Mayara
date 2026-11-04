@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Minhas madrinhas · Diego e Mayara</title>
+<meta name="description" content="Um manual feito com carinho para as madrinhas · 23.04.2027">
+<meta property="og:title" content="Minhas madrinhas 💐">
+<meta property="og:description" content="Um manual feito com carinho pra vocês · Diego & Mayara · 23.04.2027">
+<meta property="og:image" content="https://diegoemayara.netlify.app/madrinhas/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F2EFE6">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Tenor+Sans&family=Manrope:wght@400;500;600&family=La+Belle+Aurore&display=swap">
+<style>
+:root{--cream:#F2EFE6;--paper:#F7F3EA;--sand:#E7E1D4;--ink:#1F241B;--muted:#5E5A4E;--terra:#CE7A66;--terra-deep:#8D5A32;--gold:#D2B17E;--azul:#5B7386;--line:#CFC3AC;
+  --f-display:"Instrument Serif",Georgia,serif;--f-body:"Manrope",system-ui,sans-serif;--f-caps:"Tenor Sans","Gill Sans",sans-serif;--f-hand:"La Belle Aurore","Segoe Script",cursive}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--cream);color:var(--ink);font:400 1rem/1.65 var(--f-body);-webkit-font-smoothing:antialiased;overflow:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.25;background:url(/media/grain.png) repeat;background-size:200px}
+.deck{display:flex;height:100svh;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain}
+.deck::-webkit-scrollbar{display:none}
+.pg{flex:0 0 100%;height:100%;scroll-snap-align:center;overflow-y:auto;display:grid;place-items:center;padding:calc(56px + env(safe-area-inset-top)) 22px calc(96px + env(safe-area-inset-bottom))}
+.in{width:100%;max-width:520px;display:grid;gap:18px}
+.k{font:400 .78rem/1.3 var(--f-caps);letter-spacing:.38em;text-transform:uppercase;color:var(--terra-deep)}
+h1,h2{font-family:var(--f-display);font-weight:400;line-height:1;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(3.4rem,15vw,5.4rem)} h2{font-size:clamp(2.4rem,10vw,3.4rem)}
+h1 em,h2 em{color:var(--terra)}
+p{margin:0}
+.hand{font-family:var(--f-hand);color:var(--terra-deep);font-size:1.6rem;line-height:1.3}
+.fio{width:80px;height:1px;background:var(--gold)}
+.papel{background:var(--paper);padding:24px 22px;filter:drop-shadow(0 8px 14px rgba(40,30,20,.16));clip-path:polygon(0 2%,8% 0,20% 1.5%,33% 0,47% 2%,60% .5%,74% 2%,88% 0,100% 1.5%,99% 30%,100% 60%,99% 90%,100% 98%,86% 100%,70% 98%,55% 100%,40% 98%,25% 100%,10% 98%,0 100%,1% 70%,0 40%,1% 10%)}
+.papel p+p{margin-top:12px}
+.capa{text-align:center;justify-items:center}
+.capa img{width:auto;max-width:100%;height:auto;max-height:38svh;margin-top:4px}
+.data{font:400 1.05rem/1 var(--f-caps);letter-spacing:.3em;display:flex;align-items:center;gap:14px}
+.data::before,.data::after{content:"";width:34px;height:1px;background:var(--gold)}
+.cores{display:grid;gap:14px;margin:4px 0 0;padding:0;list-style:none}
+.cores li{display:flex;align-items:center;gap:16px}
+.cores i{flex:none;width:58px;height:58px;border-radius:50%;border:3px solid var(--paper);box-shadow:0 3px 8px rgba(40,30,20,.2)}
+.cores b{font:400 1.35rem/1.1 var(--f-display);display:block}
+.cores small{color:var(--muted);font-size:.85rem}
+.corsage{display:flex;gap:8px;justify-content:center}
+.corsage i{width:44px;height:44px;border-radius:50%;border:3px solid var(--paper);box-shadow:0 3px 8px rgba(40,30,20,.18)}
+.lista{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.lista li{display:grid;grid-template-columns:68px 1fr;gap:12px;align-items:baseline;border-top:1px solid var(--line);padding-top:12px}
+.lista time{font:400 1.6rem/1 var(--f-display);color:var(--terra)}
+.lista b{font:400 1.25rem/1.15 var(--f-display);display:block}
+.lista span{color:var(--muted);font-size:.92rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:999px;background:var(--azul);color:#F7F3EA;text-decoration:none;font:600 .92rem/1 var(--f-body)}
+.ilustra{width:100%;height:auto;max-height:30svh;object-fit:cover;object-position:50% 20%;border:10px solid var(--paper);filter:drop-shadow(0 8px 14px rgba(40,30,20,.18));transform:rotate(-1.2deg)}
+/* navegação */
+.nav{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--cream) 70%,transparent)}
+.nav button{width:50px;height:50px;border-radius:50%;border:0;background:var(--azul);color:#F7F3EA;font:400 1.5rem/1 var(--f-display);cursor:pointer;box-shadow:0 6px 14px rgba(30,40,55,.25)}
+.nav button[disabled]{opacity:.25;cursor:default}
+.dots{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+.dots button{width:9px;height:9px;padding:0;border-radius:50%;border:1.5px solid var(--azul);background:transparent;box-shadow:none}
+.dots button[aria-current="true"]{background:var(--azul)}
+.topo{position:fixed;top:calc(14px + env(safe-area-inset-top));left:0;right:0;text-align:center;font:400 .7rem/1 var(--f-caps);letter-spacing:.32em;color:var(--terra-deep);pointer-events:none}
+.dica{font-size:.8rem;color:var(--muted);text-align:center}
+@media (prefers-reduced-motion:reduce){.deck{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="topo">D &amp; M · madrinhas</div>
+<main class="deck" id="deck" aria-roledescription="apresentação">
+
+  <section class="pg" aria-label="Capa"><div class="in capa">
+    <span class="k">Diego &amp; Mayara</span>
+    <h1>Minhas <em>madrinhas</em></h1>
+    <p class="data">23 · 04 · 2027</p>
+    <img src="madrinhas.webp" alt="Ilustração de cinco madrinhas em vestidos longos nos tons rosé e terracota, com corsage no pulso">
+    <p class="hand">um manual feito com carinho pra vocês</p>
+    <p class="dica">arrasta pro lado ou toca na seta →</p>
+  </div></section>
+
+  <section class="pg" aria-label="Carta da noiva"><div class="in">
+    <span class="k">Uma cartinha</span>
+    <h2>Pra <em>vocês</em></h2>
+    <div class="papel">
+      <p>Minhas amigas, minhas irmãs de coração,</p>
+      <p>quando comecei a imaginar o nosso dia, vocês já estavam lá, do meu lado, como sempre estiveram. Cada uma de vocês faz parte da história que me trouxe até aqui, e eu não conseguiria subir naquele altar sem ter vocês pertinho.</p>
+      <p>Esse manual é só um jeitinho de deixar tudo mais leve: as cores, os combinados e o nosso cantinho no dia. O mais importante mesmo é que vocês estejam confortáveis, se sintam lindas e vivam essa festa com a gente.</p>
+      <p>Obrigada por dizerem sim pra mim.</p>
+    </div>
+    <p class="hand">com todo o meu carinho, Mayara</p>
+  </div></section>
+
+  <section class="pg" aria-label="As cores"><div class="in">
+    <span class="k">As cores</span>
+    <h2>Escolha o <em>seu tom</em></h2>
+    <p>São cinco tons, todos da paleta do nosso casamento. Escolham o que mais combina com vocês. Pode repetir, tá? Juntas, eles formam um degradê lindo.</p>
+    <ul class="cores">
+      <li><i style="background:#C88F84"></i><span><b>Rosa queimado</b></span></li>
+      <li><i style="background:#D4969B"></i><span><b>Rosé mais rosa</b></span></li>
+      <li><i style="background:#CE7A66"></i><span><b>Terracota suave</b></span></li>
+      <li><i style="background:#CC8C7D"></i><span><b>Rosé terracota</b></span></li>
+      <li><i style="background:#C29490"></i><span><b>Malva rosado</b></span></li>
+    </ul>
+    <p class="dica">Na hora de comprar, leva o celular com essa página aberta pra comparar a cor.</p>
+  </div></section>
+
+  <section class="pg" aria-label="O look"><div class="in">
+    <span class="k">O look</span>
+    <h2>Do <em>seu jeito</em></h2>
+    <div class="papel">
+      <p><b>Vestido, cabelo, make, sapato e acessórios são livres.</b> O único combinado é a cor: um dos cinco tons.</p>
+      <p>A ilustração é só uma inspiração. Escolham o modelo em que vocês se sentem lindas e confortáveis pra passar o dia todo com a gente e dançar até a pista fechar.</p>
+    </div>
+    <img class="ilustra" src="madrinhas.webp" alt="" aria-hidden="true">
+  </div></section>
+
+  <section class="pg" aria-label="A corsage"><div class="in capa">
+    <span class="k">O detalhe</span>
+    <h2>A <em>corsage</em></h2>
+    <div class="corsage" aria-hidden="true"><i style="background:#C9D6E0"></i><i style="background:#E7DCC6"></i><i style="background:#E9C2B8"></i></div>
+    <p>No lugar do buquê, cada uma vai usar uma corsage no pulso, com florzinhas em azul clarinho, champagne e rosê, na mesma composição do meu buquê.</p>
+    <p class="hand">ela é um presentinho meu pra vocês</p>
+  </div></section>
+
+  <section class="pg" aria-label="O dia"><div class="in">
+    <span class="k">O nosso dia</span>
+    <h2>Juntinhas <em>desde cedo</em></h2>
+    <ul class="lista">
+      <li><time>9h</time><div><b>Nosso cantinho</b><span>Vou reservar uma casa só pra gente se arrumar juntas. O endereço chega em breve.</span></div></li>
+      <li><time>15h</time><div><b>Cerimônia</b><span>Igreja Matriz São Joaquim, no Centro Histórico de Garopaba.</span></div></li>
+      <li><time>17h</time><div><b>Festa</b><span>No salão ao lado da igreja, até a pista fechar.</span></div></li>
+    </ul>
+    <p class="dica">Os horários podem mudar um pouquinho. Eu aviso tudo por aqui.</p>
+  </div></section>
+
+  <section class="pg" aria-label="Até lá"><div class="in capa">
+    <span class="k">Até lá</span>
+    <h2>Conta <em>comigo</em></h2>
+    <p>Qualquer dúvida, foto de vestido pra mostrar ou só vontade de conversar, me chama.</p>
+    <a class="btn" href="https://wa.me/5548991730653?text=Oi%2C%20May!%20Sobre%20o%20manual%20das%20madrinhas%3A" target="_blank" rel="noopener">Falar com a noiva no WhatsApp</a>
+    <div class="fio"></div>
+    <p class="hand">amo vocês. nos vemos no altar 💐</p>
+  </div></section>
+
+</main>
+<nav class="nav" aria-label="Páginas">
+  <button type="button" id="ant" aria-label="Página anterior">←</button>
+  <div class="dots" id="dots"></div>
+  <button type="button" id="prox" aria-label="Próxima página">→</button>
+</nav>
+<script>
+(() => {
+  const deck = document.getElementById("deck"), pgs = [...deck.children], dots = document.getElementById("dots");
+  const ant = document.getElementById("ant"), prox = document.getElementById("prox");
+  let cur = 0, trava = 0;
+  pgs.forEach((_, i) => { const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Ir para a página " + (i + 1)); b.onclick = () => vai(i); dots.appendChild(b); });
+  const pinta = () => { [...dots.children].forEach((d, i) => d.setAttribute("aria-current", String(i === cur))); ant.disabled = cur === 0; prox.disabled = cur === pgs.length - 1; };
+  const vai = i => { cur = Math.max(0, Math.min(pgs.length - 1, i)); trava = Date.now(); pinta(); deck.scrollTo({ left: cur * deck.clientWidth, behavior: "smooth" }); };
+  ant.onclick = () => vai(cur - 1); prox.onclick = () => vai(cur + 1);
+  deck.addEventListener("scroll", () => requestAnimationFrame(() => { if (Date.now() - trava < 700) return; cur = Math.round(deck.scrollLeft / deck.clientWidth); pinta(); }), { passive: true });
+  document.addEventListener("keydown", e => { if (e.key === "ArrowRight") vai(cur + 1); if (e.key === "ArrowLeft") vai(cur - 1); });
+  addEventListener("resize", () => deck.scrollTo({ left: cur * deck.clientWidth }));
+  pinta();
+})();
+</script>
+</body>
+</html>

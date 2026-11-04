@@ -83,8 +83,13 @@ body{background:var(--sand)}
 
 .missao,.mimos{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .missao li,.mimos li{display:grid;gap:0;border-top:1px solid var(--line);padding-top:7px}
-.missao{gap:7px}
+.missao{gap:6px}
+.missao li{display:block!important;padding-top:6px!important}
+.missao b{font-size:1.12rem!important}
+.missao span::before{content:" · "}
+.dica-mao{font-size:1.25rem!important;line-height:1.35}
 .missao b,.mimos b{font:400 1.25rem/1.15 var(--f-display)}
+.frase{font:italic 400 clamp(1.7rem,7vw,2.2rem)/1.15 var(--f-display);color:var(--terra);margin:2px 0}
 .missao b::before{content:"✦ ";color:var(--gold);font-size:.8em}
 .missao span,.mimos span{color:var(--muted);font-size:.9rem;line-height:1.45}
 .sos{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
@@ -189,39 +194,18 @@ body{background:var(--sand)}
     <p class="hand">um presentinho meu, com todo o amor</p>
   </div></section>
 
-  <section class="pg" aria-label="Uma missão"><div class="in">
-    <span class="k">Uma missão, se quiser</span>
-    <h2>Me ajuda com a <em>tradição?</em></h2>
-    <p>Diz a tradição que a noiva leva no dia uma coisinha de cada. Se quiser, escolhe uma (ou mais) e me entrega no nosso cantinho. Não é obrigatório, e pode repetir sem problema!</p>
+  <section class="pg" aria-label="A tradição"><div class="in">
+    <span class="k">Uma tradição</span>
+    <p class="frase">“Algo velho, algo novo, algo emprestado e algo azul.”</p>
+    <p>É uma tradição antiguinha e cheia de charme: a noiva leva consigo no dia uma coisinha de cada, pra dar sorte no casamento.</p>
     <ul class="missao">
-      <li><b>Algo velho</b><span>as raízes, a família, tudo que veio antes</span></li>
+      <li><b>Algo velho</b><span>as raízes e tudo que veio antes</span></li>
       <li><b>Algo novo</b><span>a vida nova que começa</span></li>
-      <li><b>Algo emprestado</b><span>a amizade e o carinho de quem empresta</span></li>
+      <li><b>Algo emprestado</b><span>o carinho de quem empresta</span></li>
       <li><b>Algo azul</b><span>o amor fiel e verdadeiro</span></li>
-      <li><b>Uma moedinha no sapato</b><span>prosperidade pro casal. Pode ser mais de uma, cabe todas!</span></li>
+      <li><b>Uma moedinha no sapato</b><span>prosperidade pro casal</span></li>
     </ul>
-    <p class="dica">Combinem no grupo, ou façam surpresa. Eu vou amar de qualquer jeito.</p>
-  </div></section>
-
-  <section class="pg" aria-label="Pequenos mimos"><div class="in">
-    <span class="k">Pequenos mimos</span>
-    <h2>Pra deixar o dia <em>mais nosso</em></h2>
-    <ul class="mimos">
-      <li><b>Uma cartinha pra mim</b><span>Se quiser, escreve um bilhetinho pra eu ler enquanto me arrumo. Me entrega fechadinho no nosso cantinho.</span></li>
-      <li><b>A playlist do cantinho</b><span>Manda no grupo uma música que tem a sua cara, pra tocar enquanto a gente se arruma juntas.</span></li>
-    </ul>
-    <p class="hand">são só ideias, nada de obrigação</p>
-  </div></section>
-
-  <section class="pg" aria-label="Kit SOS"><div class="in">
-    <span class="k">Pra bolsinha</span>
-    <h2>Kit <em>SOS</em> da madrinha</h2>
-    <p>Umas coisinhas que salvam o dia (o seu e o meu):</p>
-    <ul class="sos">
-      <li>grampos e elástico de cabelo</li><li>agulha, linha e alfinete</li><li>lenço de papel</li>
-      <li>curativo pra bolhinha</li><li>o batom do seu look</li><li>protetor de salto</li>
-      <li>rasteirinha pra pista</li><li>carregador portátil</li>
-    </ul>
+    <p class="hand dica-mao">fica a dica: se alguma quiser levar uma dessas coisinhas, eu vou amar (e pode repetir, viu?)</p>
   </div></section>
 
   <section class="pg" aria-label="O dia"><div class="in">
@@ -254,8 +238,10 @@ body{background:var(--sand)}
   <section class="pg" aria-label="Até lá"><div class="in capa">
     <span class="k">Até lá</span>
     <h2>Conta <em>comigo</em></h2>
-    <p>Qualquer dúvida, foto de vestido pra mostrar, música pra playlist ou só vontade de conversar: o nosso grupo é o lugar.</p>
+    <p>Qualquer dúvida, foto de vestido pra mostrar ou só vontade de conversar: o nosso grupo é o lugar.</p>
     <a class="btn" href="https://chat.whatsapp.com/IYevAqZHkAXJc7HP1v88Ws" target="_blank" rel="noopener">Entrar no grupo das madrinhas</a>
+    <p class="dica">Precisou de alguma coisa sobre o dia? Fala com a Noeli, nossa cerimonialista:</p>
+    <a class="btn claro" style="justify-self:center" href="https://wa.me/554891110412" target="_blank" rel="noopener">Falar com a Noeli no WhatsApp</a>
     <div class="fio"></div>
     <p class="hand">amo vocês. nos vemos no altar 💐</p>
   </div></section>

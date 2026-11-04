@@ -98,8 +98,6 @@ body{background:var(--sand)}
 .sos{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
 .sos li{font-size:.92rem;line-height:1.35;padding-left:1.2em;position:relative}
 .sos li::before{content:"♡";position:absolute;left:0;color:var(--terra)}
-/* mini selo D&M assinando cada folha */
-.in::after{content:"D&M";position:absolute;right:16px;bottom:-14px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:italic 400 .82rem/1 var(--f-display);letter-spacing:-.02em;color:#F2EFE6;background:radial-gradient(circle at 35% 30%,#7189A0,#5B7386 55%,#4A6072);box-shadow:0 3px 6px rgba(30,40,55,.35),inset 0 0 0 2px rgba(210,177,126,.6);transform:rotate(-10deg)}
 
 /* envelope de abertura */
 .env{position:fixed;inset:0;z-index:50;display:grid;place-items:center;align-content:center;gap:26px;background:var(--cream);transition:opacity .7s ease .1s,visibility .7s}
@@ -126,6 +124,31 @@ body{background:var(--sand)}
 .env-dica{position:relative;font-family:var(--f-hand);font-size:1.5rem;color:var(--terra-deep);animation:pulsa 2.2s ease-in-out infinite}
 @keyframes pulsa{50%{opacity:.45}}
 @media (prefers-reduced-motion:reduce){.e-aba,.e-carta,.selo,.env{transition:none}.env-dica{animation:none}}
+
+/* ===== visual caprichado ===== */
+body{background:#EDE6D8;background-image:
+  radial-gradient(60% 45% at 8% 6%,rgba(127,147,163,.22),transparent 70%),
+  radial-gradient(50% 40% at 96% 18%,rgba(204,140,125,.18),transparent 70%),
+  radial-gradient(55% 45% at 90% 96%,rgba(169,179,155,.24),transparent 70%),
+  radial-gradient(45% 35% at 4% 92%,rgba(210,177,126,.2),transparent 70%)}
+.in{background:var(--paper)!important;background-image:none!important;border-radius:0!important;padding:38px 28px 32px!important;
+  box-shadow:none!important;filter:none}
+.folha{position:relative;width:100%;max-width:520px;filter:drop-shadow(0 18px 26px rgba(60,45,30,.18)) drop-shadow(0 2px 3px rgba(60,45,30,.1))}
+.pg:nth-child(odd) .folha{transform:rotate(-.7deg)} .pg:nth-child(even) .folha{transform:rotate(.6deg)}
+.pg:nth-child(n) .in{transform:none!important}
+.in::before{inset:12px!important;border:1px solid rgba(210,177,126,.75)!important;outline:1px solid rgba(210,177,126,.35);outline-offset:3px}
+.folha::before{content:"";position:absolute;z-index:2;top:-18px;right:-10px;width:80px;height:112px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20120%20170%22%3E%3Cpath%20d%3D%22M14%20168%20C30%20130%2046%2096%2096%2014%22%20fill%3D%22none%22%20stroke%3D%22%236F876A%22%20stroke-width%3D%221.3%22%20stroke-linecap%3D%22round%22/%3E%3Cellipse%20cx%3D%2230%22%20cy%3D%22150%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%28-35%2030%20150%29%22%20fill%3D%22%236F876A%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%236F876A%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2248%22%20cy%3D%22128%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%2830%2048%20128%29%22%20fill%3D%22%236F876A%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%236F876A%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2240%22%20cy%3D%22112%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%28-40%2040%20112%29%22%20fill%3D%22%236F876A%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%236F876A%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2260%22%20cy%3D%2292%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%2828%2060%2092%29%22%20fill%3D%22%236F876A%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%236F876A%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2252%22%20cy%3D%2276%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%28-42%2052%2076%29%22%20fill%3D%22%236F876A%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%236F876A%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2274%22%20cy%3D%2258%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%2826%2074%2058%29%22%20fill%3D%22%236F876A%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%236F876A%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2266%22%20cy%3D%2242%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%28-44%2066%2042%29%22%20fill%3D%22%236F876A%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%236F876A%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2288%22%20cy%3D%2226%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%2822%2088%2026%29%22%20fill%3D%22%236F876A%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%236F876A%22%20stroke-width%3D%221.1%22/%3E%3C/svg%3E") no-repeat center/contain;transform:rotate(12deg);pointer-events:none}
+.folha::after{content:"";position:absolute;z-index:2;bottom:-16px;left:-12px;width:58px;height:82px;opacity:.85;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20120%20170%22%3E%3Cpath%20d%3D%22M14%20168%20C30%20130%2046%2096%2096%2014%22%20fill%3D%22none%22%20stroke%3D%22%23D2B17E%22%20stroke-width%3D%221.3%22%20stroke-linecap%3D%22round%22/%3E%3Cellipse%20cx%3D%2230%22%20cy%3D%22150%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%28-35%2030%20150%29%22%20fill%3D%22%23D2B17E%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%23D2B17E%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2248%22%20cy%3D%22128%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%2830%2048%20128%29%22%20fill%3D%22%23D2B17E%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%23D2B17E%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2240%22%20cy%3D%22112%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%28-40%2040%20112%29%22%20fill%3D%22%23D2B17E%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%23D2B17E%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2260%22%20cy%3D%2292%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%2828%2060%2092%29%22%20fill%3D%22%23D2B17E%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%23D2B17E%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2252%22%20cy%3D%2276%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%28-42%2052%2076%29%22%20fill%3D%22%23D2B17E%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%23D2B17E%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2274%22%20cy%3D%2258%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%2826%2074%2058%29%22%20fill%3D%22%23D2B17E%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%23D2B17E%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2266%22%20cy%3D%2242%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%28-44%2066%2042%29%22%20fill%3D%22%23D2B17E%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%23D2B17E%22%20stroke-width%3D%221.1%22/%3E%3Cellipse%20cx%3D%2288%22%20cy%3D%2226%22%20rx%3D%2211%22%20ry%3D%226.5%22%20transform%3D%22rotate%2822%2088%2026%29%22%20fill%3D%22%23D2B17E%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%23D2B17E%22%20stroke-width%3D%221.1%22/%3E%3C/svg%3E") no-repeat center/contain;transform:rotate(200deg);pointer-events:none}
+.k{display:flex;align-items:center;gap:10px}
+.k::after{content:"";flex:0 0 38px;height:1px;background:var(--gold)}
+.capa .k{justify-content:center} .capa .k::before{content:"";flex:0 0 38px;height:1px;background:var(--gold)}
+h2{position:relative;padding-bottom:14px}
+h2::after{content:"✦";position:absolute;left:0;bottom:-8px;font:400 .8rem/1 var(--f-body);color:var(--gold);letter-spacing:.5em}
+.capa h2::after{left:50%;transform:translateX(-50%)}
+.topo{color:var(--azul)!important;font-size:.66rem!important}
+.nav button:not(.dots button){background:var(--paper);color:var(--azul);border:1px solid rgba(210,177,126,.8);box-shadow:0 6px 14px rgba(60,45,30,.15)}
+.nav{background:linear-gradient(to top,rgba(237,230,216,.95) 60%,transparent)!important}
+.dots button{border-color:var(--gold)!important} .dots button[aria-current="true"]{background:var(--gold)!important}
 </style>
 </head>
 <body>
@@ -143,16 +166,16 @@ body{background:var(--sand)}
 <div class="topo">D &amp; M · madrinhas</div>
 <main class="deck" id="deck" aria-roledescription="apresentação">
 
-  <section class="pg" aria-label="Capa"><div class="in capa">
+  <section class="pg" aria-label="Capa"><div class="folha"><div class="in capa">
     <span class="k">Diego &amp; Mayara</span>
     <h1>Minhas <em>madrinhas</em></h1>
     <p class="data">23 · 04 · 2027</p>
     <img src="madrinhas.webp" alt="Ilustração de cinco madrinhas em vestidos longos nos tons rosé e terracota, com corsage no pulso">
     <p class="hand">um manual feito com carinho pra vocês</p>
     <p class="dica">arrasta pro lado ou toca na seta →</p>
-  </div></section>
+  </div></div></section>
 
-  <section class="pg" aria-label="Carta da noiva"><div class="in">
+  <section class="pg" aria-label="Carta da noiva"><div class="folha"><div class="in">
     <span class="k">Uma cartinha</span>
     <h2>Pra <em>vocês</em></h2>
     <div class="papel">
@@ -162,9 +185,9 @@ body{background:var(--sand)}
       <p>Obrigada por dizerem sim pra mim.</p>
     </div>
     <p class="hand">com todo o meu carinho, Mayara</p>
-  </div></section>
+  </div></div></section>
 
-  <section class="pg" aria-label="As cores"><div class="in">
+  <section class="pg" aria-label="As cores"><div class="folha"><div class="in">
     <span class="k">As cores</span>
     <h2>Escolha o <em>seu tom</em></h2>
     <p>São cinco tons, todos da paleta do nosso casamento. Escolham o que mais combina com vocês. Pode repetir, tá? Juntas, eles formam um degradê lindo.</p>
@@ -176,9 +199,9 @@ body{background:var(--sand)}
       <li><i style="background:#C29490"></i><span><b>Malva rosado</b></span></li>
     </ul>
     <p class="dica">Na hora de comprar, leva o celular com essa página aberta pra comparar a cor.</p>
-  </div></section>
+  </div></div></section>
 
-  <section class="pg" aria-label="O look"><div class="in">
+  <section class="pg" aria-label="O look"><div class="folha"><div class="in">
     <span class="k">O look</span>
     <h2>Do <em>seu jeito</em></h2>
     <div class="papel">
@@ -186,18 +209,18 @@ body{background:var(--sand)}
       <p>A ilustração é só uma inspiração. Escolham o modelo em que vocês se sentem lindas e confortáveis pra passar o dia todo com a gente e dançar até a pista fechar.</p>
     </div>
     <img class="ilustra" src="madrinhas.webp" alt="" aria-hidden="true">
-  </div></section>
+  </div></div></section>
 
-  <section class="pg" aria-label="A corsage"><div class="in capa">
+  <section class="pg" aria-label="A corsage"><div class="folha"><div class="in capa">
     <span class="k">O detalhe</span>
     <h2>A <em>corsage</em></h2>
     <div class="corsage" aria-hidden="true"><i style="background:#C9D6E0"></i><i style="background:#E7DCC6"></i><i style="background:#E9C2B8"></i></div>
     <p>A corsage é um arranjinho de flores usado no pulso. Nos casamentos, ela mostra pra todo mundo quem são as pessoas mais especiais ao lado da noiva, e é exatamente isso que vocês são pra mim.</p>
     <p>A de vocês vai ter florzinhas em azul clarinho, champagne e rosê. Usem no dia com carinho, ela vai estar ali pra lembrar que eu escolhi cada uma de vocês.</p>
     <p class="hand">um presentinho meu, com todo o amor</p>
-  </div></section>
+  </div></div></section>
 
-  <section class="pg" aria-label="A tradição"><div class="in">
+  <section class="pg" aria-label="A tradição"><div class="folha"><div class="in">
     <span class="k">Uma tradição</span>
     <p class="frase" lang="en">“Something old, something new,<br>Something borrowed, something blue,<br>And a silver sixpence in her shoe.”</p>
     <p class="traducao">“Algo velho, algo novinho,<br>Algo emprestado e algo azulzinho,<br>E no sapato, uma moeda de prata no cantinho.”</p>
@@ -210,9 +233,9 @@ body{background:var(--sand)}
       <li><b>A moedinha no sapato</b><span>prosperidade e fartura pro casal</span></li>
     </ul>
     <p class="hand dica-mao">fica a dica: se alguma quiser levar uma dessas coisinhas, eu vou amar (e pode repetir, viu?)</p>
-  </div></section>
+  </div></div></section>
 
-  <section class="pg" aria-label="O dia"><div class="in">
+  <section class="pg" aria-label="O dia"><div class="folha"><div class="in">
     <span class="k">O nosso dia</span>
     <h2>Juntinhas <em>desde cedo</em></h2>
     <ul class="lista">
@@ -222,9 +245,9 @@ body{background:var(--sand)}
     </ul>
     <a class="btn claro" href="https://www.google.com/maps/search/?api=1&query=Igreja%20Matriz%20S%C3%A3o%20Joaquim%2C%20Garopaba%2C%20SC" target="_blank" rel="noopener">Abrir a igreja no Google Maps</a>
     <p class="dica">Os horários podem mudar um pouquinho. Eu aviso tudo por aqui.</p>
-  </div></section>
+  </div></div></section>
 
-  <section class="pg" aria-label="Nosso site"><div class="in capa">
+  <section class="pg" aria-label="Nosso site"><div class="folha"><div class="in capa">
     <span class="k">Tudo num lugar só</span>
     <h2>O nosso <em>site</em></h2>
     <p>Lá tem tudinho do casamento, pra vocês consultarem sempre que precisarem:</p>
@@ -237,9 +260,9 @@ body{background:var(--sand)}
     </ul>
     <a class="btn" href="https://diegoemayara.netlify.app/" target="_blank" rel="noopener">Abrir o site do casamento</a>
     <p class="hand">confirma lá também, tá?</p>
-  </div></section>
+  </div></div></section>
 
-  <section class="pg" aria-label="Até lá"><div class="in capa">
+  <section class="pg" aria-label="Até lá"><div class="folha"><div class="in capa">
     <span class="k">Até lá</span>
     <h2>Conta <em>comigo</em></h2>
     <p>Qualquer dúvida, foto de vestido pra mostrar ou só vontade de conversar: o nosso grupo é o lugar.</p>
@@ -248,7 +271,7 @@ body{background:var(--sand)}
     <a class="btn claro" style="justify-self:center" href="https://wa.me/554891110412" target="_blank" rel="noopener">Falar com a Noeli no WhatsApp</a>
     <div class="fio"></div>
     <p class="hand">amo vocês. nos vemos no altar 💐</p>
-  </div></section>
+  </div></div></section>
 
 </main>
 <nav class="nav" aria-label="Páginas">

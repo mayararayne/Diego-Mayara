@@ -83,13 +83,15 @@ body{background:var(--sand)}
 
 .missao,.mimos{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .missao li,.mimos li{display:grid;gap:0;border-top:1px solid var(--line);padding-top:7px}
-.missao{gap:6px}
+.missao{gap:6px 14px;grid-template-columns:1fr 1fr}
+.missao .larga{grid-column:1/-1}
 .missao li{display:block!important;padding-top:6px!important}
 .missao b{font-size:1.12rem!important}
-.missao span::before{content:" · "}
+.missao span{display:block}
 .dica-mao{font-size:1.25rem!important;line-height:1.35}
 .missao b,.mimos b{font:400 1.25rem/1.15 var(--f-display)}
-.frase{font:italic 400 clamp(1.7rem,7vw,2.2rem)/1.15 var(--f-display);color:var(--terra);margin:2px 0}
+.frase{font:italic 400 clamp(1.25rem,5.2vw,1.7rem)/1.18 var(--f-display);color:var(--terra);margin:2px 0}
+.traducao{font-family:var(--f-hand);font-size:clamp(1.05rem,4.3vw,1.35rem);line-height:1.35;color:var(--terra-deep);margin-top:-4px}
 .missao b::before{content:"✦ ";color:var(--gold);font-size:.8em}
 .missao span,.mimos span{color:var(--muted);font-size:.9rem;line-height:1.45}
 .sos{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
@@ -196,14 +198,15 @@ body{background:var(--sand)}
 
   <section class="pg" aria-label="A tradição"><div class="in">
     <span class="k">Uma tradição</span>
-    <p class="frase">“Algo velho, algo novo, algo emprestado e algo azul.”</p>
-    <p>É uma tradição antiguinha e cheia de charme: a noiva leva consigo no dia uma coisinha de cada, pra dar sorte no casamento.</p>
+    <p class="frase" lang="en">“Something old, something new,<br>Something borrowed, something blue,<br>And a silver sixpence in her shoe.”</p>
+    <p class="traducao">“Algo velho, algo novinho,<br>Algo emprestado e algo azulzinho,<br>E no sapato, uma moeda de prata no cantinho.”</p>
+    <p>Uma tradição antiguinha e cheia de charme: a noiva leva no dia uma coisinha de cada, pra dar sorte.</p>
     <ul class="missao">
-      <li><b>Algo velho</b><span>as raízes e tudo que veio antes</span></li>
-      <li><b>Algo novo</b><span>a vida nova que começa</span></li>
-      <li><b>Algo emprestado</b><span>o carinho de quem empresta</span></li>
-      <li><b>Algo azul</b><span>o amor fiel e verdadeiro</span></li>
-      <li><b>Uma moedinha no sapato</b><span>prosperidade pro casal</span></li>
+      <li><b>Algo velho</b><span>as raízes</span></li>
+      <li><b>Algo novo</b><span>a vida nova</span></li>
+      <li><b>Algo emprestado</b><span>quem a gente ama</span></li>
+      <li><b>Algo azul</b><span>o amor fiel</span></li>
+      <li class="larga"><b>Uma moedinha no sapato</b><span>prosperidade pro casal</span></li>
     </ul>
     <p class="hand dica-mao">fica a dica: se alguma quiser levar uma dessas coisinhas, eu vou amar (e pode repetir, viu?)</p>
   </div></section>

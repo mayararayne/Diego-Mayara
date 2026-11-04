@@ -63,6 +63,24 @@ p{margin:0}
 .dica{font-size:.8rem;color:var(--muted);text-align:center}
 @media (prefers-reduced-motion:reduce){.deck{scroll-behavior:auto}}
 
+/* papel de carta: cada página é uma folha sobre a mesa */
+body{background:var(--sand)}
+.pg{padding-left:16px;padding-right:16px}
+.in{position:relative;background:var(--paper);padding:34px 26px 30px;border-radius:3px;
+  background-image:repeating-linear-gradient(to bottom,transparent 0 33px,rgba(91,115,134,.11) 33px 34px);background-position:0 18px;
+  box-shadow:0 1px 1px rgba(40,30,20,.06),0 16px 30px rgba(40,30,20,.16)}
+.in::before{content:"";position:absolute;inset:10px;border:1px solid rgba(210,177,126,.7);border-radius:2px;pointer-events:none}
+.pg:nth-child(odd) .in{transform:rotate(-.6deg)} .pg:nth-child(even) .in{transform:rotate(.5deg)}
+.papel{background:none;padding:0;filter:none;clip-path:none}
+.site-itens{margin:0;padding:0 0 0 1.1em;display:grid;gap:4px;text-align:left;justify-self:center}
+.site-itens li::marker{color:var(--terra)}
+.btn.claro{background:transparent;color:var(--azul);border:1.5px solid var(--azul);justify-self:start}
+.nav{background:linear-gradient(to top,var(--sand) 70%,transparent)}
+.capa img{max-height:30svh}
+.in{gap:14px;padding:28px 22px 24px}
+.pg{padding-top:calc(44px + env(safe-area-inset-top));padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.cores{gap:10px}.cores i{width:48px;height:48px}
+
 /* envelope de abertura */
 .env{position:fixed;inset:0;z-index:50;display:grid;place-items:center;align-content:center;gap:26px;background:var(--cream);transition:opacity .7s ease .1s,visibility .7s}
 .env::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.25;background:url(/media/grain.png) repeat;background-size:200px}
@@ -154,8 +172,9 @@ p{margin:0}
     <span class="k">O detalhe</span>
     <h2>A <em>corsage</em></h2>
     <div class="corsage" aria-hidden="true"><i style="background:#C9D6E0"></i><i style="background:#E7DCC6"></i><i style="background:#E9C2B8"></i></div>
-    <p>No lugar do buquê, cada uma vai usar uma corsage no pulso, com florzinhas em azul clarinho, champagne e rosê, na mesma composição do meu buquê.</p>
-    <p class="hand">ela é um presentinho meu pra vocês</p>
+    <p>A corsage é um arranjinho de flores usado no pulso. Nos casamentos, ela mostra pra todo mundo quem são as pessoas mais especiais ao lado da noiva, e é exatamente isso que vocês são pra mim.</p>
+    <p>A de vocês vai ter florzinhas em azul clarinho, champagne e rosê. Usem no dia com carinho, ela vai estar ali pra lembrar que eu escolhi cada uma de vocês.</p>
+    <p class="hand">um presentinho meu, com todo o amor</p>
   </div></section>
 
   <section class="pg" aria-label="O dia"><div class="in">
@@ -163,10 +182,26 @@ p{margin:0}
     <h2>Juntinhas <em>desde cedo</em></h2>
     <ul class="lista">
       <li><time>9h</time><div><b>Nosso cantinho</b><span>Vou reservar uma casa só pra gente se arrumar juntas. O endereço chega em breve.</span></div></li>
-      <li><time>15h</time><div><b>Cerimônia</b><span>Igreja Matriz São Joaquim, no Centro Histórico de Garopaba.</span></div></li>
+      <li><time>15h</time><div><b>Cerimônia</b><span>Igreja Matriz São Joaquim, no Centro Histórico de Garopaba, em frente à Praça 21 de Abril.</span></div></li>
       <li><time>17h</time><div><b>Festa</b><span>No salão ao lado da igreja, até a pista fechar.</span></div></li>
     </ul>
+    <a class="btn claro" href="https://www.google.com/maps/search/?api=1&query=Igreja%20Matriz%20S%C3%A3o%20Joaquim%2C%20Garopaba%2C%20SC" target="_blank" rel="noopener">Abrir a igreja no Google Maps</a>
     <p class="dica">Os horários podem mudar um pouquinho. Eu aviso tudo por aqui.</p>
+  </div></section>
+
+  <section class="pg" aria-label="Nosso site"><div class="in capa">
+    <span class="k">Tudo num lugar só</span>
+    <h2>O nosso <em>site</em></h2>
+    <p>Lá tem tudinho do casamento, pra vocês consultarem sempre que precisarem:</p>
+    <ul class="site-itens">
+      <li>o cronograma do dia</li>
+      <li>o local e como chegar</li>
+      <li>dicas de onde ficar em Garopaba</li>
+      <li>a confirmação de presença</li>
+      <li>o mural de recados</li>
+    </ul>
+    <a class="btn" href="https://diegoemayara.netlify.app/" target="_blank" rel="noopener">Abrir o site do casamento</a>
+    <p class="hand">confirma lá também, tá?</p>
   </div></section>
 
   <section class="pg" aria-label="Até lá"><div class="in capa">

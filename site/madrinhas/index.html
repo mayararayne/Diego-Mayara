@@ -62,9 +62,46 @@ p{margin:0}
 .topo{position:fixed;top:calc(14px + env(safe-area-inset-top));left:0;right:0;text-align:center;font:400 .7rem/1 var(--f-caps);letter-spacing:.32em;color:var(--terra-deep);pointer-events:none}
 .dica{font-size:.8rem;color:var(--muted);text-align:center}
 @media (prefers-reduced-motion:reduce){.deck{scroll-behavior:auto}}
+
+/* envelope de abertura */
+.env{position:fixed;inset:0;z-index:50;display:grid;place-items:center;align-content:center;gap:26px;background:var(--cream);transition:opacity .7s ease .1s,visibility .7s}
+.env::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.25;background:url(/media/grain.png) repeat;background-size:200px}
+.env.aberto{opacity:0;visibility:hidden;transition-delay:1.9s}
+.env-k{font:400 .74rem/1 var(--f-caps);letter-spacing:.38em;color:var(--terra-deep);text-transform:uppercase;position:relative}
+.envelope{position:relative;width:min(84vw,380px);aspect-ratio:1.45/1;perspective:1200px;cursor:pointer;border:0;background:none;padding:0}
+.envelope:focus-visible{outline:2px solid var(--azul);outline-offset:8px;border-radius:6px}
+.e-fundo{position:absolute;inset:0;background:#E9DFCD;border-radius:6px;box-shadow:0 18px 36px rgba(40,30,20,.22)}
+.e-carta{position:absolute;left:7%;right:7%;top:8%;height:86%;background:var(--paper);border-radius:4px;display:grid;place-items:center;align-content:center;gap:6px;text-align:center;box-shadow:0 2px 8px rgba(40,30,20,.12);transition:transform 1s cubic-bezier(.2,.8,.2,1) .7s;z-index:1}
+.e-carta b{font:400 clamp(1.6rem,7vw,2.2rem)/1 var(--f-display)} .e-carta b em{color:var(--terra)}
+.e-carta small{font:400 .66rem/1 var(--f-caps);letter-spacing:.3em;color:var(--terra-deep)}
+.e-frente{position:absolute;inset:0;z-index:2;border-radius:6px;overflow:hidden;pointer-events:none}
+.e-frente::before,.e-frente::after{content:"";position:absolute;bottom:0;width:60%;height:100%;background:#EFE6D6}
+.e-frente::before{left:0;clip-path:polygon(0 0,100% 58%,100% 100%,0 100%);background:#ECE2D1}
+.e-frente::after{right:0;clip-path:polygon(100% 0,0 58%,0 100%,100% 100%);background:#E6DBC8}
+.e-aba{position:absolute;left:0;right:0;top:0;height:62%;z-index:3;transform-origin:top center;transition:transform .8s ease,z-index 0s linear .4s;transform-style:preserve-3d}
+.e-aba::before{content:"";position:absolute;inset:0;background:#E3D7C2;clip-path:polygon(0 0,100% 0,50% 100%);filter:drop-shadow(0 4px 4px rgba(40,30,20,.12))}
+.selo{position:absolute;left:50%;top:62%;z-index:4;width:74px;height:74px;margin:-37px 0 0 -37px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7189A0,#5B7386 55%,#4A6072);box-shadow:0 4px 10px rgba(30,40,55,.4),inset 0 0 0 4px rgba(210,177,126,.55);display:grid;place-items:center;transition:transform .5s ease,opacity .5s ease}
+.selo span{font:400 1.45rem/1 var(--f-display);color:#F2EFE6;letter-spacing:-.02em}.selo span i{color:var(--gold);font-style:italic}
+.env.aberto .selo{transform:scale(.4);opacity:0}
+.env.aberto .e-aba{transform:rotateX(180deg);z-index:0}
+.env.aberto .e-carta{transform:translateY(-58%)}
+.env-dica{position:relative;font-family:var(--f-hand);font-size:1.5rem;color:var(--terra-deep);animation:pulsa 2.2s ease-in-out infinite}
+@keyframes pulsa{50%{opacity:.45}}
+@media (prefers-reduced-motion:reduce){.e-aba,.e-carta,.selo,.env{transition:none}.env-dica{animation:none}}
 </style>
 </head>
 <body>
+<div class="env" id="env">
+  <span class="env-k">Diego &amp; Mayara</span>
+  <button class="envelope" id="abrir-env" type="button" aria-label="Abrir o envelope">
+    <span class="e-fundo"></span>
+    <span class="e-carta"><small>para</small><b>minhas <em>madrinhas</em></b><small>23 · 04 · 2027</small></span>
+    <span class="e-frente"></span>
+    <span class="e-aba"></span>
+    <span class="selo"><span>D<i>&amp;</i>M</span></span>
+  </button>
+  <p class="env-dica">toque no envelope pra abrir</p>
+</div>
 <div class="topo">D &amp; M · madrinhas</div>
 <main class="deck" id="deck" aria-roledescription="apresentação">
 
@@ -147,6 +184,12 @@ p{margin:0}
   <div class="dots" id="dots"></div>
   <button type="button" id="prox" aria-label="Próxima página">→</button>
 </nav>
+<script>
+(() => {
+  const env = document.getElementById("env"), bt = document.getElementById("abrir-env");
+  bt.addEventListener("click", () => { env.classList.add("aberto"); setTimeout(() => { env.remove(); document.getElementById("prox").focus({ preventScroll: true }); }, 2700); }, { once: true });
+})();
+</script>
 <script>
 (() => {
   const deck = document.getElementById("deck"), pgs = [...deck.children], dots = document.getElementById("dots");
